@@ -23,23 +23,28 @@ namespace game
 	public:
 		bool init ();
 		void terminate ();
-
+		
 		void update ();
 		void render (); 
 		
 		void saveGameState ();
 		void restoreGameState ();
 		
+		void startNewGame ();
+		void returnToMainMenu ();
+		
 		void setNextScene (mx3::Scene *nscene)
 		{
 			next_scene = nscene;
 		}
 		
+		void setPaused (bool b);
+		
 	protected:
 		mx3::Scene *current_scene;
 		mx3::Scene *next_scene;
 	};
-
+	
 	extern bool paused;
 	extern mx3::Timer timer;
 	extern unsigned int next_game_tick;

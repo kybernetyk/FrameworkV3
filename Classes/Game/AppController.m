@@ -11,4 +11,9 @@
 
 @implementation AppController
 
+- (void) setup
+{
+	NSLog(@"setup called!");
+}
+
 @end
