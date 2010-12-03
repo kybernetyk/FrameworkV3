@@ -73,10 +73,10 @@
 		03B8436012A802A7008D6D25 /* PlayerControlledSystem.mm in Sources */ = {isa = PBXBuildFile; fileRef = 03B8434E12A802A7008D6D25 /* PlayerControlledSystem.mm */; };
 		03B8436112A802A7008D6D25 /* GameBoardSystem.mm in Sources */ = {isa = PBXBuildFile; fileRef = 03B8435112A802A7008D6D25 /* GameBoardSystem.mm */; };
 		03B8436212A802A7008D6D25 /* GameComponents.mm in Sources */ = {isa = PBXBuildFile; fileRef = 03B8435412A802A7008D6D25 /* GameComponents.mm */; };
-		03B8436312A802A7008D6D25 /* Scene.mm in Sources */ = {isa = PBXBuildFile; fileRef = 03B8435812A802A7008D6D25 /* Scene.mm */; };
 		03B8436412A802A7008D6D25 /* Game.mm in Sources */ = {isa = PBXBuildFile; fileRef = 03B8435B12A802A7008D6D25 /* Game.mm */; };
 		03B8436512A802A7008D6D25 /* globals.mm in Sources */ = {isa = PBXBuildFile; fileRef = 03B8435D12A802A7008D6D25 /* globals.mm */; };
 		03B8437012A802CC008D6D25 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 03B8436F12A802CC008D6D25 /* AudioToolbox.framework */; };
+		03E364DA12A9092300E4D0A9 /* Scene.mm in Sources */ = {isa = PBXBuildFile; fileRef = 03E364D912A9092300E4D0A9 /* Scene.mm */; };
 		1D60589B0D05DD56006BFB54 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; };
 		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
 		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
@@ -214,13 +214,13 @@
 		03B8435112A802A7008D6D25 /* GameBoardSystem.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = GameBoardSystem.mm; sourceTree = "<group>"; };
 		03B8435312A802A7008D6D25 /* GameComponents.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameComponents.h; sourceTree = "<group>"; };
 		03B8435412A802A7008D6D25 /* GameComponents.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = GameComponents.mm; sourceTree = "<group>"; };
-		03B8435712A802A7008D6D25 /* Scene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Scene.h; sourceTree = "<group>"; };
-		03B8435812A802A7008D6D25 /* Scene.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Scene.mm; sourceTree = "<group>"; };
 		03B8435A12A802A7008D6D25 /* Game.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Game.h; sourceTree = "<group>"; };
 		03B8435B12A802A7008D6D25 /* Game.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Game.mm; sourceTree = "<group>"; };
 		03B8435C12A802A7008D6D25 /* globals.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = globals.h; sourceTree = "<group>"; };
 		03B8435D12A802A7008D6D25 /* globals.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = globals.mm; sourceTree = "<group>"; };
 		03B8436F12A802CC008D6D25 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		03E364D812A9092300E4D0A9 /* Scene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Scene.h; sourceTree = "<group>"; };
+		03E364D912A9092300E4D0A9 /* Scene.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Scene.mm; sourceTree = "<group>"; };
 		1D30AB110D05D00D00671497 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		1D6058910D05DD3D006BFB54 /* Framework.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Framework.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1DF5F4DF0D08C38300B7A737 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -294,6 +294,7 @@
 		03B8426212A80220008D6D25 /* Runtime */ = {
 			isa = PBXGroup;
 			children = (
+				03E364D712A9092300E4D0A9 /* Scene */,
 				03B8426312A80220008D6D25 /* Audio */,
 				03B8426E12A80220008D6D25 /* Graphics */,
 				03B8429212A80220008D6D25 /* Input */,
@@ -612,7 +613,6 @@
 				03B8435C12A802A7008D6D25 /* globals.h */,
 				03B8435D12A802A7008D6D25 /* globals.mm */,
 				03B8435912A802A7008D6D25 /* GAME LOOP + CO */,
-				03B8435612A802A7008D6D25 /* Scenes */,
 				03B8435512A802A7008D6D25 /* Game Objects */,
 				03B8435212A802A7008D6D25 /* Game Components */,
 				03B8434512A802A7008D6D25 /* Game Systems */,
@@ -686,15 +686,6 @@
 			name = "Game Objects";
 			sourceTree = "<group>";
 		};
-		03B8435612A802A7008D6D25 /* Scenes */ = {
-			isa = PBXGroup;
-			children = (
-				03B8435712A802A7008D6D25 /* Scene.h */,
-				03B8435812A802A7008D6D25 /* Scene.mm */,
-			);
-			name = Scenes;
-			sourceTree = "<group>";
-		};
 		03B8435912A802A7008D6D25 /* GAME LOOP + CO */ = {
 			isa = PBXGroup;
 			children = (
@@ -702,6 +693,15 @@
 				03B8435B12A802A7008D6D25 /* Game.mm */,
 			);
 			name = "GAME LOOP + CO";
+			sourceTree = "<group>";
+		};
+		03E364D712A9092300E4D0A9 /* Scene */ = {
+			isa = PBXGroup;
+			children = (
+				03E364D812A9092300E4D0A9 /* Scene.h */,
+				03E364D912A9092300E4D0A9 /* Scene.mm */,
+			);
+			path = Scene;
 			sourceTree = "<group>";
 		};
 		080E96DDFE201D6D7F000001 /* Classes */ = {
@@ -890,9 +890,9 @@
 				03B8436012A802A7008D6D25 /* PlayerControlledSystem.mm in Sources */,
 				03B8436112A802A7008D6D25 /* GameBoardSystem.mm in Sources */,
 				03B8436212A802A7008D6D25 /* GameComponents.mm in Sources */,
-				03B8436312A802A7008D6D25 /* Scene.mm in Sources */,
 				03B8436412A802A7008D6D25 /* Game.mm in Sources */,
 				03B8436512A802A7008D6D25 /* globals.mm in Sources */,
+				03E364DA12A9092300E4D0A9 /* Scene.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
