@@ -88,6 +88,12 @@ namespace mx3
 		if (!_current_position)
 			abort();
 #endif
+		if (action->duration == 0.0)
+		{
+			_current_position->x = action->x;
+			_current_position->y = action->y;
+			return;
+		}
 		
 		if (action->_ups_x >= INFINITY)
 		{
@@ -99,6 +105,7 @@ namespace mx3
 		{
 			float dy = action->y - _current_position->y;
 			action->_ups_y = dy / action->duration;
+
 		}
 		
 		_current_position->x += action->_ups_x * _delta;
@@ -111,7 +118,14 @@ namespace mx3
 #ifdef __ABORT_GUARDS__
 		if (!_current_position)
 			abort();
+				
 #endif
+		if (action->duration == 0.0)
+		{
+			_current_position->x += action->x;
+			_current_position->y += action->y;
+			return;
+		}
 		
 		if (action->_dx >= INFINITY)
 			action->_dx = _current_position->x + action->x;
