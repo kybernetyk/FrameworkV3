@@ -16,3 +16,4 @@
 #include "Component.h"
 #include "Entity.h"
 #include "EntityManager.h"
+#include "ParticleSystem.h"
