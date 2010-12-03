@@ -12,6 +12,7 @@
 @interface MainViewController : UIViewController 
 {
 	EAGLView *glView;
+	id appController;
 }
 
 - (IBAction) spawnOne: (id) sender;
@@ -19,5 +20,5 @@
 - (IBAction) spawnPlayer: (id) sender;
 
 @property (nonatomic, retain) IBOutlet EAGLView *glView;
-
+@property (nonatomic, retain) IBOutlet id appController;
 @end

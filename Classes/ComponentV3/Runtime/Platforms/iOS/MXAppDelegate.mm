@@ -7,7 +7,6 @@
 #include "EntityManager.h"
 #import "FacebookSubmitController.h"
 #import "MainViewController.h"
-#include "Scene.h"
 #include "RenderDevice.h"
 #import <QuartzCore/QuartzCore.h>
 #include "Timer.h"
@@ -144,7 +143,7 @@
 	
 	glView = [[mainViewController glView] retain];
 	
-	RenderDevice::sharedInstance()->init ();
+	mx3::RenderDevice::sharedInstance()->init ();
 #ifdef __ALLOW_RENDER_TO_TEXTURE__
 	mx3::RenderDevice::sharedInstance()->setupBackingTexture();
 	mx3::RenderDevice::sharedInstance()->setRenderTargetBackingTexture();
