@@ -65,6 +65,7 @@
 		[self destroyFramebuffer];
 		[self createFramebuffer];
 		
+#ifdef __ENABLE_GESTURE_RECOGNIZERS__
 		UISwipeGestureRecognizer *rec  = [[[UISwipeGestureRecognizer alloc] initWithTarget: self
 																					action: @selector(swipeHandler_left:)] autorelease];
 		
@@ -81,7 +82,7 @@
 														  action: @selector(swipeHandler_up:)] autorelease];
 		[rec setDirection: UISwipeGestureRecognizerDirectionUp];
 		[self addGestureRecognizer: rec];
-		
+#endif
 	}
     return self;
 }
@@ -332,7 +333,7 @@
 	//	NSLog(@"loc: %f,%f",loc.x, loc.y);
 	
 	
-	//NSLog(@"touch ended");
+	NSLog(@"touch ended");
 	mx3::InputDevice::sharedInstance()->setTouchActive(false);
 	mx3::InputDevice::sharedInstance()->setTouchUpReceived(true);
 	

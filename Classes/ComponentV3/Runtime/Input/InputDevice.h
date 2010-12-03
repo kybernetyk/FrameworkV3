@@ -50,7 +50,7 @@ namespace mx3
 		
 		bool isTouchActive ()
 		{
-			_touchdown_handled = true;
+			//_touchdown_handled = true;
 			return _is_touch_active;
 		}
 		
