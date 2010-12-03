@@ -16,13 +16,11 @@
 	EAGLView *glView;
 	
 	game::Game *theGame;
-	id	appController;
 	
 	MainViewController *mainViewController;
 	FacebookSubmitController *facebookController;
 }
 @property (nonatomic, retain) IBOutlet UIWindow *window;
-@property (nonatomic, assign) id appController;
 
 - (void) startAnimation;
 - (void) stopAnimation;

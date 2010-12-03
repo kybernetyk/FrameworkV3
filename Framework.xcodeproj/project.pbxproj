@@ -76,6 +76,8 @@
 		03B8436412A802A7008D6D25 /* Game.mm in Sources */ = {isa = PBXBuildFile; fileRef = 03B8435B12A802A7008D6D25 /* Game.mm */; };
 		03B8436512A802A7008D6D25 /* globals.mm in Sources */ = {isa = PBXBuildFile; fileRef = 03B8435D12A802A7008D6D25 /* globals.mm */; };
 		03B8437012A802CC008D6D25 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 03B8436F12A802CC008D6D25 /* AudioToolbox.framework */; };
+		03D33B7A12A915AC00587E92 /* MenuScene.mm in Sources */ = {isa = PBXBuildFile; fileRef = 03D33B7612A915AC00587E92 /* MenuScene.mm */; };
+		03D33B7B12A915AC00587E92 /* GameScene.mm in Sources */ = {isa = PBXBuildFile; fileRef = 03D33B7912A915AC00587E92 /* GameScene.mm */; };
 		03E364DA12A9092300E4D0A9 /* Scene.mm in Sources */ = {isa = PBXBuildFile; fileRef = 03E364D912A9092300E4D0A9 /* Scene.mm */; };
 		1D60589B0D05DD56006BFB54 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; };
 		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
@@ -219,6 +221,10 @@
 		03B8435C12A802A7008D6D25 /* globals.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = globals.h; sourceTree = "<group>"; };
 		03B8435D12A802A7008D6D25 /* globals.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = globals.mm; sourceTree = "<group>"; };
 		03B8436F12A802CC008D6D25 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		03D33B7512A915AC00587E92 /* MenuScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuScene.h; sourceTree = "<group>"; };
+		03D33B7612A915AC00587E92 /* MenuScene.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MenuScene.mm; sourceTree = "<group>"; };
+		03D33B7812A915AC00587E92 /* GameScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameScene.h; sourceTree = "<group>"; };
+		03D33B7912A915AC00587E92 /* GameScene.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = GameScene.mm; sourceTree = "<group>"; };
 		03E364D812A9092300E4D0A9 /* Scene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Scene.h; sourceTree = "<group>"; };
 		03E364D912A9092300E4D0A9 /* Scene.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Scene.mm; sourceTree = "<group>"; };
 		1D30AB110D05D00D00671497 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -610,6 +616,7 @@
 		03B8431A12A80233008D6D25 /* Game */ = {
 			isa = PBXGroup;
 			children = (
+				03D33B7312A915AC00587E92 /* Scenes */,
 				03B8435C12A802A7008D6D25 /* globals.h */,
 				03B8435D12A802A7008D6D25 /* globals.mm */,
 				03B8435912A802A7008D6D25 /* GAME LOOP + CO */,
@@ -693,6 +700,33 @@
 				03B8435B12A802A7008D6D25 /* Game.mm */,
 			);
 			name = "GAME LOOP + CO";
+			sourceTree = "<group>";
+		};
+		03D33B7312A915AC00587E92 /* Scenes */ = {
+			isa = PBXGroup;
+			children = (
+				03D33B7712A915AC00587E92 /* GameScene */,
+				03D33B7412A915AC00587E92 /* MenuScene */,
+			);
+			name = Scenes;
+			sourceTree = "<group>";
+		};
+		03D33B7412A915AC00587E92 /* MenuScene */ = {
+			isa = PBXGroup;
+			children = (
+				03D33B7512A915AC00587E92 /* MenuScene.h */,
+				03D33B7612A915AC00587E92 /* MenuScene.mm */,
+			);
+			name = MenuScene;
+			sourceTree = "<group>";
+		};
+		03D33B7712A915AC00587E92 /* GameScene */ = {
+			isa = PBXGroup;
+			children = (
+				03D33B7812A915AC00587E92 /* GameScene.h */,
+				03D33B7912A915AC00587E92 /* GameScene.mm */,
+			);
+			name = GameScene;
 			sourceTree = "<group>";
 		};
 		03E364D712A9092300E4D0A9 /* Scene */ = {
@@ -893,6 +927,8 @@
 				03B8436412A802A7008D6D25 /* Game.mm in Sources */,
 				03B8436512A802A7008D6D25 /* globals.mm in Sources */,
 				03E364DA12A9092300E4D0A9 /* Scene.mm in Sources */,
+				03D33B7A12A915AC00587E92 /* MenuScene.mm in Sources */,
+				03D33B7B12A915AC00587E92 /* GameScene.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

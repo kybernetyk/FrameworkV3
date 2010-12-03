@@ -25,8 +25,6 @@ namespace game
 	//TODO: rename right blob and left blob to: left blob -> center blob, right blob -> rotating blob		
 		EntityManager *_entityManager;
 		
-		Entity *_map[BOARD_NUM_COLS][BOARD_NUM_ROWS];
-		void update_map ();
 		
 		std::vector<Entity*> _entities;
 		float _delta;

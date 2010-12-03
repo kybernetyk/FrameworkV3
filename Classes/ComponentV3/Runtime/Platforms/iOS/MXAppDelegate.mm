@@ -14,7 +14,7 @@
 
 @implementation MXAppDelegate
 @synthesize window;
-@synthesize appController;
+
 
 #pragma mark -
 #pragma mark facebook 
@@ -115,20 +115,8 @@
 		NSLog(@"You must have an AppController Class!");
 		abort();
 	}
-	
-	appController = [[acClass alloc] init];
 
-	
-	NSString *nibName = [appController mainViewNibName];
-	if (!nibName)
-	{
-#ifdef ORIENTATION_PORTRAIT
-		nibName = @"MainViewController_portrait";
-#else
-		nibName = @"MainViewController_landscape";
-#endif
-	}
-	
+	NSString *nibName = MAINVIEWNIBNAME;
 	NSLog(@"Using %@ as nib ...", nibName);
 	
 	mainViewController = [[MainViewController alloc] initWithNibName: nibName bundle: nil];
@@ -168,7 +156,8 @@
 {
 	NSLog(@"will resign ...");
 	[self saveGameState];
-	game::paused = true;
+	//game::paused = true;
+	game::g_pGame->setPaused(true);
 	//	[[CCDirector sharedDirector] pause];
 }
 
@@ -176,9 +165,10 @@
 {
 	NSLog(@"did become active resign ...");
 	//	[[CCDirector sharedDirector] resume];
-	game::paused = false;
+/*	game::paused = false;
 	game::next_game_tick = mx3::GetTickCount();
-	game::timer.update();
+	game::timer.update();*/
+	game::g_pGame->setPaused(false);
 }
 
 - (void)applicationDidReceiveMemoryWarning:(UIApplication *)application 
@@ -298,8 +288,7 @@
 	[[mainViewController view] removeFromSuperview];
 	[mainViewController release];
 	[window release];
-	[appController release];
-	appController = nil;
+
 	[super dealloc];
 }
 

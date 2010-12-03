@@ -13,6 +13,8 @@
 #include "globals.h"
 #include "RenderDevice.h"
 #include "Timer.h"
+#include "GameScene.h"
+#include "MenuScene.h"
 
 using namespace mx3;
 using namespace game;
@@ -30,15 +32,16 @@ namespace game
 	float interpolation;
 	bool paused = false;
 	mx3::Timer timer;
-		
+	Game *g_pGame;	
 	
 	
 
 	bool Game::init ()
 	{
+		g_pGame = this;
 		
-		scene = new Scene();
-		scene->init();
+		current_scene = new GameScene();
+		current_scene->init();
 		
 		next_game_tick = mx3::GetTickCount();
 		paused = false;
@@ -47,7 +50,17 @@ namespace game
 
 	void Game::update ()
 	{
-		
+		if (next_scene)
+		{
+			mx3::Scene *tmp = current_scene;
+			
+			current_scene = next_scene;
+			
+			tmp->end();
+			delete tmp;
+			
+			next_scene = NULL;
+		}
 		if (paused)
 			return;
 
@@ -59,13 +72,13 @@ namespace game
 		loops = 0;
 		while( mx3::GetTickCount() > next_game_tick && loops < MAX_FRAMESKIP) 
 		{
-			scene->update(FIXED_DELTA);
+			current_scene->update(FIXED_DELTA);
 			next_game_tick += SKIP_TICKS;
 			loops++;	
 		}
 		
 #else
-		scene->update(timer.fdelta());	//blob rotation doesn't work well with high dynamic delta! fix this before enabling dynamic delta
+		current_scene->update(timer.fdelta());	//blob rotation doesn't work well with high dynamic delta! fix this before enabling dynamic delta
 #endif
 		
 	}
@@ -73,8 +86,8 @@ namespace game
 	void Game::render ()
 	{
 		RenderDevice::sharedInstance()->beginRender();
-		scene->render(1.0);
-		scene->frameDone();
+		current_scene->render();
+		current_scene->frameDone();
 		RenderDevice::sharedInstance()->endRender();
 	}
 	

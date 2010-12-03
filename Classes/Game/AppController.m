@@ -11,9 +11,4 @@
 
 @implementation AppController
 
-- (NSString *) mainViewNibName
-{
-	return nil;	//let handle the engine the stuff
-}
-
 @end

@@ -7,14 +7,15 @@
  *
  */
 #pragma once
+
 //entity system checks and infos
 #define __VERBOSE__
 
 #ifdef __VERBOSE__
-	#define CV3Log printf
+#define CV3Log printf
 #else
-	#define CV3Log //
-	#define NSLog(...)
+#define CV3Log //
+#define NSLog(...)
 #endif
 
 #define __RUNTIME_INFORMATION__
@@ -32,25 +33,35 @@
 #ifdef ORIENTATION_PORTRAIT
 	#define SCREEN_W 320.0
 	#define SCREEN_H 480.0
+	#ifndef MAINVIEWNIBNAME
+		#define MAINVIEWNIBNAME @"MainViewController_portrait"
+	#endif
 #endif
+
 #ifdef ORIENTATION_LANDSCAPE
 	#define SCREEN_W 480.0
 	#define SCREEN_H 320.0
+	#ifdef MAINVIEWNIBNAME
+		#define MAINVIEWNIBNAME @"MainViewController_landscape"
+	#endif
 #endif
 
 //allow offscreen texture rendertarget for the RenderDevice
 #define __ALLOW_RENDER_TO_TEXTURE__
+
+//enable/disable gesture recogniz
+//#define __ENABLE_GESTURE_RECOGNIZERS__
 
 //Entity Manager
 #define MAX_ENTITIES 512
 #define MAX_COMPONENTS_PER_ENTITY 32
 
 /* convention for slots:
-	use multiples of 2
-	lower half is registered for the system
-	upper half is free for user use
-
-	example with MAX_COMPONENTS_PER_ENTITY = 32:
-	internal system use: 0..15 (0 is reserved and not valid!)
-	user use: 16..31
-*/
+ use multiples of 2
+ lower half is registered for the system
+ upper half is free for user use
+ 
+ example with MAX_COMPONENTS_PER_ENTITY = 32:
+ internal system use: 0..15 (0 is reserved and not valid!)
+ user use: 16..31
+ */
