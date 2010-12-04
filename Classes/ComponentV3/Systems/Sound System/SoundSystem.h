@@ -30,15 +30,19 @@ namespace mx3
 	{
 	public:
 		SoundSystem (EntityManager *entityManager);
-		void update (float delta);	
+		void registerSound (std::string filename, int sfx_id);
+		void preloadSounds ();
 		
+		void update (float delta);	
 		void playMusic (int music_id);
+		
+		static mx3::Entity *make_new_sound (int soundfx);
 		
 	protected:
 		EntityManager *_entityManager;
 		
-		std::string sounds[32];
-		float sound_delays[32];
+		std::string sounds[MAX_REGISTERED_SOUNDS];
+		float sound_delays[MAX_REGISTERED_SOUNDS];
 		
 		int music_playing;
 		std::vector<Entity*> _entities;

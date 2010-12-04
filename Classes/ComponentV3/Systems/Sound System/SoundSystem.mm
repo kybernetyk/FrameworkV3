@@ -53,23 +53,26 @@ namespace mx3
 	SoundSystem::SoundSystem (EntityManager *entityManager)
 	{
 		_entityManager = entityManager;
-	//	memset(sounds,0x00,32*sizeof(SystemSoundID));
-	//	memset(sound_delays, 0x00, 32 * sizeof(float));
-		
-		for (int i = 0; i <32; i++)
+		for (int i = 0; i < MAX_REGISTERED_SOUNDS; i++)
 			sound_delays[i] = 0.0;
 		
 		music_playing = 0;
+	}
+
+	void SoundSystem::registerSound (std::string filename, int sfx_id)
+	{
+		if (sfx_id >= MAX_REGISTERED_SOUNDS)
+		{	
+			abort();
+			
+		}
 		
-/*		sounds[SFX_TICK] = "tick.wav";
-		sounds[SFX_BLAM] = "bam1.wav";
-		sounds[SFX_KAWAII] = "kawaii2.wav";
-		sounds[SFX_KAWAII2] = "kawaii.wav";
-		sounds[SFX_LEVELUP] = "levelup.wav";
-		
-		[[SimpleAudioEngine sharedEngine] preloadBackgroundMusic: @"maulwurf.mp4"];*/
-		
-		for (int i = 0; i < 32; i++)
+		sounds[sfx_id] = filename;
+	}
+	
+	void SoundSystem::preloadSounds ()
+	{
+		for (int i = 0; i < MAX_REGISTERED_SOUNDS; i++)
 		{
 			NSString *s = [NSString stringWithCString: sounds[i].c_str() 
 											 encoding: NSASCIIStringEncoding];
@@ -81,7 +84,7 @@ namespace mx3
 			[[SimpleAudioEngine sharedEngine] preloadEffect: s];
 		}
 	}
-
+	
 	void SoundSystem::playMusic (int music_id)
 	{
 		if (music_playing == music_id)
@@ -115,7 +118,7 @@ namespace mx3
 		std::vector<Entity*>::const_iterator it = _entities.begin();
 		Entity *current_entity = NULL;
 
-		for (int i = 0; i < 32; i++)
+		for (int i = 0; i < MAX_REGISTERED_SOUNDS; i++)
 			sound_delays[i] -= delta;
 		
 		SoundEffect *current_sound = NULL;
@@ -145,4 +148,19 @@ namespace mx3
 		}
 	}
 
+	mx3::Entity *SoundSystem::make_new_sound (int soundfx)
+	{
+		if (soundfx >= MAX_REGISTERED_SOUNDS)
+		{	
+			abort();
+			return NULL;
+		}
+		
+		EntityManager *em = Entity::entityManager;
+		Entity *sound = em->createNewEntity();
+		SoundEffect *sfx = em->addComponent <SoundEffect> (sound);
+		sfx->sfx_id = soundfx;
+		
+		return sound;
+	}
 }
