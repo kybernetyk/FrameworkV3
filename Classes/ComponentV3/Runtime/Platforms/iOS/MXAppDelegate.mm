@@ -216,7 +216,9 @@
 	
 #ifdef __IPHONE_OS_VERSION_MAX_ALLOWED
 	displayLink = [CADisplayLink displayLinkWithTarget: self selector:@selector(renderScene)];
-	[displayLink setFrameInterval: 1];
+
+	int interval = 60 / DESIRED_FPS;
+	[displayLink setFrameInterval: interval];
 	[displayLink addToRunLoop: [NSRunLoop currentRunLoop] forMode: NSDefaultRunLoopMode];
 #elif defined(__MAC_OS_X_VERSION_MAX_ALLOWED)
 	//mac init

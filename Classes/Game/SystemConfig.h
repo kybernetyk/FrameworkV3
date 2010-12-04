@@ -29,6 +29,8 @@
 //#define ORIENTATION_LANDSCAPE
 #define ORIENTATION_PORTRAIT
 
+#define DESIRED_FPS 60
+
 //screen size
 #ifdef ORIENTATION_PORTRAIT
 	#define SCREEN_W 320.0
