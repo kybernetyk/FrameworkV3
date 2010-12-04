@@ -41,7 +41,7 @@ namespace mx3
 		
 		virtual ~Component ()
 		{
-			
+
 		}
 		DEBUGINFO("Component")
 		

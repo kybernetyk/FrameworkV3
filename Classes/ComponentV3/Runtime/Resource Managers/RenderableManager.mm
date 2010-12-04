@@ -97,8 +97,9 @@ namespace mx3
 			return;
 		
 		std::string filename = pRenderable->_filename;
-		
 		_referenceCounts[filename] --;
+		
+
 		if (_referenceCounts[filename] <= 0)
 		{
 			IRenderable *p = _renderables[filename];

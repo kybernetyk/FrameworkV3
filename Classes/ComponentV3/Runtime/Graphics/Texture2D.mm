@@ -65,7 +65,7 @@ namespace mx3
 
 	bool Texture2D::loadFromFile (std::string filename)
 	{
-		
+		_filename = filename;
 		filename = pathForFile2(filename.c_str());
 		
 		//printf("LOADING %s ...\n",filename.c_str());
@@ -92,7 +92,7 @@ namespace mx3
 		
 		_openGlTextureID = tex_2d;
 		
-		_filename = filename;
+		
 		
 		setAliasTexParams();
 		return true;
@@ -160,7 +160,7 @@ namespace mx3
 	
 	bool BufferTexture2D::loadFromFile (std::string filename)
 	{
-		
+		_filename = filename;
 		filename = pathForFile2(filename.c_str());
 		
 		printf("LOADING %s ...\n",filename.c_str());
@@ -186,11 +186,6 @@ namespace mx3
 			abort();
 		}
 		_openGlTextureID = tex_2d;
-		
-		_filename = filename;
-		
-		
-		
 		setAliasTexParams();
 		return true;
 		
