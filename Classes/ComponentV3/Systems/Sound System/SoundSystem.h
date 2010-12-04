@@ -34,9 +34,10 @@ namespace mx3
 		void preloadSounds ();
 		
 		void update (float delta);	
-		void playMusic (int music_id);
 		
 		static mx3::Entity *make_new_sound (int soundfx);
+		
+		static void play_background_music (std::string filename);
 		
 	protected:
 		EntityManager *_entityManager;

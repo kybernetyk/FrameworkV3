@@ -83,31 +83,33 @@ namespace mx3
 			
 			[[SimpleAudioEngine sharedEngine] preloadEffect: s];
 		}
+		
+		[[SimpleAudioEngine sharedEngine] setEffectsVolume: 0.9];
 	}
 	
-	void SoundSystem::playMusic (int music_id)
-	{
-		if (music_playing == music_id)
-			return;
-
-		
-		[[SimpleAudioEngine sharedEngine] stopBackgroundMusic];
-		
-		if (music_id == 0)
-			return;
-			
-		NSString *filename = nil;
-		
-		
-		if (music_id == MUSIC_GAME)
-			filename = @"music.mp3";
-		
-		if (!filename)
-			return;
-		
-		[[SimpleAudioEngine sharedEngine] playBackgroundMusic: filename loop: YES];
-	}
-
+//	void SoundSystem::playMusic (int music_id)
+//	{
+//		if (music_playing == music_id)
+//			return;
+//
+//		
+//		[[SimpleAudioEngine sharedEngine] stopBackgroundMusic];
+//		
+//		if (music_id == 0)
+//			return;
+//			
+//		NSString *filename = nil;
+//		
+//		
+//		if (music_id == MUSIC_GAME)
+//			filename = @"music.mp3";
+//		
+//		if (!filename)
+//			return;
+//		
+//		[[SimpleAudioEngine sharedEngine] playBackgroundMusic: filename loop: YES];
+//	}
+//
 
 	void SoundSystem::update (float delta)
 	{
@@ -159,5 +161,16 @@ namespace mx3
 		sfx->sfx_id = soundfx;
 		
 		return sound;
+	}
+	
+	void SoundSystem::play_background_music (std::string filename)
+	{
+		NSString *fn = [NSString stringWithCString: filename.c_str() encoding: NSASCIIStringEncoding];
+	
+		[[SimpleAudioEngine sharedEngine] playBackgroundMusic: fn loop: YES];
+
+		[[SimpleAudioEngine sharedEngine] setBackgroundMusicVolume: 0.5];
+		
+	//	[[SimpleAudioEngine sharedEngine] preloadBackgroundMusic: @"endless.mp3"];
 	}
 }
