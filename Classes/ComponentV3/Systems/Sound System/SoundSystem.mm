@@ -133,15 +133,12 @@ namespace mx3
 			if (current_sound)
 			{
 				int sid = current_sound->sfx_id;
-				if (sid)
-				{
-					if (sound_delays[sid] <= 0.0)
-					{	
-						
-						[[SimpleAudioEngine sharedEngine] playEffect: [NSString stringWithCString: sounds[sid].c_str() encoding: NSASCIIStringEncoding]];
-						
-						sound_delays[sid] = 0.05;
-					}
+				if (sound_delays[sid] <= 0.0)
+				{	
+					//printf("PLAYIN SID %i ...\n", sid);
+					[[SimpleAudioEngine sharedEngine] playEffect: [NSString stringWithCString: sounds[sid].c_str() encoding: NSASCIIStringEncoding]];
+					
+					sound_delays[sid] = 0.1;
 				}
 			}
 			_entityManager->addComponent<MarkOfDeath>(current_entity);
