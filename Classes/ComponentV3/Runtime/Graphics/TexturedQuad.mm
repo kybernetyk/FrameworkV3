@@ -26,36 +26,38 @@ namespace mx3
 		init();
 	}
 
-	TexturedQuad::TexturedQuad(Texture2D *existing_texture)
-	{
-		IRenderable::IRenderable();
-		init();
-
-		texture = existing_texture;
-		w = texture->w;
-		h = texture->h;
-	}
+//	TexturedQuad::TexturedQuad(Texture2D *existing_texture)
+//	{
+//		IRenderable::IRenderable();
+//		init();
+//
+//		//texture = existing_texture;
+//		_filename = existing_texture->_filename;
+//		w = existing_texture->w;
+//		h = existing_texture->h;
+//	}
 
 
 	TexturedQuad::TexturedQuad(std::string filename)
 	{
 		init();
+		_filename = filename;
 		loadFromFile(filename);
 	}
 
 	TexturedQuad::~TexturedQuad ()
 	{
-		if (texture)
-		{
-			g_TextureManager.releaseTexture(texture);
-			texture = NULL;
-		}
+		g_TextureManager.releaseTexture (_filename);
+//		if (texture)
+//		{
+//			g_TextureManager.releaseTexture(texture);
+//			texture = NULL;
+//		}
 	}
 
 	bool TexturedQuad::loadFromFile (std::string filename)
 	{
-		
-		texture = g_TextureManager.accquireTexture (filename);
+		Texture2D *texture = g_TextureManager.accquireTexture (filename);
 		if (!texture)
 			abort();
 		
@@ -63,8 +65,6 @@ namespace mx3
 		_filename = filename;
 		w = texture->w;
 		h = texture->h;
-		
-		
 		return true;
 	}
 
@@ -84,6 +84,7 @@ namespace mx3
 
 	void TexturedQuad::renderContent ()
 	{
+		Texture2D *texture = g_TextureManager.getTexture(_filename);
 		if (texture)
 		{	
 			//glLoadIdentity();
@@ -142,6 +143,7 @@ namespace mx3
 	{
 		IRenderable::IRenderable();
 		init();
+		_filename = filename;
 		loadFromFile(filename);
 	}
 	
@@ -408,41 +410,45 @@ namespace mx3
 		init();
 	}
 
-	TexturedAtlasQuad::TexturedAtlasQuad(Texture2D *existing_texture)
-	{
-		IRenderable::IRenderable();
-		init();
-		
-		texture = existing_texture;
-		
-		tex_w = texture->w;
-		tex_h = texture->h;
-
-	}
+//	TexturedAtlasQuad::TexturedAtlasQuad(Texture2D *existing_texture)
+//	{
+//		IRenderable::IRenderable();
+//		init();
+//		
+//		//texture = existing_texture;
+//		_filename = existing_texture->_filename;
+//		
+//		tex_w = existing_texture->w;
+//		tex_h = existing_texture->h;
+//
+//	}
 
 
 	TexturedAtlasQuad::TexturedAtlasQuad(std::string filename)
 	{
 		init();
+		_filename = filename;
 		loadFromFile(filename);
 		
-		tex_w = texture->w;
-		tex_h = texture->h;
+	//	tex_w = texture->w;
+	//	tex_h = texture->h;
 
 	}
 
 	TexturedAtlasQuad::~TexturedAtlasQuad ()
 	{
-		if (texture)
-		{
-			g_TextureManager.releaseTexture(texture);
-			texture = NULL;
-		}
+		g_TextureManager.releaseTexture (_filename);
+//		
+//		if (texture)
+//		{
+//			g_TextureManager.releaseTexture(texture);
+//			texture = NULL;
+//		}
 	}
 
 	bool TexturedAtlasQuad::loadFromFile (std::string filename)
 	{
-		texture = g_TextureManager.accquireTexture (filename);
+		Texture2D *texture = g_TextureManager.accquireTexture (filename);
 		if (!texture)
 			abort();
 		
@@ -472,6 +478,7 @@ namespace mx3
 	void TexturedAtlasQuad::renderContent ()
 	{
 		
+		Texture2D *texture = g_TextureManager.getTexture(_filename);
 		if (texture)
 		{	
 			//glLoadIdentity();
@@ -663,10 +670,10 @@ namespace mx3
 		}
 		
 		
-		texture = g_TextureManager.accquireTexture (font.tex_filename);
+		Texture2D *texture = g_TextureManager.accquireTexture (font.tex_filename);
 		if (!texture)
 			abort();
-		
+		_tex_filename = font.tex_filename;
 		texture->setAliasTexParams();
 		_filename = fnt_filename;
 		return true;
@@ -691,6 +698,7 @@ namespace mx3
 	void OGLFont::renderContent()
 	{
 		
+		Texture2D *texture = g_TextureManager.getTexture(_tex_filename);
 		if (texture)
 		{	
 			//glLoadIdentity();

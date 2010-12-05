@@ -16,7 +16,7 @@ namespace mx3
 {
 		
 		
-	class Texture2D;
+//	class Texture2D;
 
 	class IRenderable
 	{
@@ -77,20 +77,21 @@ namespace mx3
 		
 		~OGLFont ()
 		{
-			if (texture)
-			{
-				g_TextureManager.releaseTexture(texture);
-				texture = NULL;
-			}
-			
+//			if (texture)
+//			{
+//				g_TextureManager.releaseTexture(texture);
+//				texture = NULL;
+//			}
+			g_TextureManager.releaseTexture (_tex_filename);
 		}
 		void init()
 		{
 			IRenderable::init();
 			text = NULL;
-			texture = NULL;
+			//texture = NULL;
 		}
-		
+
+		std::string _tex_filename;
 		void transform ();
 		void renderContent();
 		
@@ -98,7 +99,7 @@ namespace mx3
 		
 		char *text;
 		bm_font font;
-		Texture2D *texture;
+	//	Texture2D *texture;
 	};
 	
 	class PE_Proxy : public IRenderable
@@ -169,7 +170,7 @@ namespace mx3
 	{
 	public:
 		TexturedQuad();
-		TexturedQuad(Texture2D *existing_texture);
+		//TexturedQuad(Texture2D *existing_texture);
 		TexturedQuad(std::string filename);
 		~TexturedQuad ();
 
@@ -177,7 +178,7 @@ namespace mx3
 		{
 			IRenderable::init();
 			
-			texture = NULL;
+			//texture = NULL;
 		}
 		
 		bool loadFromFile (std::string filename);
@@ -186,7 +187,7 @@ namespace mx3
 		void renderContent();
 		
 		
-		Texture2D *texture;
+//		Texture2D *texture;
 	};
 
 	class TexturedBufferQuad : public IRenderable
@@ -229,7 +230,7 @@ namespace mx3
 	{
 	public:
 		TexturedAtlasQuad();
-		TexturedAtlasQuad(Texture2D *existing_texture);
+		//TexturedAtlasQuad(Texture2D *existing_texture);
 		TexturedAtlasQuad(std::string filename);
 		~TexturedAtlasQuad ();
 		
@@ -237,7 +238,7 @@ namespace mx3
 		{
 			IRenderable::init();
 			
-			texture = NULL;
+			//texture = NULL;
 			src.x = src.y = src.w = src.h = 0.0;
 			tex_w = tex_h = 0;
 		}
@@ -252,7 +253,7 @@ namespace mx3
 		rect src;
 		void renderContent ();
 
-		Texture2D *texture;
+		//Texture2D *texture;
 	};
 
 

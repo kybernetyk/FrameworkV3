@@ -10,10 +10,9 @@
 #include "TextureManager.h"
 namespace mx3 
 {
-		
-		
 	Texture2D *TextureManager::accquireTexture (std::string filename)
 	{
+		printf("accquiring %s ...\n", filename.c_str());
 		if (_referenceCounts[filename] > 0)
 		{
 			_referenceCounts[filename] ++;
@@ -28,13 +27,24 @@ namespace mx3
 		_referenceCounts[filename] = 1;
 		return ret;
 	}
-
-	void TextureManager::releaseTexture (Texture2D *pTexture)
+	
+	Texture2D *TextureManager::getTexture (std::string &filename)
 	{
-		if (!pTexture)
-			return;
+		if (_referenceCounts[filename] > 0)
+			return _textures[filename];
+
+		return accquireTexture (filename);
+	}
+
+	void TextureManager::releaseTexture (std::string &filename)
+	{
+//		if (!pTexture)
+//			return;
+//Texture2D *pTexture = _textures[filename];
+//		if (!pTexture)
+//			return;
 		
-		std::string filename = pTexture->_filename;
+		//std::string filename = pTexture->_filename;
 		_referenceCounts[filename] --;
 		if (_referenceCounts[filename] <= 0)
 		{
@@ -45,6 +55,20 @@ namespace mx3
 		}
 	}
 
+	void TextureManager::purgeCache ()
+	{
+		std::tr1::unordered_map <std::string, Texture2D *>::iterator it = _textures.begin();
+		
+		while (it != _textures.end()) 
+		{
+			Texture2D *p = it->second;
+			delete p;
+			++it;
+		}
+		
+		_textures.clear();
+		_referenceCounts.clear();
+	}
 }
 
 mx3::TextureManager g_TextureManager;
