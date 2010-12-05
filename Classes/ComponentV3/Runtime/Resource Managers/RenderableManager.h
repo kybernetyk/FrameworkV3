@@ -9,7 +9,7 @@
 
 #pragma once
 
-#include <map>
+#include <tr1/unordered_map>
 namespace mx3 
 {
 	
@@ -36,8 +36,8 @@ namespace mx3
 		void release (IRenderable *pRenderable);
 		
 	protected:
-		std::map <std::string, int> _referenceCounts;
-		std::map <std::string, IRenderable *> _renderables;
+		std::tr1::unordered_map <std::string, int> _referenceCounts;
+		std::tr1::unordered_map <std::string, IRenderable *> _renderables;
 	};
 
 }
