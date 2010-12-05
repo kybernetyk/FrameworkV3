@@ -68,8 +68,6 @@ namespace game
 		
 		preload();
 		
-		
-		_soundSystem->playMusic(MUSIC_GAME);
 
 		/* create background */	
 		Entity *bg = _entityManager->createNewEntity();

@@ -15,6 +15,7 @@
 #include "Timer.h"
 #include "GameScene.h"
 #include "MenuScene.h"
+#include "SimpleAudioEngine.h"
 
 using namespace mx3;
 using namespace game;
@@ -34,15 +35,43 @@ namespace game
 	mx3::Timer timer;
 	Game *g_pGame;	
 	
+	extern std::string sounds[];
 	
+	void Game::loadGlobalResources ()
+	{
+//		[[SimpleAudioEngine sharedEngine] preloadBackgroundMusic: @"menu.mp3"];
+//		[[SimpleAudioEngine sharedEngine] preloadBackgroundMusic: @"endless.mp3"];
+//		[[SimpleAudioEngine sharedEngine] preloadBackgroundMusic: @"timed.mp3"];
+//		
+//		g_TextureManager.accquireTexture ("back.png");
+//		g_TextureManager.accquireTexture ("banana40.png");
+//		g_TextureManager.accquireTexture ("bug40.png");
+//		g_TextureManager.accquireTexture ("clock.png");
+//		g_TextureManager.accquireTexture ("grapes40.png");
+//		g_TextureManager.accquireTexture ("strawberry.png");
+//		g_TextureManager.accquireTexture ("bug40.png");
+//		g_TextureManager.accquireTexture ("orange40.png");
+//		g_TextureManager.accquireTexture ("pause.png");
+//		g_TextureManager.accquireTexture ("zomg.png");
+//		
+//		for (int i = 0; i < NUM_SOUNDS; i++)
+//		{
+//			//_soundSystem->registerSound (sounds[i], i);
+//			NSString *fn = [NSString stringWithCString: sounds[i].c_str() encoding: NSASCIIStringEncoding];
+//			if ([fn length] > 0)
+//				[[SimpleAudioEngine sharedEngine] preloadEffect: fn];
+//		}
+//		
+	}
 	
 	bool Game::init ()
 	{
 		g_pGame = this;
+		loadGlobalResources();
 		
-		GameScene *gc = new GameScene();
-		gc->init();
-		delete gc;
+		/*GameScene *gc = new GameScene();
+		 gc->init();
+		 delete gc;*/
 		
 		current_scene = new MenuScene();
 		current_scene->init();
@@ -64,6 +93,7 @@ namespace game
 			delete tmp;
 			
 			next_scene = NULL;
+			next_game_tick = mx3::GetTickCount();
 		}
 		if (paused)
 			return;
@@ -98,6 +128,8 @@ namespace game
 	
 	void Game::terminate()
 	{
+		current_scene->end();
+		current_scene = 0;
 		CV3Log ("terminating ...\n");
 	}
 	
@@ -137,4 +169,38 @@ namespace game
 			game::timer.update();
 		}
 	}
+	
+#pragma mark -
+#pragma mark app background unso
+	void Game::appDidFinishLaunching ()
+	{
+		CV3Log ("Game::appDidFinishLaunching ()\n");
+	}
+	
+	void Game::appDidBecomeActive ()
+	{
+		CV3Log ("Game::appDidBecomeActive ()\n");
+	}
+	
+	void Game::appWillEnterForeground ()
+	{
+		CV3Log ("Game::appWillEnterForeground ()\n");
+	}
+	
+	void Game::appWillResignActive ()
+	{
+		g_TextureManager.purgeCache();
+		CV3Log ("Game::appWillResignActive ()\n");		
+	}
+	
+	void Game::appDidEnterBackground ()
+	{
+		CV3Log ("Game::appDidEnterBackground ()\n");		
+	}
+	
+	void Game::appWillTerminate ()
+	{
+		CV3Log ("Game::appWillTerminate ()\n");		
+	}
+	
 }

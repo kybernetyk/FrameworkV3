@@ -24,11 +24,7 @@
 
 - (void) startAnimation;
 - (void) stopAnimation;
-
 - (void)renderScene;
-
-- (void) saveGameState;
-
 - (void) initFBShare;
 @end
 

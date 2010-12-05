@@ -12,7 +12,6 @@ namespace mx3
 {
 	Texture2D *TextureManager::accquireTexture (std::string filename)
 	{
-		printf("accquiring %s ...\n", filename.c_str());
 		if (_referenceCounts[filename] > 0)
 		{
 			_referenceCounts[filename] ++;

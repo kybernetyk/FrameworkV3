@@ -141,12 +141,13 @@
 	theGame->init();
 	
 	[self startAnimation];
+	
+	theGame->appDidFinishLaunching ();
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application 
 {
-	[self saveGameState];
-	
+	theGame->appWillTerminate();
 	theGame->terminate();
 }
 
@@ -154,21 +155,14 @@
 
 - (void)applicationWillResignActive:(UIApplication *)application 
 {
-	NSLog(@"will resign ...");
-	[self saveGameState];
-	//game::paused = true;
 	game::g_pGame->setPaused(true);
-	//	[[CCDirector sharedDirector] pause];
+	theGame->appWillResignActive();
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application 
 {
-	NSLog(@"did become active resign ...");
-	//	[[CCDirector sharedDirector] resume];
-/*	game::paused = false;
-	game::next_game_tick = mx3::GetTickCount();
-	game::timer.update();*/
 	game::g_pGame->setPaused(false);
+	theGame->appDidBecomeActive ();
 }
 
 - (void)applicationDidReceiveMemoryWarning:(UIApplication *)application 
@@ -180,20 +174,13 @@
 -(void) applicationDidEnterBackground:(UIApplication*)application 
 {
 	[self stopAnimation];
-	
-	NSLog(@"did enter background!");
-	//	[[CCDirector sharedDirector] stopAnimation];
-	//game::paused = true;
+	theGame->appDidEnterBackground();
 }
 
 -(void) applicationWillEnterForeground:(UIApplication*)application 
 {
 	[self startAnimation];
-	NSLog(@"did enter foreground!");
-	//	[[CCDirector sharedDirector] startAnimation];
-	/*	game::paused = false;
-	 game::next_game_tick = mx3::GetTickCount();
-	 game::timer.update();*/
+	theGame->appWillEnterForeground();
 }
 
 
@@ -241,48 +228,6 @@
 	theGame->render();
 	[glView endDrawing];
 }
-
-
-
-
-
-#pragma mark -
-#pragma mark restoresave
-- (void) saveGameState
-{
-	theGame->saveGameState();
-//	NSUserDefaults *defs = [NSUserDefaults standardUserDefaults];
-//	
-//	if (g_GameState.level <= 0)
-//	{
-//		g_GameState.level = 1;
-//		g_GameState.experience_needed_to_levelup = g_GameState.level*g_GameState.level*g_GameState.level+100;
-//	}
-//	
-//	[defs setInteger: g_GameState.experience forKey: @"gs_experience"];
-//	[defs setInteger: g_GameState.level forKey: @"gs_level"];
-//	[defs setInteger: g_GameState.score forKey: @"gs_score"];
-//	[defs synchronize];	
-}
-
-- (void) loadGameState
-{
-	theGame->restoreGameState();
-//	NSUserDefaults *defs = [NSUserDefaults standardUserDefaults];
-//	
-//	NSInteger xp = [defs integerForKey: @"gs_experience"];
-//	NSInteger level = [defs integerForKey: @"gs_level"];
-//	NSInteger score = [defs integerForKey: @"gs_score"];
-//	if (level <= 0)
-//		level = 1;
-//	
-//	g_GameState.experience = xp;
-//	g_GameState.level = level;
-//	g_GameState.score = score;
-//	g_GameState.experience_needed_to_levelup =g_GameState.level*g_GameState.level*g_GameState.level+100;
-//	
-}
-
 
 - (void)dealloc 
 {

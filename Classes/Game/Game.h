@@ -22,6 +22,7 @@ namespace game
 	{
 	public:
 		bool init ();
+		void loadGlobalResources ();
 		void terminate ();
 		
 		void update ();
@@ -32,6 +33,13 @@ namespace game
 		
 		void startNewGame ();
 		void returnToMainMenu ();
+		
+		void appDidFinishLaunching ();
+		void appDidBecomeActive ();
+		void appWillEnterForeground ();
+		void appWillResignActive ();
+		void appDidEnterBackground ();
+		void appWillTerminate ();
 		
 		void setNextScene (mx3::Scene *nscene)
 		{

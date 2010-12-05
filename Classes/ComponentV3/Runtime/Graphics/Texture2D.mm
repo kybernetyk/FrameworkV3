@@ -60,7 +60,6 @@ namespace mx3
 
 	Texture2D::~Texture2D ()
 	{
-		printf("releaseing texture %s ...\n", _filename.c_str());
 		glDeleteTextures (1, &_openGlTextureID);
 		if (boundTexture == _openGlTextureID)
 			boundTexture = 0;
