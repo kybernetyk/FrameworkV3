@@ -12,6 +12,27 @@
 
 #ifdef USE_GAMECENTER
 #import <GameKit/GameKit.h>
+
+@implementation GKLeaderboardViewController (meinpenis)
+
+
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation 
+{
+#ifdef ORIENTATION_LANDSCAPE
+    return (interfaceOrientation == UIInterfaceOrientationLandscapeRight ||
+			interfaceOrientation == UIInterfaceOrientationLandscapeLeft);
+#endif
+	
+#ifdef ORIENTATION_PORTRAIT
+	return (interfaceOrientation == UIInterfaceOrientationPortrait ||
+			interfaceOrientation == UIInterfaceOrientationPortraitUpsideDown);
+#endif
+	
+	return NO;
+}
+
+@end
+
 #endif
 
 @implementation MainViewController
