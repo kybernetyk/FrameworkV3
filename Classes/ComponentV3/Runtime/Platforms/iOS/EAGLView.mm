@@ -189,12 +189,20 @@
 }
 
 
-- (void)destroyFramebuffer {
+- (void)destroyFramebuffer 
+{
+    if (viewFramebuffer)
+	{
+		glDeleteFramebuffersOES(1, &viewFramebuffer);
+		viewFramebuffer = 0;
+	}
+
+	if (viewRenderbuffer)
+	{
+		glDeleteRenderbuffersOES(1, &viewRenderbuffer);
+		viewRenderbuffer = 0;	
+	}
     
-    glDeleteFramebuffersOES(1, &viewFramebuffer);
-    viewFramebuffer = 0;
-    glDeleteRenderbuffersOES(1, &viewRenderbuffer);
-    viewRenderbuffer = 0;
     
     if(depthRenderbuffer) {
         glDeleteRenderbuffersOES(1, &depthRenderbuffer);
@@ -202,16 +210,14 @@
     }
 }
 
-
-
 - (void)dealloc 
 {
-        
     if ([EAGLContext currentContext] == context) {
         [EAGLContext setCurrentContext:nil];
     }
     
     [context release];  
+	context = nil;
     [super dealloc];
 }
 

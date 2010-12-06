@@ -12,6 +12,12 @@
 #include "Timer.h"
 #include "ComponentV3.h"
 
+#ifdef USE_GAMECENTER
+#import "GameCenterManager.h"
+#endif
+
+BOOL g_MayReleaseMemory = YES;
+
 @implementation MXAppDelegate
 @synthesize window;
 
@@ -100,6 +106,20 @@
 	return YES;
 }
 
+- (void) setNewGLView: (NSNotification *) notification
+{
+	NSLog(@"setting gl view to: %@", [notification object]);
+	NSLog(@"current gl view: %@", glView);
+	
+	EAGLView *newgl = (EAGLView *)[notification object];
+	[self stopAnimation];
+	
+	[glView autorelease];
+	//glView = [newgl retain];
+	glView = newgl;
+	[self startAnimation];
+	mx3::RenderDevice::sharedInstance()->init ();
+}
 
 #pragma mark -
 #pragma mark application delegate
@@ -129,7 +149,8 @@
 	
 	[window addSubview: [mainViewController view]];
 	
-	glView = [[mainViewController glView] retain];
+	//glView = [[mainViewController glView] retain];
+	glView = [mainViewController glView];
 	
 	mx3::RenderDevice::sharedInstance()->init ();
 #ifdef __ALLOW_RENDER_TO_TEXTURE__
@@ -137,6 +158,13 @@
 	mx3::RenderDevice::sharedInstance()->setRenderTargetBackingTexture();
 	mx3::RenderDevice::sharedInstance()->setRenderTargetScreen();
 #endif
+	
+	NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+	[nc addObserver: self 
+		   selector: @selector(setNewGLView:) 
+			   name: @"NewGLViewLoaded" 
+			 object: nil];
+	
 	theGame = new game::Game();
 	theGame->init();
 	
@@ -231,6 +259,7 @@
 
 - (void)dealloc 
 {
+	[[NSNotificationCenter defaultCenter] removeObserver: self];
 	[glView release];
 	[[mainViewController view] removeFromSuperview];
 	[mainViewController release];

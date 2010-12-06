@@ -73,7 +73,7 @@ namespace game
 		 gc->init();
 		 delete gc;*/
 		
-		current_scene = new MenuScene();
+		current_scene = new GameScene();
 		current_scene->init();
 		
 		next_game_tick = mx3::GetTickCount();

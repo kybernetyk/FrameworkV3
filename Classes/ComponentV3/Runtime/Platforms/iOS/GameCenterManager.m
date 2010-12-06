@@ -50,7 +50,7 @@
 #import "GameCenterManager.h"
 #import <GameKit/GameKit.h>
 
-
+GameCenterManager *g_pGameCenterManger = nil;
 
 @implementation GameCenterManager
 
@@ -63,7 +63,7 @@
 	if(self!= NULL)
 	{
 		earnedAchievementCache= NULL;
-		
+		g_pGameCenterManger = self;
 		[self loadScoresFromDefaults];
 	}
 	return self;

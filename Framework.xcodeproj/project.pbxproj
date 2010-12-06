@@ -64,6 +64,8 @@
 		032A16A112ABF3970046B89E /* ParticleSystem.mm in Sources */ = {isa = PBXBuildFile; fileRef = 032A166612ABF3970046B89E /* ParticleSystem.mm */; };
 		032A16A212ABF3970046B89E /* RenderSystem.mm in Sources */ = {isa = PBXBuildFile; fileRef = 032A166912ABF3970046B89E /* RenderSystem.mm */; };
 		032A16A312ABF3970046B89E /* SoundSystem.mm in Sources */ = {isa = PBXBuildFile; fileRef = 032A166C12ABF3970046B89E /* SoundSystem.mm */; };
+		032A195812AC72750046B89E /* README in Resources */ = {isa = PBXBuildFile; fileRef = 032A195712AC72750046B89E /* README */; };
+		032A195B12AC72900046B89E /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 032A195A12AC72900046B89E /* GameKit.framework */; };
 		03B8431E12A80233008D6D25 /* AppController.m in Sources */ = {isa = PBXBuildFile; fileRef = 03B8431C12A80233008D6D25 /* AppController.m */; };
 		03B8432412A8026D008D6D25 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 03B8432312A8026D008D6D25 /* AVFoundation.framework */; };
 		03B8432612A8026D008D6D25 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 03B8432512A8026D008D6D25 /* OpenAL.framework */; };
@@ -203,6 +205,8 @@
 		032A166B12ABF3970046B89E /* SoundSystem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoundSystem.h; sourceTree = "<group>"; };
 		032A166C12ABF3970046B89E /* SoundSystem.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SoundSystem.mm; sourceTree = "<group>"; };
 		032A166D12ABF3970046B89E /* types.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = types.h; sourceTree = "<group>"; };
+		032A195712AC72750046B89E /* README */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README; sourceTree = "<group>"; };
+		032A195A12AC72900046B89E /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
 		03B8431B12A80233008D6D25 /* AppController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppController.h; sourceTree = "<group>"; };
 		03B8431C12A80233008D6D25 /* AppController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppController.m; sourceTree = "<group>"; };
 		03B8431D12A80233008D6D25 /* SystemConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SystemConfig.h; sourceTree = "<group>"; };
@@ -253,6 +257,7 @@
 				03B8432A12A8026D008D6D25 /* QuartzCore.framework in Frameworks */,
 				03B8432C12A8026D008D6D25 /* libz.dylib in Frameworks */,
 				03B8437012A802CC008D6D25 /* AudioToolbox.framework in Frameworks */,
+				032A195B12AC72900046B89E /* GameKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -763,6 +768,7 @@
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
+				032A195712AC72750046B89E /* README */,
 				8D1107310486CEB800E47090 /* Framework-Info.plist */,
 				080E96DDFE201D6D7F000001 /* Classes */,
 				29B97315FDCFA39411CA2CEA /* Other Sources */,
@@ -804,6 +810,7 @@
 				03B8432912A8026D008D6D25 /* QuartzCore.framework */,
 				03B8432B12A8026D008D6D25 /* libz.dylib */,
 				03B8436F12A802CC008D6D25 /* AudioToolbox.framework */,
+				032A195A12AC72900046B89E /* GameKit.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -865,6 +872,7 @@
 				032A169312ABF3970046B89E /* MainViewController_landscape.xib in Resources */,
 				032A169412ABF3970046B89E /* MainViewController_portrait.xib in Resources */,
 				032A169512ABF3970046B89E /* MainWindow.xib in Resources */,
+				032A195812AC72750046B89E /* README in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -10,6 +10,10 @@
 #import "EAGLView.h"
 #include "TextureManager.h"
 
+#ifdef USE_GAMECENTER
+#import <GameKit/GameKit.h>
+#endif
+
 @implementation MainViewController
 @synthesize glView;
 @synthesize appController;
@@ -27,9 +31,24 @@
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad 
 {
+	NSLog(@"view did load ... %@", self);
     [super viewDidLoad];
-	
 	[appController setup];
+	
+	NSNotificationCenter *dc = [NSNotificationCenter defaultCenter];
+	
+#ifdef USE_GAMECENTER
+	[dc addObserver: self selector: @selector(showLeaderBoards:) name: @"ShowGameCenterLeaderBoard" object: nil];
+	
+	gcManager = [[GameCenterManager alloc] init];
+	[gcManager setDelegate: self];
+	
+	[gcManager authenticateLocalUser];
+	
+#endif
+	
+	[dc postNotificationName: @"NewGLViewLoaded" object: glView];
+	
 }
 
 
@@ -57,8 +76,13 @@
 
 - (void)didReceiveMemoryWarning 
 {
-    // Releases the view if it doesn't have a superview.
-    [super didReceiveMemoryWarning];
+	if (g_MayReleaseMemory)
+	{   
+		// Releases the view if it doesn't have a superview.
+		[super didReceiveMemoryWarning];	
+	}
+    
+	//tex manager doesnt matter
     g_TextureManager.purgeCache();
     // Release any cached data, images, etc that aren't in use.
 }
@@ -66,13 +90,34 @@
 - (void)viewDidUnload 
 {
     [super viewDidUnload];
+	
+	[[NSNotificationCenter defaultCenter] removeObserver: self];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
+	[self setGlView: nil];
+	NSLog(@"appc: %i", [appController retainCount]);
+	[self setAppController: nil];
+	
+#ifdef USE_GAMECENTER
+	[gcManager release];
+	gcManager = nil;
+#endif
+	
+	NSLog(@"lol view did unload!");
 }
 
 
 - (void)dealloc 
 {
+#ifdef USE_GAMECENTER
+	[gcManager release];
+	gcManager = nil;
+#endif
+	
+	[self setGlView: nil];
+	[self setAppController: nil];
+
+	[[NSNotificationCenter defaultCenter] removeObserver: self];
     [super dealloc];
 }
 
@@ -90,4 +135,62 @@ extern bool spawn_player;
 	spawn_player = true;
 }
 
+
+#pragma mark -
+#pragma mark leaderboard
+#ifdef USE_GAMECENTER
+
+#pragma mark -
+#pragma mark gamecenter delegate
+- (void) processGameCenterAuth: (NSError*) error
+{
+	NSLog(@"processGameCenterAuth. err: %@", [error localizedDescription]);
+}
+
+- (void) scoreReported: (NSError*) error
+{
+	NSLog(@"scoreReported. err: %@", [error localizedDescription]);	
+}
+
+
+- (void) showLeaderBoards: (NSNotification *) notification
+{
+	g_MayReleaseMemory = NO;
+	
+	NSUserDefaults *defs = [NSUserDefaults standardUserDefaults];
+	NSNumber *scope = [defs objectForKey: @"leaderboardScope"];
+	GKLeaderboardTimeScope lbscope = [scope integerValue];
+	NSString *catName = [defs objectForKey: @"leaderboardCategoryName"];
+	
+	GKLeaderboardViewController *leaderboardController = [[GKLeaderboardViewController alloc] init];
+	[leaderboardController setTimeScope: lbscope];
+	[leaderboardController setCategory: catName];
+	[leaderboardController setLeaderboardDelegate: self];
+	
+	[self presentModalViewController: leaderboardController animated: YES];
+	
+	[leaderboardController release];
+	
+}
+
+- (void)leaderboardViewControllerDidFinish:(GKLeaderboardViewController *)viewController
+{
+	NSUserDefaults *defs = [NSUserDefaults standardUserDefaults];
+	NSNumber *scope = [NSNumber numberWithInt: [viewController timeScope]];
+	if (scope)
+	{	
+		[defs setObject: scope forKey: @"leaderboardScope"];
+	}
+	if ([viewController category])
+	{
+		[defs setObject: [viewController category] forKey: @"leaderboardCategoryName"];
+	}
+//	NSLog(@"cat: %@", [viewController category]);
+	[defs synchronize];
+	
+	[self dismissModalViewControllerAnimated: YES];
+	g_MayReleaseMemory = YES;
+}	
+
+#endif
 @end

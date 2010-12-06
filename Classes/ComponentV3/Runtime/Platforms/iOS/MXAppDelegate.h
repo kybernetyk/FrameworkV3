@@ -5,6 +5,7 @@
 
 #include "Game.h"
 
+extern BOOL g_MayReleaseMemory;
 
 
 @interface MXAppDelegate : NSObject <UIApplicationDelegate> 

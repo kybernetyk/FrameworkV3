@@ -88,4 +88,7 @@
 
 - (void) mapPlayerIDtoPlayer: (NSString*) playerID;
 @end
+
+extern GameCenterManager *g_pGameCenterManger;
+
 #endif

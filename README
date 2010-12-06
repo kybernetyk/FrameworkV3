@@ -26,6 +26,7 @@ How to create a new Project?
 	OpenAL
 	OpenGLES
 	QuartzCore
+	GameKit (if USE_GAMECENTER in systemconfig.h was defined)
 	libz
 	
 7. Add the following line at the bottom of your .pch file:
