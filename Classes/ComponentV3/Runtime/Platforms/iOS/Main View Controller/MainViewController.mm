@@ -10,6 +10,11 @@
 #import "EAGLView.h"
 #include "TextureManager.h"
 
+#ifdef USE_INAPPSTORE
+#import "MKStoreManager.h"
+#import "MinyxStoreViewController.h"
+#endif
+
 #ifdef USE_GAMECENTER
 #import <GameKit/GameKit.h>
 
@@ -32,8 +37,8 @@
 }
 
 @end
-
 #endif
+
 
 @implementation MainViewController
 @synthesize glView;
@@ -65,7 +70,19 @@
 	[gcManager setDelegate: self];
 	
 	[gcManager authenticateLocalUser];
+#endif
 	
+#ifdef USE_INAPPSTORE
+	NSSet *products = [appController inAppProductIDs];
+	
+//	[[MKStoreManager sharedManager] setProductIDs: products];
+	
+	[MKStoreManager sharedManagerWithProductIDs: products];
+	
+	[dc addObserver: self 
+		   selector: @selector(showInAppStore:)
+			   name: @"ShowInAppStore" 
+			 object: nil];
 #endif
 	
 	[dc postNotificationName: @"NewGLViewLoaded" object: glView];
@@ -212,6 +229,41 @@ extern bool spawn_player;
 	[self dismissModalViewControllerAnimated: YES];
 	g_MayReleaseMemory = YES;
 }	
+#endif
+
+#ifdef USE_INAPPSTORE
+
+- (void) showInAppStore: (NSNotification *) notification
+{
+//	NSLog(@"purchasable: %@", [[MKStoreManager sharedManager] purchasableObjects])
+	MinyxStoreViewController *msvc = [[MinyxStoreViewController alloc] initWithNibName:
+									  @"MinyxStoreViewController" 
+																				bundle: nil];
+	[msvc setDelegate: self];
+	
+	UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController: msvc];
+	
+	UIBarButtonItem *done = [[UIBarButtonItem alloc] initWithBarButtonSystemItem: UIBarButtonSystemItemDone
+																		  target: self
+																		  action: @selector(dismissStore:)];
+	[[msvc navigationItem] setRightBarButtonItem: done];
+	[[msvc navigationItem] setTitle: @"Minyx Store"];
+	[self presentModalViewController: nav animated: YES];
+	
+	[done autorelease];
+	[msvc autorelease];
+	[nav autorelease];
+}
+
+- (void) dismissStore: (id) sender
+{
+	[self dismissModalViewControllerAnimated: YES];
+}
+- (void) minyxStoreDismissed: (MinyxStoreViewController *) msvc
+{
+	[self dismissModalViewControllerAnimated: YES];
+}
 
 #endif
+
 @end

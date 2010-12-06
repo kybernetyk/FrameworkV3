@@ -61,10 +61,12 @@ namespace mx3
 		if (!texture)
 			abort();
 		
-		texture->setAliasTexParams();
+		//texture->setAliasTexParams();
 		_filename = filename;
 		w = texture->w;
 		h = texture->h;
+		
+		printf("w: %f, h: %f\n",w,h);
 		return true;
 	}
 
