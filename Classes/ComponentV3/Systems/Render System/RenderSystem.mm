@@ -104,7 +104,7 @@ namespace mx3
 			{
 				atlas_sprite = (AtlasSprite*)ren;
 				
-				textured_atlas_quad = atlas_sprite->atlas_quad;
+				textured_atlas_quad = g_RenderableManager.getResource <TexturedAtlasQuad> (&atlas_sprite->res_handle);
 				textured_atlas_quad->x = pos->x;
 				textured_atlas_quad->y = pos->y;
 				textured_atlas_quad->z = ren->z;
@@ -134,7 +134,7 @@ namespace mx3
 			{
 				sprite = (Sprite*)ren;
 				
-				textured_quad = sprite->quad;
+				textured_quad = g_RenderableManager.getResource <TexturedQuad> (&sprite->res_handle);
 				textured_quad->x = pos->x;
 				textured_quad->y = pos->y;
 				textured_quad->z = ren->z;
@@ -154,7 +154,7 @@ namespace mx3
 			{
 				buffered_sprite = (BufferedSprite*)ren;
 				
-				textured_buffer_quad = buffered_sprite->quad;
+				textured_buffer_quad = g_RenderableManager.getResource <TexturedBufferQuad> (&buffered_sprite->res_handle);
 				textured_buffer_quad->x = pos->x;
 				textured_buffer_quad->y = pos->y;
 				textured_buffer_quad->z = ren->z;
@@ -174,7 +174,7 @@ namespace mx3
 			if (ren->_renderable_type == RENDERABLETYPE_TEXT)
 			{
 				label = (TextLabel*)ren;
-				font = label->ogl_font;
+				font = g_RenderableManager.getResource <OGLFont> (&label->res_handle);
 				font->x = pos->x;
 				font->y = pos->y;
 				font->z = ren->z;

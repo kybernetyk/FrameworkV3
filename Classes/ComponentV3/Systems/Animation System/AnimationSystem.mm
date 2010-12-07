@@ -61,7 +61,7 @@ namespace mx3
 		Entity *current_entity = NULL;
 		FrameAnimation *current_animation = NULL;
 		AtlasSprite *current_sprite = NULL;
-		
+		TexturedAtlasQuad *atlas_quad = NULL;
 		while (it != _entities.end())
 		{
 			current_entity = *it;
@@ -130,9 +130,10 @@ namespace mx3
 					
 				}
 				
+				atlas_quad = g_RenderableManager.getResource <TexturedAtlasQuad> (&current_sprite->res_handle);
 				
 				rect fs = current_animation->frame_size;
-				int sx = current_sprite->atlas_quad->tex_w / fs.w;
+				int sx = atlas_quad->tex_w / fs.w;
 			//	int sy = current_sprite->atlas_quad->tex_h / fs.h;
 				
 				int fx = ((int)current_animation->current_frame) % sx;

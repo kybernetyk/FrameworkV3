@@ -216,6 +216,8 @@ namespace mx3
 		unsigned int _renderable_type;
 		float alpha;
 		float z;
+		ResourceHandle res_handle;
+		
 		Renderable()
 		{
 			_id = COMPONENT_ID;
@@ -223,10 +225,12 @@ namespace mx3
 			anchorPoint = vector2D_make( 0.5, 0.5);
 			z = 0.0;
 			alpha = 1.0;
+			res_handle = 0;
 		}
 		virtual ~Renderable()
 		{
-			
+			if (res_handle)
+				g_RenderableManager.release(&res_handle);
 		}
 		//WARNING: Don't forget to set the entity manager to dirty when you change the z value of an existing component! (Which shouldn't happen too often anyways)
 
@@ -237,22 +241,22 @@ namespace mx3
 	{
 		static ComponentID COMPONENT_ID;
 		
-		TexturedQuad *quad;
+		//TexturedQuad *quad;
 		
 		Sprite()
 		{
 			_id = COMPONENT_ID;
 			_renderable_type = RENDERABLETYPE_SPRITE;
 			
-			quad = NULL;
+//			quad = NULL;
 		}
 		~Sprite()
 		{
-			g_RenderableManager.release(quad);
+			
 		}
 		//WARNING: Don't forget to set the entity manager to dirty when you change the z value of an existing component! (Which shouldn't happen too often anyways)
 		
-		DEBUGINFO ("Renderable: quad=%p, z=%f", quad,z)
+		DEBUGINFO ("Renderable: res_handle=%i, z=%f", res_handle,z)
 	};
 
 	struct PEmitter : public Renderable
@@ -284,22 +288,22 @@ namespace mx3
 	{
 		static ComponentID COMPONENT_ID;
 		
-		TexturedBufferQuad *quad;
+//		TexturedBufferQuad *quad;
 		
 		BufferedSprite()
 		{
 			_id = COMPONENT_ID;
 			_renderable_type = RENDERABLETYPE_BUFFEREDSPRITE;
 			
-			quad = NULL;
+//			quad = NULL;
 		}
 		~BufferedSprite()
 		{
-			g_RenderableManager.release(quad);
+//			g_RenderableManager.release(quad);
 		}
 		//WARNING: Don't forget to set the entity manager to dirty when you change the z value of an existing component! (Which shouldn't happen too often anyways)
 		
-		DEBUGINFO ("BufferedSprite: quad=%p, z=%f", quad,z)
+		DEBUGINFO ("BufferedSprite: res_handle=%i, z=%f", res_handle,z)
 	};
 	
 	
@@ -307,7 +311,7 @@ namespace mx3
 	{
 		static ComponentID COMPONENT_ID;
 		
-		TexturedAtlasQuad *atlas_quad;
+//		TexturedAtlasQuad *atlas_quad;
 		
 		rect src; 
 		
@@ -317,16 +321,16 @@ namespace mx3
 			_renderable_type = RENDERABLETYPE_ATLASSPRITE;
 			src.x = src.y = src.w = src.h = 0;
 			
-			atlas_quad = NULL;
+		//	atlas_quad = NULL;
 		}
 		~AtlasSprite()
 		{
-			g_RenderableManager.release(atlas_quad);
+		//	g_RenderableManager.release(atlas_quad);
 		}
 		
 		//WARNING: Don't forget to set the entity manager to dirty when you change the z value of an existing component! (Which shouldn't happen too often anyways)
 		
-		DEBUGINFO ("Atlas Sprite: atlas_quad=%p, z=%f", atlas_quad,z)
+		DEBUGINFO ("Atlas Sprite: res_handle=%i, z=%f", res_handle,z)
 	};
 
 	struct TextLabel : public Renderable
@@ -335,7 +339,7 @@ namespace mx3
 		
 		std::string text;
 		
-		OGLFont *ogl_font;
+	//	OGLFont *ogl_font;
 		
 		TextLabel()
 		{
@@ -344,12 +348,12 @@ namespace mx3
 			
 			text = "fill me!";
 			
-			ogl_font = NULL;
+		//	ogl_font = NULL;
 		}
 		
 		~TextLabel()
 		{
-			g_RenderableManager.release(ogl_font);
+		//	g_RenderableManager.release(ogl_font);
 		}
 		
 		//WARNING: Don't forget to set the entity manager to dirty when you change the z value of an existing component! (Which shouldn't happen too often anyways)
