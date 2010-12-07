@@ -33,7 +33,18 @@
 #pragma mark -
 #pragma mark webView delegate
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request 
- navigationType:(UIWebViewNavigationType)navigationType {
+ navigationType:(UIWebViewNavigationType)navigationType 
+{
+	NSLog(@"%@", [[request URL] scheme]);
+	
+	//if ([[[request URL] scheme] isEqualToString: @"itms"])
+	if (navigationType == UIWebViewNavigationTypeLinkClicked)
+	{
+		[[UIApplication sharedApplication] openURL: [request URL]];
+		return NO;
+	}
+	
+	
 	[spinner startAnimating];
 	return YES;
 }
@@ -44,14 +55,14 @@
 }
 
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error {
-	UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" 
-													message:@"Unable to load, please try again later." 
-												   delegate:nil 
-										  cancelButtonTitle:@"OK" 
-										  otherButtonTitles:nil];
-	[alert show];
-	[alert release];
-	[self.parentViewController dismissModalViewControllerAnimated:YES];
+//	UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" 
+//													message:@"Unable to load, please try again later." 
+//												   delegate:nil 
+//										  cancelButtonTitle:@"OK" 
+//										  otherButtonTitles:nil];
+//	[alert show];
+//	[alert release];
+//	[self.parentViewController dismissModalViewControllerAnimated:YES];
 
 }
 
@@ -88,6 +99,8 @@
 
 - (void)dealloc 
 {
+	[self setWebView: nil];
+	[self setSpinner: nil];
 	[self setPromotionAddress: nil];
     [super dealloc];
 }
