@@ -39,6 +39,9 @@
 @end
 #endif
 
+#ifdef USE_PROMOTION
+#import "PromotionViewController.h"
+#endif
 
 @implementation MainViewController
 @synthesize glView;
@@ -89,6 +92,13 @@
 			   name: @"DismissMinyxStore"
 			 object: nil];
 #endif
+	
+#ifdef USE_PROMOTION
+	[dc addObserver: self 
+		   selector: @selector(showPromotionView:)
+			   name: @"ShowPromotionView" 
+			 object: nil];
+#endif	
 	
 	[dc postNotificationName: @"NewGLViewLoaded" object: glView];
 	
@@ -264,7 +274,18 @@ extern bool spawn_player;
 {
 	[self dismissModalViewControllerAnimated: YES];
 }
+#endif
 
+#ifdef USE_PROMOTION
+- (void) showPromotionView: (NSNotification *) notification
+{
+	PromotionViewController *controller = [[PromotionViewController alloc]
+										   initWithNibName:@"PromotionViewController"
+										   bundle:[NSBundle mainBundle]];
+	controller.promotionAddress = PROMOTION_URL;
+	[self presentModalViewController:controller animated:YES];
+	[controller release];
+}
 #endif
 
 @end

@@ -294,7 +294,7 @@
 							<array>
 								<string>29B97314FDCFA39411CA2CEA</string>
 								<string>080E96DDFE201D6D7F000001</string>
-								<string>03D1530D12AEE12900AACF84</string>
+								<string>030BDB4B12AEF537008BC5CF</string>
 								<string>29B97315FDCFA39411CA2CEA</string>
 								<string>29B97317FDCFA39411CA2CEA</string>
 								<string>29B97323FDCFA39411CA2CEA</string>
@@ -337,8 +337,6 @@
 					<key>Dock</key>
 					<array>
 						<dict>
-							<key>BecomeActive</key>
-							<true/>
 							<key>ContentConfiguration</key>
 							<dict>
 								<key>PBXProjectModuleGUID</key>
@@ -356,7 +354,7 @@
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>03D1540D12AEE24600AACF84</string>
+										<string>030BDC3112AEF54E008BC5CF</string>
 										<key>history</key>
 										<array>
 											<string>03B8433B12A80279008D6D25</string>
@@ -376,7 +374,7 @@
 											<string>03D153F812AEE22F00AACF84</string>
 											<string>03D153F912AEE22F00AACF84</string>
 											<string>03D153FA12AEE22F00AACF84</string>
-											<string>03D1540C12AEE24600AACF84</string>
+											<string>030BDA5212AEE571008BC5CF</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -390,18 +388,18 @@
 							<key>GeometryConfiguration</key>
 							<dict>
 								<key>Frame</key>
-								<string>{{0, 0}, {928, 383}}</string>
+								<string>{{0, 0}, {928, 367}}</string>
 								<key>RubberWindowFrame</key>
 								<string>0 106 1280 672 0 0 1280 778 </string>
 							</dict>
 							<key>Module</key>
 							<string>PBXNavigatorGroup</string>
 							<key>Proportion</key>
-							<string>383pt</string>
+							<string>367pt</string>
 						</dict>
 						<dict>
 							<key>Proportion</key>
-							<string>243pt</string>
+							<string>259pt</string>
 							<key>Tabs</key>
 							<array>
 								<dict>
@@ -415,7 +413,7 @@
 									<key>GeometryConfiguration</key>
 									<dict>
 										<key>Frame</key>
-										<string>{{10, 27}, {928, 216}}</string>
+										<string>{{10, 27}, {928, 232}}</string>
 									</dict>
 									<key>Module</key>
 									<string>XCDetailModule</string>
@@ -469,7 +467,7 @@
 									<key>GeometryConfiguration</key>
 									<dict>
 										<key>Frame</key>
-										<string>{{10, 27}, {928, 216}}</string>
+										<string>{{10, 27}, {928, 232}}</string>
 										<key>RubberWindowFrame</key>
 										<string>0 106 1280 672 0 0 1280 778 </string>
 									</dict>
@@ -499,11 +497,11 @@
 			</array>
 			<key>TableOfContents</key>
 			<array>
-				<string>03D153FF12AEE23000AACF84</string>
+				<string>030BDC3212AEF54E008BC5CF</string>
 				<string>1CA23ED40692098700951B8B</string>
-				<string>03D1540012AEE23000AACF84</string>
+				<string>030BDC3312AEF54E008BC5CF</string>
 				<string>03B8433912A80279008D6D25</string>
-				<string>03D1540112AEE23000AACF84</string>
+				<string>030BDC3412AEF54E008BC5CF</string>
 				<string>1CA23EDF0692099D00951B8B</string>
 				<string>1CA23EE00692099D00951B8B</string>
 				<string>1CA23EE10692099D00951B8B</string>
@@ -652,14 +650,14 @@
 			</array>
 			<key>TableOfContents</key>
 			<array>
-				<string>03D1540212AEE23000AACF84</string>
+				<string>030BDA5312AEE571008BC5CF</string>
 				<string>1CCC7628064C1048000F2A68</string>
 				<string>1CCC7629064C1048000F2A68</string>
-				<string>03D1540312AEE23000AACF84</string>
-				<string>03D1540412AEE23000AACF84</string>
-				<string>03D1540512AEE23000AACF84</string>
-				<string>03D1540612AEE23000AACF84</string>
-				<string>03B8433912A80279008D6D25</string>
+				<string>030BDA5412AEE571008BC5CF</string>
+				<string>030BDA5512AEE571008BC5CF</string>
+				<string>030BDA5612AEE571008BC5CF</string>
+				<string>030BDA5712AEE571008BC5CF</string>
+				<string>030BDA5812AEE571008BC5CF</string>
 			</array>
 			<key>ToolbarConfigUserDefaultsMinorVersion</key>
 			<string>2</string>
@@ -676,7 +674,7 @@
 	<key>StatusbarIsVisible</key>
 	<true/>
 	<key>TimeStamp</key>
-	<real>313451078.29878497</real>
+	<real>313455950.428581</real>
 	<key>ToolbarConfigUserDefaultsMinorVersion</key>
 	<string>2</string>
 	<key>ToolbarDisplayMode</key>
