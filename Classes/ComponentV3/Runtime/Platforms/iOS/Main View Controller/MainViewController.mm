@@ -83,6 +83,11 @@
 		   selector: @selector(showInAppStore:)
 			   name: @"ShowInAppStore" 
 			 object: nil];
+	
+	[dc addObserver: self
+		   selector: @selector(dismissStore:)
+			   name: @"DismissMinyxStore"
+			 object: nil];
 #endif
 	
 	[dc postNotificationName: @"NewGLViewLoaded" object: glView];
@@ -235,31 +240,27 @@ extern bool spawn_player;
 
 - (void) showInAppStore: (NSNotification *) notification
 {
+	
+	NSString *prodid = [notification object];
+	//NSLog(@"prodid: %@", prodid);
+	
 //	NSLog(@"purchasable: %@", [[MKStoreManager sharedManager] purchasableObjects])
 	MinyxStoreViewController *msvc = [[MinyxStoreViewController alloc] initWithNibName:
 									  @"MinyxStoreViewController" 
 																				bundle: nil];
-	[msvc setDelegate: self];
+	[msvc setProductInformationDataSource: appController];
+	[msvc setProductIdToShow: prodid];
 	
 	UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController: msvc];
 	
-	UIBarButtonItem *done = [[UIBarButtonItem alloc] initWithBarButtonSystemItem: UIBarButtonSystemItemDone
-																		  target: self
-																		  action: @selector(dismissStore:)];
-	[[msvc navigationItem] setRightBarButtonItem: done];
 	[[msvc navigationItem] setTitle: @"Minyx Store"];
 	[self presentModalViewController: nav animated: YES];
 	
-	[done autorelease];
 	[msvc autorelease];
 	[nav autorelease];
 }
 
-- (void) dismissStore: (id) sender
-{
-	[self dismissModalViewControllerAnimated: YES];
-}
-- (void) minyxStoreDismissed: (MinyxStoreViewController *) msvc
+- (void) dismissStore: (NSNotification *) notification
 {
 	[self dismissModalViewControllerAnimated: YES];
 }

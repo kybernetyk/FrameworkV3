@@ -8,12 +8,14 @@
 
 #import "MinyxStoreViewController.h"
 #import "MKStoreManager.h"
+#import "MinyxStoreDetailViewController.h"
 
 @implementation MinyxStoreViewController
-@synthesize delegate;
 @synthesize activity;
 @synthesize tableView;
 @synthesize products;
+@synthesize productInformationDataSource;
+@synthesize productIdToShow;
 
 // The designated initializer.  Override if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
 /*
@@ -31,9 +33,41 @@
 - (void)viewDidLoad 
 {
     [super viewDidLoad];
+	UIBarButtonItem *done = [[UIBarButtonItem alloc] initWithBarButtonSystemItem: UIBarButtonSystemItemDone
+																		  target: self
+																		  action: @selector(dismissStore:)];
+//	[[msvc navigationItem] setRightBarButtonItem: done];
 	
+	[[self navigationItem] setRightBarButtonItem: done];
+	[done autorelease];
+
 	
 	[self setProducts: [[MKStoreManager sharedManager] purchasableObjects]];
+	
+	if ([self productIdToShow])
+	{
+		for (SKProduct *product in [self products])
+		{
+			if ([[product productIdentifier] isEqualToString: [self productIdToShow]])
+			{
+				[self showDetailViewForProduct: product animated: NO];
+				return;
+			}
+		}
+	}
+
+//	if ([[self products] count] == 1)
+//	{
+//		SKProduct *product = [[self products] objectAtIndex: 0];
+//		
+//		[self showDetailViewForProduct: product animated: NO];
+//	}
+}
+
+- (void) viewWillAppear:(BOOL)animated
+{
+	[self setProducts: [[MKStoreManager sharedManager] purchasableObjects]];
+	[tableView reloadData];
 }
 
 
@@ -64,6 +98,7 @@
 
 - (void)dealloc 
 {
+	[self setProductInformationDataSource: nil];
 	[MKStoreManager setDelegate: nil];
 	[self setActivity: nil];
 	[self setProducts: nil];
@@ -76,7 +111,10 @@
 - (IBAction) dismissStore: (id) sender
 {
 	[MKStoreManager setDelegate: nil];
-	[delegate minyxStoreDismissed: self];
+	//[delegate minyxStoreDismissed: self];
+	
+	NSNotificationCenter *dc = [NSNotificationCenter defaultCenter];
+	[dc postNotificationName: @"DismissMinyxStore" object: self];
 }
 
 #pragma mark -
@@ -118,8 +156,9 @@
 	[numberFormatter setFormatterBehavior:NSNumberFormatterBehavior10_4];
 	[numberFormatter setNumberStyle:NSNumberFormatterCurrencyStyle];
 	[numberFormatter setLocale:product.priceLocale];
-	NSString *formattedPrice = [numberFormatter stringFromNumber:product.price];
-
+	NSString *formattedPrice = [NSString stringWithString: [numberFormatter stringFromNumber:product.price]];
+	[numberFormatter release];
+	
 	if ([MKStoreManager isFeaturePurchased: [product productIdentifier]])
 		formattedPrice = @"[You own this]";
 	
@@ -136,31 +175,30 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath 
 {
-	[activity startAnimating];
-	
-	SKProduct *product = [[self products] objectAtIndex: [indexPath row]];
-	
+	//[activity startAnimating];
+
+/*	SKProduct *product = [[self products] objectAtIndex: [indexPath row]];
 	NSString *feature = [product productIdentifier];
 	[MKStoreManager setDelegate: self];
-	[[MKStoreManager sharedManager] buyFeature: feature];
+	[[MKStoreManager sharedManager] buyFeature: feature];*/
+
+	SKProduct *product = [[self products] objectAtIndex: [indexPath row]];
+	
+	[self showDetailViewForProduct: product animated: YES];
+	
 	[tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
-#pragma mark -
-#pragma mark MKStoreManager
 
-- (void)productPurchased:(NSString *)productId
+- (void) showDetailViewForProduct: (SKProduct *) product animated: (BOOL) animated
 {
-	[activity stopAnimating];
-	[self setProducts: [[MKStoreManager sharedManager] purchasableObjects]];
-	[tableView reloadData];
-}
-
-- (void)transactionCanceled
-{
-	[activity stopAnimating];
-	[self setProducts: [[MKStoreManager sharedManager] purchasableObjects]];
-	[tableView reloadData];
+	MinyxStoreDetailViewController *dvc = [[MinyxStoreDetailViewController alloc] initWithNibName:@"MinyxStoreDetailViewController" bundle: nil];
+	[dvc setProduct: product];
+	[dvc setDataSource: [self productInformationDataSource]];
+	
+	[[self navigationController] pushViewController: dvc animated: animated];
+	[dvc release];
+	
 }
 
 

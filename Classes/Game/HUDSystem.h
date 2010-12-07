@@ -26,7 +26,7 @@ namespace game
 		EntityManager *_entityManager;
 
 		Entity *fps_label;
-		OGLFont *font;
+		ResourceHandle font_handle;
 	};
 
 

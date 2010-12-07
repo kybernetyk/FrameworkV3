@@ -21,7 +21,7 @@ namespace game
 	{
 		_entityManager = entityManager;
 
-		font = g_RenderableManager.accquireOGLFont("zomg.fnt");
+		font_handle = g_RenderableManager.acquireResource <OGLFont> ("zomg.fnt");
 		
 		//fps label
 		fps_label = _entityManager->createNewEntity();
@@ -31,7 +31,7 @@ namespace game
 		fps_label->get<Position>()->y = SCREEN_H;
 		fps_label->get<Position>()->scale_x = 		fps_label->get<Position>()->scale_y =  0.5;
 		TextLabel *label = _entityManager->addComponent<TextLabel> (fps_label);
-		label->ogl_font = font;
+		label->res_handle = font_handle;
 		label->anchorPoint = vector2D_make(0.0, 1.0);
 		label->text = "FPS: 0";
 		label->z = 6.0;

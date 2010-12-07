@@ -7,20 +7,23 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import <StoreKit/StoreKit.h>
 
 @interface MinyxStoreViewController : UIViewController 
 {
-	id delegate;
 	UIActivityIndicatorView *activity;
 	UITableView *tableView;
 	NSArray *products;
-}
 
-@property (readwrite, assign) id delegate;
+	NSString *productIdToShow;
+	
+	id productInformationDataSource;
+}
+@property (readwrite, assign) id productInformationDataSource;
 @property (readwrite, retain) IBOutlet UIActivityIndicatorView *activity;
 @property (readwrite, retain) IBOutlet UITableView *tableView;
 @property (readwrite, retain) NSArray *products;
-- (IBAction) dismissStore: (id) sender;
+@property (readwrite, retain) NSString *productIdToShow;
 
+- (void) showDetailViewForProduct: (SKProduct *) product animated: (BOOL) animated;
 @end
