@@ -58,6 +58,16 @@ namespace mx3
 			if (_resourcesByHandle[*handle])
 				return (T *)_resourcesByHandle[*handle];
 
+			
+			
+			//
+			// hmm - let's rather crash
+			//
+
+			CV3Log ("No renderable found to handle %i!\n", *handle);
+			abort();
+			return NULL;
+			
 			if (*handle == 0)
 			{
 				CV3Log ("0 is not a valid handle!\n");
