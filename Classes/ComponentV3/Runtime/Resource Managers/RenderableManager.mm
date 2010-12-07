@@ -17,7 +17,7 @@ namespace mx3
 	}
 	
 	
-	ResourceHandle RenderableManager::getNextAvailableHandle() 
+	ResourceHandle RenderableManager::getFreeHandle() 
 	{
 		for (ResourceHandle i = 1; i < MAX_RESOURCES; i++)
 			if (_resourcesByHandle[i] == 0)
