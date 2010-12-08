@@ -19,6 +19,7 @@
 	IBOutlet UITextView *detailText;
 	IBOutlet UIImageView *imageView;
 	IBOutlet UIActivityIndicatorView *activity;
+	IBOutlet UIButton *buyButton;
 }
 @property (readwrite, assign) id dataSource;
 @property (readwrite, retain) SKProduct *product;

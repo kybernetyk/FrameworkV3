@@ -8,6 +8,8 @@
 
 #import "MinyxStoreDetailViewController.h"
 #import "MKStoreManager.h"
+#import "NotificationSystem.h"
+#import <QuartzCore/QuartzCore.h>
 
 @implementation MinyxStoreDetailViewController
 @synthesize dataSource;
@@ -23,6 +25,14 @@
     return self;
 }
 */
+- (void) setBorderAndCornersForView: (UIView *) aView
+{
+	[[aView layer] setCornerRadius: 8.0];
+	[[aView layer] setMasksToBounds: YES];
+	[[aView layer] setBorderColor: [[UIColor blackColor] CGColor]];
+	[[aView layer] setBorderWidth: 1.0];
+	
+}
 
 
 - (void) dismissStore: (id) sender
@@ -30,7 +40,7 @@
 	[MKStoreManager setDelegate: nil];
 
 	NSNotificationCenter *dc = [NSNotificationCenter defaultCenter];
-	[dc postNotificationName: @"DismissMinyxStore" object: self];
+	[dc postNotificationName: kHideInAppStore object: self];
 }
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
@@ -39,9 +49,20 @@
     [super viewDidLoad];
 
 	
-	UIBarButtonItem *done = [[UIBarButtonItem alloc] initWithBarButtonSystemItem: UIBarButtonSystemItemDone
-																		  target: self
-																		  action: @selector(dismissStore:)];
+	[self setBorderAndCornersForView: imageView];
+	[self setBorderAndCornersForView: detailText];
+	//[self setBorderAndCornersForView: buyButton];
+	
+//	UIBarButtonItem *done = [[UIBarButtonItem alloc] initWithBarButtonSystemItem: UIBarButtonSystemItemDone
+//																		  target: self
+//																		  action: @selector(dismissStore:)];
+
+	UIBarButtonItem *done = [[UIBarButtonItem alloc] initWithTitle: @"Done"
+															 style: UIBarButtonItemStyleBordered 
+															target: self 
+															action: @selector(dismissStore:)];
+	
+	
 	[[self navigationItem] setRightBarButtonItem: done];
 	[done autorelease];
 

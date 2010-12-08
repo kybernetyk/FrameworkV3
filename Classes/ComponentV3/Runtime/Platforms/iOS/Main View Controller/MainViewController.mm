@@ -9,6 +9,7 @@
 #import "MainViewController.h"
 #import "EAGLView.h"
 #include "TextureManager.h"
+#import "NotificationSystem.h"
 
 #ifdef USE_INAPPSTORE
 #import "MKStoreManager.h"
@@ -67,7 +68,7 @@
 	NSNotificationCenter *dc = [NSNotificationCenter defaultCenter];
 	
 #ifdef USE_GAMECENTER
-	[dc addObserver: self selector: @selector(showLeaderBoards:) name: @"ShowGameCenterLeaderBoard" object: nil];
+	[dc addObserver: self selector: @selector(showLeaderBoards:) name: kShowLeaderBoard object: nil];
 	
 	gcManager = [[GameCenterManager alloc] init];
 	[gcManager setDelegate: self];
@@ -84,23 +85,23 @@
 	
 	[dc addObserver: self 
 		   selector: @selector(showInAppStore:)
-			   name: @"ShowInAppStore" 
+			   name: kShowInAppStore 
 			 object: nil];
 	
 	[dc addObserver: self
 		   selector: @selector(dismissStore:)
-			   name: @"DismissMinyxStore"
+			   name: kHideInAppStore
 			 object: nil];
 #endif
 	
 #ifdef USE_PROMOTION
 	[dc addObserver: self 
 		   selector: @selector(showPromotionView:)
-			   name: @"ShowPromotionView" 
+			   name: kShowPromotions
 			 object: nil];
 #endif	
 	
-	[dc postNotificationName: @"NewGLViewLoaded" object: glView];
+	[dc postNotificationName: kNewGLViewLoaded object: glView];
 	
 }
 
@@ -262,7 +263,7 @@ extern bool spawn_player;
 	[msvc setProductIdToShow: prodid];
 	
 	UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController: msvc];
-	
+	[[nav navigationBar] setBarStyle: UIBarStyleBlack];
 	[[msvc navigationItem] setTitle: @"Minyx Store"];
 	[self presentModalViewController: nav animated: YES];
 	

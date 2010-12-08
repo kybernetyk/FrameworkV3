@@ -9,6 +9,8 @@
 #import "MinyxStoreViewController.h"
 #import "MKStoreManager.h"
 #import "MinyxStoreDetailViewController.h"
+#import "NotificationSystem.h"
+
 
 @implementation MinyxStoreViewController
 @synthesize activity;
@@ -33,10 +35,15 @@
 - (void)viewDidLoad 
 {
     [super viewDidLoad];
-	UIBarButtonItem *done = [[UIBarButtonItem alloc] initWithBarButtonSystemItem: UIBarButtonSystemItemDone
-																		  target: self
-																		  action: @selector(dismissStore:)];
-//	[[msvc navigationItem] setRightBarButtonItem: done];
+//	UIBarButtonItem *done = [[UIBarButtonItem alloc] initWithBarButtonSystemItem: UIBarButtonSystemItemDone
+//																		  target: self
+//																		  action: @selector(dismissStore:)];
+
+	UIBarButtonItem *done = [[UIBarButtonItem alloc] initWithTitle: @"Done"
+															 style: UIBarButtonItemStyleBordered 
+															target: self 
+															action: @selector(dismissStore:)];
+	
 	
 	[[self navigationItem] setRightBarButtonItem: done];
 	[done autorelease];
@@ -114,7 +121,7 @@
 	//[delegate minyxStoreDismissed: self];
 	
 	NSNotificationCenter *dc = [NSNotificationCenter defaultCenter];
-	[dc postNotificationName: @"DismissMinyxStore" object: self];
+	[dc postNotificationName: kHideInAppStore object: self];
 }
 
 #pragma mark -
@@ -146,7 +153,7 @@
 		/*UISwitch *mySwitch = [[[UISwitch alloc] initWithFrame:CGRectZero] autorelease];
 		[cell addSubview: mySwitch];
 		[cell setAccessoryView: mySwitch];*/
-		[cell setAccessoryType: UITableViewCellAccessoryDetailDisclosureButton];
+		[cell setAccessoryType: UITableViewCellAccessoryDisclosureIndicator];
 	}
 
 	

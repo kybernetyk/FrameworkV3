@@ -11,6 +11,7 @@
 #import <QuartzCore/QuartzCore.h>
 #include "Timer.h"
 #include "ComponentV3.h"
+#import "NotificationSystem.h"
 
 #ifdef USE_GAMECENTER
 #import "GameCenterManager.h"
@@ -162,7 +163,7 @@ BOOL g_MayReleaseMemory = YES;
 	NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
 	[nc addObserver: self 
 		   selector: @selector(setNewGLView:) 
-			   name: @"NewGLViewLoaded" 
+			   name: kNewGLViewLoaded 
 			 object: nil];
 	
 	theGame = new game::Game();
