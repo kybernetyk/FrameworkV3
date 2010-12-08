@@ -39,8 +39,9 @@
 {
 	[MKStoreManager setDelegate: nil];
 
-	NSNotificationCenter *dc = [NSNotificationCenter defaultCenter];
-	[dc postNotificationName: kHideInAppStore object: self];
+//	NSNotificationCenter *dc = [NSNotificationCenter defaultCenter];
+//	[dc postNotificationName: kHideInAppStore object: self];
+	post_notification (kHideInAppStore, self);
 }
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.

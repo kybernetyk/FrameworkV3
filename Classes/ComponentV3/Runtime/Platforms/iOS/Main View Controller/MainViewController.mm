@@ -101,7 +101,9 @@
 			 object: nil];
 #endif	
 	
-	[dc postNotificationName: kNewGLViewLoaded object: glView];
+	//[dc postNotificationName: kNewGLViewLoaded object: glView];
+	
+	post_notification (kNewGLViewLoaded, glView);
 	
 }
 

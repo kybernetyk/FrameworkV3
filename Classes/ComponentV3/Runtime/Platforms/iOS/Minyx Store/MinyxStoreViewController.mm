@@ -119,9 +119,11 @@
 {
 	[MKStoreManager setDelegate: nil];
 	//[delegate minyxStoreDismissed: self];
+
+	post_notification (kHideInAppStore, self);
 	
-	NSNotificationCenter *dc = [NSNotificationCenter defaultCenter];
-	[dc postNotificationName: kHideInAppStore object: self];
+//	NSNotificationCenter *dc = [NSNotificationCenter defaultCenter];
+//	[dc postNotificationName: kHideInAppStore object: self];
 }
 
 #pragma mark -

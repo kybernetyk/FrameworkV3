@@ -9,5 +9,5 @@
 #pragma once
 #include "NotificationNames.h"
 
-void post_notification (NSString *notificationName, id object);
+void post_notification (NSString *notificationName, id object = nil);
 

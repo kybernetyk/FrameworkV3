@@ -9,7 +9,7 @@
 
 #include "NotificationSystem.h"
 
-void post_notification (NSString *notificationName, id object = nil)
+void post_notification (NSString *notificationName, id object)
 {
 	NSNotificationCenter *dc = [NSNotificationCenter defaultCenter];
 	[dc postNotificationName: notificationName object: object];
