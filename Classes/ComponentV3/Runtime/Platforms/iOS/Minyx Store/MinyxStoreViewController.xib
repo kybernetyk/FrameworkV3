@@ -12,7 +12,7 @@
 		</object>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
-			<integer value="15"/>
+			<integer value="11"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -45,24 +45,24 @@
 					<object class="IBUIImageView" id="216074168">
 						<reference key="NSNextResponder" ref="397238599"/>
 						<int key="NSvFlags">274</int>
-						<string key="NSFrame">{{0, -2}, {320, 188}}</string>
+						<string key="NSFrameSize">{320, 246}</string>
 						<reference key="NSSuperview" ref="397238599"/>
 						<int key="IBUIContentMode">5</int>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<object class="NSCustomResource" key="IBUIImage">
 							<string key="NSClassName">NSImage</string>
-							<string key="NSResourceName">moneyyy.png</string>
+							<string key="NSResourceName">minyx_rubel.png</string>
 						</object>
 					</object>
 					<object class="IBUITableView" id="655078564">
 						<reference key="NSNextResponder" ref="397238599"/>
 						<int key="NSvFlags">274</int>
-						<string key="NSFrame">{{0, 183}, {325, 253}}</string>
+						<string key="NSFrame">{{0, 189}, {325, 247}}</string>
 						<reference key="NSSuperview" ref="397238599"/>
 						<object class="NSColor" key="IBUIBackgroundColor">
 							<int key="NSColorSpace">3</int>
-							<bytes key="NSWhite">MQA</bytes>
+							<bytes key="NSWhite">MC45AA</bytes>
 						</object>
 						<bool key="IBUIClipsSubviews">YES</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -166,9 +166,9 @@
 						<reference key="object" ref="397238599"/>
 						<object class="NSMutableArray" key="children">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<reference ref="604220343"/>
 							<reference ref="655078564"/>
 							<reference ref="216074168"/>
-							<reference ref="604220343"/>
 						</object>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -200,6 +200,7 @@
 					<string>14.IBPluginDependency</string>
 					<string>14.IBViewBoundsToFrameTransform</string>
 					<string>15.IBPluginDependency</string>
+					<string>15.IBViewBoundsToFrameTransform</string>
 					<string>19.IBPluginDependency</string>
 					<string>19.IBViewBoundsToFrameTransform</string>
 				</object>
@@ -211,9 +212,12 @@
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<object class="NSAffineTransform">
-						<bytes key="NSTransformStruct">P4AAAL+AAAAAAAAAwwoAAA</bytes>
+						<bytes key="NSTransformStruct">P4AAAL+AAAAAAAAAw3QAAA</bytes>
 					</object>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+					<object class="NSAffineTransform">
+						<bytes key="NSTransformStruct">P4AAAL+AAAAAAAAAw9kAAA</bytes>
+					</object>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<object class="NSAffineTransform">
 						<bytes key="NSTransformStruct">P4AAAL+AAABDEQAAwqoAAA</bytes>
@@ -537,7 +541,7 @@
 		<string key="IBDocument.LastKnownRelativeProjectPath">../../../../../../../Fruitmunch.xcodeproj</string>
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
 		<object class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
-			<string key="NS.key.0">moneyyy.png</string>
+			<string key="NS.key.0">minyx_rubel.png</string>
 			<string key="NS.object.0">{320, 240}</string>
 		</object>
 		<string key="IBCocoaTouchPluginVersion">132</string>

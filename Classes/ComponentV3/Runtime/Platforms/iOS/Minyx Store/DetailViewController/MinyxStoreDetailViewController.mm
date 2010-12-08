@@ -29,7 +29,14 @@
 {
 	[[aView layer] setCornerRadius: 8.0];
 	[[aView layer] setMasksToBounds: YES];
-	[[aView layer] setBorderColor: [[UIColor blackColor] CGColor]];
+	
+	//0x9f9087
+	
+	
+	
+	UIColor *col = [UIColor colorWithRed: (159.0/255.0) green: (144.0/255.0) blue: (135.0/255.0) alpha:1.0];
+	
+	[[aView layer] setBorderColor: [col CGColor]];
 	[[aView layer] setBorderWidth: 1.0];
 	
 }
@@ -51,7 +58,7 @@
 
 	
 	[self setBorderAndCornersForView: imageView];
-	[self setBorderAndCornersForView: detailText];
+	//[self setBorderAndCornersForView: detailText];
 	//[self setBorderAndCornersForView: buyButton];
 	
 //	UIBarButtonItem *done = [[UIBarButtonItem alloc] initWithBarButtonSystemItem: UIBarButtonSystemItemDone
