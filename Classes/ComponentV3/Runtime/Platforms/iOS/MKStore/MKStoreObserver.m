@@ -34,8 +34,10 @@
 
 - (void)paymentQueue:(SKPaymentQueue *)queue updatedTransactions:(NSArray *)transactions
 {
+	//NSLog(@"update transactions ...");
 	for (SKPaymentTransaction *transaction in transactions)
 	{
+	//	NSLog(@"update: %@", transaction);
 		switch (transaction.transactionState)
 		{
 			case SKPaymentTransactionStatePurchased:
@@ -63,13 +65,14 @@
 
 - (void) failedTransaction: (SKPaymentTransaction *)transaction
 {	
+	//	NSLog(@"failed transaction: %@", transaction);
 	[[MKStoreManager sharedManager] transactionCanceled:transaction];
     [[SKPaymentQueue defaultQueue] finishTransaction: transaction];	
 }
 
 - (void) completeTransaction: (SKPaymentTransaction *)transaction
 {		
-	
+	//NSLog(@"complete transaction: %@", transaction);
     [[MKStoreManager sharedManager] provideContent:transaction.payment.productIdentifier 
 									   forReceipt:transaction.transactionReceipt];	
 
@@ -78,10 +81,39 @@
 
 - (void) restoreTransaction: (SKPaymentTransaction *)transaction
 {	
+	//NSLog(@"restore transaction: %@", transaction);
     [[MKStoreManager sharedManager] provideContent: transaction.originalTransaction.payment.productIdentifier
 									   forReceipt:transaction.transactionReceipt];
 	
     [[SKPaymentQueue defaultQueue] finishTransaction: transaction];	
 }
+
+- (void)paymentQueueRestoreCompletedTransactionsFinished:(SKPaymentQueue *)queue
+{
+//	NSArray *transactions = [queue transactions];
+//	
+//	NSLog(@"restore finished!");
+//	for (SKPaymentTransaction *transaction in transactions)
+//	{
+//		NSLog(@"update: %@", transaction);
+//		switch (transaction.transactionState)
+//		{
+//            case SKPaymentTransactionStateRestored:
+//				NSLog(@"restore trans ...");
+//                [self restoreTransaction:transaction];
+//            default:
+//                break;
+//		}			
+//	}
+//	
+	[[MKStoreManager sharedManager] restoreFinished];
+}
+
+- (void)paymentQueue:(SKPaymentQueue *)queue restoreCompletedTransactionsFailedWithError:(NSError *)error
+{
+	//NSLog(@"restore err: %@", error);
+	[[MKStoreManager sharedManager] restoreFinished];
+}
+
 
 @end

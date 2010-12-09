@@ -38,6 +38,7 @@
 - (void)productFetchComplete;
 - (void)productPurchased:(NSString *)productId;
 - (void)transactionCanceled;
+- (void)restoreFinished;
 // as a matter of UX, don't show a "User Canceled transaction" alert view here
 // use this only to "enable/disable your UI or hide your activity indicator view etc.,
 @end

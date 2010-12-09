@@ -77,7 +77,11 @@
 	[tableView reloadData];
 }
 
-
+- (void) viewWillDisappear:(BOOL)animated
+{
+	[MKStoreManager setDelegate: nil];
+	[activity stopAnimating];
+}
 /*
 // Override to allow orientations other than the default portrait orientation.
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
@@ -215,5 +219,36 @@
 	
 }
 
+- (void) restorePurchases: (id) sender
+{
+	[MKStoreManager setDelegate: self];
+	[activity startAnimating];
+	[[MKStoreManager sharedManager] restorePreviousTransactions];
+}
+
+
+- (void)productPurchased:(NSString *)productId
+{
+//	[MKStoreManager setDelegate: nil];
+	[activity stopAnimating];
+	[self setProducts: [[MKStoreManager sharedManager] purchasableObjects]];
+	[tableView reloadData];
+}
+
+- (void)transactionCanceled
+{
+	//[MKStoreManager setDelegate: nil];
+	[activity stopAnimating];
+	
+//	[tableView reloadData];
+}
+
+- (void) restoreFinished
+{
+	//[MKStoreManager setDelegate: nil];
+	[activity stopAnimating];
+	[self setProducts: [[MKStoreManager sharedManager] purchasableObjects]];
+	[tableView reloadData];
+}
 
 @end

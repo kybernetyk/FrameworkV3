@@ -153,6 +153,7 @@ static MKStoreManager* _sharedStoreManager;
 
 - (void) restorePreviousTransactions
 {
+	[[SKPaymentQueue defaultQueue] addTransactionObserver: _storeObserver];
 	[[SKPaymentQueue defaultQueue] restoreCompletedTransactions];
 }
 
@@ -183,7 +184,9 @@ static MKStoreManager* _sharedStoreManager;
 	}
 	
 	for(NSString *invalidProduct in response.invalidProductIdentifiers)
-		NSLog(@"Problem in iTunes connect configuration for product: %@", invalidProduct);
+	{	NSLog(@"Problem in iTunes connect configuration for product: %@", invalidProduct);
+		NSLog(@"resp: %@", response);
+	}
 #endif
 	
 	[request autorelease];
@@ -407,6 +410,7 @@ static MKStoreManager* _sharedStoreManager;
 	return retVal;
 }
 
+
 // This function is only used if you want to enable in-app purchases for free for reviewers
 // Read my blog post http://mk.sg/
 
@@ -449,5 +453,12 @@ static MKStoreManager* _sharedStoreManager;
 	
 	[responseString release];
 	return retVal;
+}
+
+- (void) restoreFinished
+{
+	if([_delegate respondsToSelector:@selector(restoreFinished)])
+		[_delegate restoreFinished];
+	
 }
 @end

@@ -26,4 +26,6 @@
 @property (readwrite, retain) NSString *productIdToShow;
 
 - (void) showDetailViewForProduct: (SKProduct *) product animated: (BOOL) animated;
+
+- (IBAction) restorePurchases: (id) sender;
 @end
