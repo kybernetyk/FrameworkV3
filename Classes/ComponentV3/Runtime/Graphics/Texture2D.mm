@@ -71,7 +71,7 @@ namespace mx3
 		_filename = filename;
 		filename = pathForFile2(filename.c_str());
 		
-		//printf("LOADING %s ...\n",filename.c_str());
+		printf("LOADING %s ...\n",filename.c_str());
 		
 		GLuint tex_2d = SOIL_load_OGL_texture2
 		(

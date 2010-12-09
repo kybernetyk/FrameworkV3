@@ -21,3 +21,5 @@
 #define kHidePromotions @"kHidePromotions"
 
 #define kNewGLViewLoaded @"kNewGLViewLoaded"
+
+#define kShowGameOverView @"kShowGameOverView"

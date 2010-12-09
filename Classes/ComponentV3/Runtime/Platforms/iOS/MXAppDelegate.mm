@@ -128,7 +128,7 @@ BOOL g_MayReleaseMemory = YES;
 - (void)applicationDidFinishLaunching:(UIApplication *)application 
 {
 	CV3Log ("Component V3 Engine. Version %s starting up ...\n", CV3_VERSION);
-		
+
 	Class acClass = NSClassFromString(@"AppController");
 	
 	if (!acClass)

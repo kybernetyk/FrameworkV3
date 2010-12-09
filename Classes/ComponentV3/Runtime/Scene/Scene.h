@@ -16,6 +16,7 @@ namespace mx3
 	public:
 		virtual void preload () = 0;
 		virtual void init () = 0;
+		virtual void reset () = 0;
 		virtual void end () = 0;
 		
 		virtual void update (float delta) = 0;

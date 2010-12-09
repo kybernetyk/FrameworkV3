@@ -66,7 +66,7 @@ namespace mx3
 		w = texture->w;
 		h = texture->h;
 		
-		printf("w: %f, h: %f\n",w,h);
+//		printf("w: %f, h: %f\n",w,h);
 		return true;
 	}
 
