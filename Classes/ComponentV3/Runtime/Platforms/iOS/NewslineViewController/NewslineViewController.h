@@ -18,6 +18,9 @@
 	
 	NSMutableData *receivedData;
 	NSString *link;
+	
+	CGRect visibleFrame;
+	CGRect hiddenFrame;
 }
 
 @property (readwrite, retain) NSArray *newsItems;

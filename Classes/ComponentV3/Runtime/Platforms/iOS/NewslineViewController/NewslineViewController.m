@@ -49,8 +49,22 @@
     [super viewDidLoad];
 	
 	[self setBorderAndCornersForView: [self view]];
+	visibleFrame = [[self view] frame];
+	
+	hiddenFrame = visibleFrame;
+	
+	hiddenFrame.origin.y += hiddenFrame.size.height;
+	
+	[[self view] setFrame: hiddenFrame];
 }
 
+- (void) animateIn 
+{
+	[UIView beginAnimations: @"alalalal" context: NULL];
+	[UIView setAnimationDuration: 1.0];
+	[[self view] setFrame: visibleFrame];
+	[UIView commitAnimations];
+}
 
 /*
 // Override to allow orientations other than the default portrait orientation.
@@ -86,21 +100,17 @@
 - (void) start
 {
 	[moreButton setHidden: YES];
-	
-	srand(time(0));
-	int r = rand()%[[self newsItems] count];
+	[[self view] setFrame: hiddenFrame];
 	
 	
-	NSString *news = [[self newsItems] objectAtIndex: r];
-	[textLabel setText: news];
 	
-	NSUserDefaults *defs = [NSUserDefaults standardUserDefaults];
-	NSInteger n = [defs integerForKey: @"num_of_news_shown"];
-	n ++;
-	[defs setInteger: n forKey: @"num_of_news_shown"];
-	[defs synchronize];
-	if (n < 4)
-		return;
+//	NSUserDefaults *defs = [NSUserDefaults standardUserDefaults];
+//	NSInteger n = [defs integerForKey: @"num_of_news_shown"];
+//	n ++;
+//	[defs setInteger: n forKey: @"num_of_news_shown"];
+//	[defs synchronize];
+//	if (n < 4)
+//		return;
 	
 	NSString *bundle_id = [[NSBundle mainBundle] bundleIdentifier];
 	NSString *urlstring = [NSString stringWithFormat: @"http://www.minyxgames.com/app_news.php?id=%@",bundle_id];
@@ -115,6 +125,19 @@
 	{	
 		[connection release];
 		connection = nil;
+		
+		if ([[self newsItems] count] > 0)
+		{
+			srand(time(0));
+			int r = rand()%[[self newsItems] count];
+			
+			
+			NSString *news = [[self newsItems] objectAtIndex: r];
+			[textLabel setText: news];
+			
+			[self animateIn];
+		}
+		
 	}
 	else
 	{
@@ -154,6 +177,18 @@
     // receivedData is declared as a method instance elsewhere
     [receivedData release];
 	receivedData = nil;
+	
+	if ([[self newsItems] count] > 0)
+	{
+		srand(time(0));
+		int r = rand()%[[self newsItems] count];
+		
+		
+		NSString *news = [[self newsItems] objectAtIndex: r];
+		[textLabel setText: news];
+		
+		[self animateIn];
+	}
 }
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection
@@ -172,7 +207,18 @@
 		[connection release];
 		[receivedData release];
 		receivedData = nil;
-
+		if ([[self newsItems] count] > 0)
+		{
+			srand(time(0));
+			int r = rand()%[[self newsItems] count];
+			
+			
+			NSString *news = [[self newsItems] objectAtIndex: r];
+			[textLabel setText: news];
+			
+			[self animateIn];
+		}
+		
 		return;
 	}
 	
@@ -190,6 +236,8 @@
 		[moreButton setHidden: NO];
 	}
 
+	[self animateIn];
+	
     // release the connection, and the data object
     [connection release];
     [receivedData release];
