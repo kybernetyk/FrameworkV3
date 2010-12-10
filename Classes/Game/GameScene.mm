@@ -86,6 +86,10 @@ namespace game
 
 	}
 
+	void GameScene::reset ()
+	{
+		
+	}
 	
 	void GameScene::update (float delta)
 	{

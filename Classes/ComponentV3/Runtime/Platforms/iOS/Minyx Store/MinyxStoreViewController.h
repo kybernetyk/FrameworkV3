@@ -18,6 +18,8 @@
 	NSString *productIdToShow;
 	
 	id productInformationDataSource;
+	
+	NSMutableData *receivedData;
 }
 @property (readwrite, assign) id productInformationDataSource;
 @property (readwrite, retain) IBOutlet UIActivityIndicatorView *activity;
@@ -28,4 +30,5 @@
 - (void) showDetailViewForProduct: (SKProduct *) product animated: (BOOL) animated;
 
 - (IBAction) restorePurchases: (id) sender;
+- (IBAction) enterPromoCode: (id) sender;
 @end

@@ -101,7 +101,14 @@
 			 object: nil];
 #endif	
 	
-	//[dc postNotificationName: kNewGLViewLoaded object: glView];
+#ifdef USE_NEWSFEED
+	newsController = [[NewslineViewController alloc] initWithNibName: @"NewslineViewController" 
+															  bundle: nil];
+	
+	[newslineView addSubview: [newsController view]];
+	[newsController setNewsItems: [appController newsItemsForOffline]];
+	[newsController start];
+#endif
 	
 	post_notification (kNewGLViewLoaded, glView);
 	
@@ -136,10 +143,21 @@
 	{   
 		// Releases the view if it doesn't have a superview.
 		[super didReceiveMemoryWarning];	
+		g_TextureManager.purgeCache();
 	}
-    
+	
+
+//	UIAlertView *alertView = [[UIAlertView alloc] initWithTitle: @"Mem warning!" 
+//														message: @"You have been warned!" 
+//													   delegate: nil
+//											  cancelButtonTitle: @"No." 
+//											  otherButtonTitles: @"NO DADDY NO", nil];
+//	
+//	[alertView show];
+//	[alertView release]; 
+	
+	
 	//tex manager doesnt matter
-    g_TextureManager.purgeCache();
     // Release any cached data, images, etc that aren't in use.
 }
 
@@ -168,6 +186,11 @@
 #ifdef USE_GAMECENTER
 	[gcManager release];
 	gcManager = nil;
+#endif
+	
+#ifdef USE_NEWSFEED
+	[newsController release];
+	newsController = nil;
 #endif
 	
 	[self setGlView: nil];
@@ -253,7 +276,7 @@ extern bool spawn_player;
 
 - (void) showInAppStore: (NSNotification *) notification
 {
-	
+	g_MayReleaseMemory = NO;
 	NSString *prodid = [notification object];
 	//NSLog(@"prodid: %@", prodid);
 	
@@ -276,12 +299,14 @@ extern bool spawn_player;
 - (void) dismissStore: (NSNotification *) notification
 {
 	[self dismissModalViewControllerAnimated: YES];
+	g_MayReleaseMemory = YES;
 }
 #endif
 
 #ifdef USE_PROMOTION
 - (void) showPromotionView: (NSNotification *) notification
 {
+	g_MayReleaseMemory = NO;
 	PromotionViewController *controller = [[PromotionViewController alloc]
 										   initWithNibName:@"PromotionViewController"
 										   bundle:[NSBundle mainBundle]];

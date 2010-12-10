@@ -10,6 +10,7 @@
 #ifdef USE_GAMECENTER
 #import "GameCenterManager.h"
 #endif
+#import "NewslineViewController.h"
 
 @class EAGLView;
 
@@ -17,6 +18,12 @@
 {
 	EAGLView *glView;
 	id appController;
+	
+	IBOutlet UIView *newslineView;
+	
+#ifdef USE_NEWSFEED
+	NewslineViewController *newsController;
+#endif
 	
 #ifdef USE_GAMECENTER
 	GameCenterManager *gcManager;

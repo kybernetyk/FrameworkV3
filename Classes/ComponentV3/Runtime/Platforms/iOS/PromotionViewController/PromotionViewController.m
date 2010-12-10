@@ -65,8 +65,9 @@
 //	[self.parentViewController dismissModalViewControllerAnimated:YES];
 
 }
-
+extern BOOL g_MayReleaseMemory;
 - (IBAction) doneButtonTouched:(id) sender {
+	g_MayReleaseMemory = YES;
 	[self.parentViewController dismissModalViewControllerAnimated:YES];
 }
 

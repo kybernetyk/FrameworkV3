@@ -27,7 +27,10 @@ namespace game
 	{
 		
 	}
-	
+	void MenuScene::reset ()
+	{
+		
+	}
 	void MenuScene::update (float delta)
 	{
 		

@@ -18,6 +18,7 @@ namespace game
 		void preload ();
 		void init ();
 		void end ();
+		void reset ();
 		
 		void update (float delta);
 		void render ();
