@@ -7,6 +7,7 @@
 //
 
 #import "FacebookSubmitController.h"
+#import "NotificationSystem.h"
 #import "FBConnect.h"
 #import "SBJSON.h"
 
@@ -15,6 +16,7 @@
 @synthesize level;
 @synthesize delegate;
 @synthesize facebook;
+@synthesize dataSource;
 
 /*
  // The designated initializer.  Override if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
@@ -90,6 +92,12 @@
 #pragma mark farmville
 - (void) shareOverFarmville
 {
+	if (![self dataSource])
+	{
+		NSLog(@"the facebook controller needs a datasource!");
+		abort();
+		return;
+	}
 	
 	[[UIApplication sharedApplication] setNetworkActivityIndicatorVisible: YES];
 	if (!facebook)
@@ -159,8 +167,10 @@
 
 	[self killme];	
 	
-	NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
-	[center postNotificationName: @"MXCanEnableFacebookButton" object: nil];
+	post_notification(kFacebookSubmitDidFail);
+	
+//	NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
+//	[center postNotificationName: kEnableFacebookButton object: nil];
 
 
 }
@@ -184,20 +194,31 @@
 
 	[self killme];	
 
-	NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
-	[center postNotificationName: @"MXCanEnableFacebookButton" object: nil];
-	
+//	NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
+//	[center postNotificationName: kEnableFacebookButton object: nil];
+	post_notification(kFacebookSubmitDidFail);	
 }
 
 
 - (void) share2
 {
-
-
+	NSString *fb_title = [[self dataSource] titleForFBShare];
+	NSString *fb_picurl = [[self dataSource] picurlForFBShare];
+	NSString *fb_link = [[self dataSource] linkForFBShare];
+	NSString *fb_caption = [[self dataSource] captionForFBShare];	
+	NSString *fb_description = [[self dataSource] descriptionForFBShare];	
+	
+	if (!fb_title || !fb_picurl || !fb_link || !fb_caption || !fb_description)
+	{
+		NSLog(@"lol! your datasource sucks!");
+		abort();
+		return;
+	}
+	
 	unlock_orientation = NO;
 	NSMutableDictionary* params = [NSMutableDictionary dictionaryWithObjectsAndKeys: 
 								   API_KEY, @"api_key",
-								   [NSString stringWithFormat: @"I have reached Level %i on Minyx Ultra!",level] , @"message",
+								   fb_title , @"message",
 								   nil];
 	/*	NSString *action_links = @"[{\"text\":\"How Evil Are You???\",\"href\":\"http://itunes.apple.com/us/app/how-evil-are-you/id393122123?mt=8\"}]";
 	 [params setObject:action_links forKey:@"action_links"];
@@ -205,45 +226,45 @@
 	 
 	 NSLog(@"post params: %@", params);*/
 	
-	NSString *picurl = [NSString stringWithString: @"http://www.minyxgames.com/minyx-ultra/icon_90.png"];
+	NSString *picurl = fb_picurl;//[NSString stringWithString: @"http://www.minyxgames.com/minyx-ultra/icon_90.png"];
 	//NSString *picurl = [NSString stringWithString: @"http://www.minyxgames.com/mega-fill-up/not_awesome_face.png"];
-	NSString *captionText = [NSString stringWithFormat: @"{*actor*} has reached level %i and has now %i Gold!",level, score];
+	NSString *captionText = fb_caption;//[NSString stringWithFormat: @"{*actor*} has reached level %i and has now %i Gold!",level, score];
 	
 
 	
-	NSString *descString = @"And how much can you get? Minyx Ultra is free!";
+	NSString *descString = fb_description;//@"And how much can you get? Minyx Ultra is free!";
 	
 	//media
 	NSMutableDictionary *media_entry = [NSMutableDictionary dictionary];
 	[media_entry setObject: @"image" forKey: @"type"];
 	[media_entry setObject: picurl forKey: @"src"];
-	[media_entry setObject: @"http://www.facebook.com/apps/application.php?id=167949196560754" forKey: @"href"];
+	[media_entry setObject: fb_link forKey: @"href"];
 	NSArray *media = [NSArray arrayWithObject: media_entry];
 	
 	//attachment
 	NSMutableDictionary *attachment = [NSMutableDictionary dictionary];
-	[attachment setObject: @"http://www.facebook.com/apps/application.php?id=167949196560754" forKey: @"href"];
+	[attachment setObject: fb_link forKey: @"href"];
 	[attachment setObject: captionText forKey: @"caption"];
 	[attachment setObject: descString forKey: @"description"];
 	[attachment setObject: media forKey: @"media"];
 	
 	
 	//actionlinks
-	NSMutableDictionary *action_link = [NSMutableDictionary dictionary];
-	[action_link setObject: @"Minyx Ultra for iPhone" forKey: @"text"];
-	[action_link setObject: @"http://itunes.apple.com/app/LOL"  forKey: @"href"];
-	NSArray *action_links = [NSArray arrayWithObject: action_link];
+	//	NSMutableDictionary *action_link = [NSMutableDictionary dictionary];
+	//	[action_link setObject: @"Minyx Ultra for iPhone" forKey: @"text"];
+	//	[action_link setObject: @"http://itunes.apple.com/app/LOL"  forKey: @"href"];
+	//	NSArray *action_links = [NSArray arrayWithObject: action_link];
 	
 	SBJSON *json = [[[SBJSON alloc] init] autorelease];
 	
 	NSString *strAttachment = [json stringWithObject: attachment];
-	NSString *strActionLinks = [json stringWithObject: action_links];
+//	NSString *strActionLinks = [json stringWithObject: action_links];
 	
 	[params setObject: strAttachment forKey: @"attachment"];
-	[params setObject: strActionLinks forKey: @"action_links"];
+//	[params setObject: strActionLinks forKey: @"action_links"];
 	
 	NSLog(@"attachment: %@",strAttachment);
-	NSLog(@"links: %@",strActionLinks);
+///	NSLog(@"links: %@",strActionLinks);
 	
 	[facebook retain];
 	[facebook requestWithMethodName: @"stream.publish" andParams: params andHttpMethod: @"POST" andDelegate: self];
@@ -251,9 +272,9 @@
 
 - (void)request:(FBRequest*)request didFailWithError:(NSError*)error
 {
-	NSUserDefaults *defs = [NSUserDefaults standardUserDefaults];
-	[defs removeObjectForKey: @"fbtoken"];
-	[defs synchronize];
+//	NSUserDefaults *defs = [NSUserDefaults standardUserDefaults];
+//	[defs removeObjectForKey: @"fbtoken"];
+//	[defs synchronize];
 	
 	NSLog(@"FB REQ DID FAIL: %@", [error localizedDescription]);
 	[facebook autorelease];
@@ -275,9 +296,9 @@
 
 	[self killme];	
 	
-	NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
-	[center postNotificationName: @"MXCanEnableFacebookButton" object: nil];
-	
+//	NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
+//	[center postNotificationName: kEnableFacebookButton object: nil];
+	post_notification(kFacebookSubmitDidFail);	
 
 }
 
@@ -293,7 +314,7 @@
 	unlock_orientation = NO;
 	//dont re enable on success
 	//	NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
-	//	[center postNotificationName: @"MXCanEnableFacebookButton" object: nil];
+	//	[center postNotificationName: kEnableFacebookButton object: nil];
 	
 	/*
 	[[UIApplication sharedApplication] setNetworkActivityIndicatorVisible: NO];
@@ -306,7 +327,7 @@
 	[alert release]; */
 	[facebook autorelease];
 	isPostingOnFB = NO;
-
+	post_notification(kFacebookSubmitDidSucceed);
 	[self killme];	
 }
 
@@ -321,8 +342,9 @@
 	
 	NSLog(@"cancel!");
 	isPostingOnFB = NO;
-	NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
-	[center postNotificationName: @"MXCanEnableFacebookButton" object: nil];
+//	NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
+//	[center postNotificationName: kEnableFacebookButton object: nil];
+	post_notification(kFacebookSubmitDidFail);
 	
 	[self killme];	
 }

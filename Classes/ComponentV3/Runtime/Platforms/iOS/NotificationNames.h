@@ -23,3 +23,6 @@
 #define kNewGLViewLoaded @"kNewGLViewLoaded"
 
 #define kShowGameOverView @"kShowGameOverView"
+
+#define kFacebookSubmitDidFail @"kFacebookSubmitDidFail"
+#define kFacebookSubmitDidSucceed @"kFacebookSubmitDidSucceed" 

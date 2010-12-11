@@ -25,65 +25,66 @@ BOOL g_MayReleaseMemory = YES;
 
 #pragma mark -
 #pragma mark facebook 
-- (void) shareLevelOnFarmville
-{
+//- (void) shareLevelOnFarmville
+//{
+//
+//	NSUserDefaults *defs = [NSUserDefaults standardUserDefaults];
+//	if ([defs boolForKey: @"facebook_disable"])
+//	{
+//		NSLog(@"Facebook disabled by user!");
+//		return;
+//	}
+//	
+//	
+//	NSString *token = [defs objectForKey: @"fbtoken"];
+//	if (token)
+//	{
+//		NSLog(@"found token. init share!");
+//		[self initFBShare];
+//		return;
+//	}
+//	
+//	NSLog(@"no token. let's ask user!");
+//	UIAlertView *alertView = [[UIAlertView alloc] initWithTitle: @"Share On Facebook" 
+//														message: @"Do you want to share your progress on Facebook?" 
+//													   delegate: self 
+//											  cancelButtonTitle: @"No. Don't ask me again." 
+//											  otherButtonTitles: @"Yes!", @"Not now.", nil];
+//	
+//	[alertView show];
+//	[alertView autorelease]; 
+//	
+//}
+//
+//- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+//{
+//	NSLog(@"omg der buttonen indexen: %i, %@", buttonIndex,	[alertView buttonTitleAtIndex: buttonIndex]);
+//	if (buttonIndex == 1)
+//	{
+//		NSLog(@"user wants to share!");
+//		[self initFBShare];
+//		return;
+//	}
+//	if (buttonIndex == 2)
+//	{
+//		NSLog(@"user wants not to share now ...");
+//		return;
+//	}
+//	
+//	NSLog(@"user hates facebook!");
+//	NSUserDefaults *defs = [NSUserDefaults standardUserDefaults];
+//	[defs setBool: YES forKey: @"facebook_disable"];
+//	[defs synchronize];
+//}
 
-	NSUserDefaults *defs = [NSUserDefaults standardUserDefaults];
-	if ([defs boolForKey: @"facebook_disable"])
-	{
-		NSLog(@"Facebook disabled by user!");
-		return;
-	}
-	
-	
-	NSString *token = [defs objectForKey: @"fbtoken"];
-	if (token)
-	{
-		NSLog(@"found token. init share!");
-		[self initFBShare];
-		return;
-	}
-	
-	NSLog(@"no token. let's ask user!");
-	UIAlertView *alertView = [[UIAlertView alloc] initWithTitle: @"Share On Facebook" 
-														message: @"Do you want to share your progress on Facebook?" 
-													   delegate: self 
-											  cancelButtonTitle: @"No. Don't ask me again." 
-											  otherButtonTitles: @"Yes!", @"Not now.", nil];
-	
-	[alertView show];
-	[alertView autorelease]; 
-	
-}
 
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-	NSLog(@"omg der buttonen indexen: %i, %@", buttonIndex,	[alertView buttonTitleAtIndex: buttonIndex]);
-	if (buttonIndex == 1)
-	{
-		NSLog(@"user wants to share!");
-		[self initFBShare];
-		return;
-	}
-	if (buttonIndex == 2)
-	{
-		NSLog(@"user wants not to share now ...");
-		return;
-	}
-	
-	NSLog(@"user hates facebook!");
-	NSUserDefaults *defs = [NSUserDefaults standardUserDefaults];
-	[defs setBool: YES forKey: @"facebook_disable"];
-	[defs synchronize];
-}
-
-
-- (void) initFBShare
+- (void) initFBShare: (id) datasource
 {
 	if (!facebookController)
 	{
 		facebookController = [[FacebookSubmitController alloc] initWithNibName: @"FacebookSubmitController" bundle: nil];
 		[facebookController setDelegate: self];
+		[facebookController setDataSource: datasource];
 		
 	}
 	

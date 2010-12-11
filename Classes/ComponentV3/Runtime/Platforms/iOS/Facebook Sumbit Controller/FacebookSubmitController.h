@@ -20,8 +20,11 @@
 	BOOL unlock_orientation;
 	BOOL dismissing;
 	
+	id dataSource;
+	
 }
 
+@property (readwrite, assign) id dataSource;
 @property (readwrite, retain) Facebook *facebook;
 @property (readwrite, assign) NSInteger score;
 @property (readwrite, assign) NSInteger level;

@@ -25,7 +25,7 @@ extern BOOL g_MayReleaseMemory;
 
 - (void) startAnimation;
 - (void) stopAnimation;
-- (void)renderScene;
-- (void) initFBShare;
+- (void) renderScene;
+- (void) initFBShare: (id) datasource;
 @end
 
