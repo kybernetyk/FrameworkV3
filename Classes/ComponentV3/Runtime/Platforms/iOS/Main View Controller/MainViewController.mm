@@ -10,7 +10,7 @@
 #import "EAGLView.h"
 #include "TextureManager.h"
 #import "NotificationSystem.h"
-
+#include "SoundSystem.h"
 #ifdef USE_INAPPSTORE
 #import "MKStoreManager.h"
 #import "MinyxStoreViewController.h"
@@ -254,6 +254,7 @@ extern bool spawn_player;
 
 - (void)leaderboardViewControllerDidFinish:(GKLeaderboardViewController *)viewController
 {
+	mx3::SoundSystem::play_sound (MENU_ITEM_SFX);
 	NSUserDefaults *defs = [NSUserDefaults standardUserDefaults];
 	NSNumber *scope = [NSNumber numberWithInt: [viewController timeScope]];
 	if (scope)

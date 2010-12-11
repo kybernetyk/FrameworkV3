@@ -195,7 +195,12 @@ namespace mx3
 //		
 	PE_Proxy *RenderableManager::accquireParticleEmmiter (std::string filename)
 	{
-		return new PE_Proxy(filename);
+		PE_Proxy *ret = new PE_Proxy(filename);
+		
+		ret->stop();
+		ret->reset();
+
+		return ret;
 	}
 }
 

@@ -2014,14 +2014,16 @@ int query_NPOT_capability( void )
 	{
 		/*	we haven't yet checked for the capability, do so	*/
 		if(
-			(NULL == strstr( (char const*)glGetString( GL_EXTENSIONS ),
-				"GL_ARB_texture_non_power_of_two" ) )
+			(NULL == strstr( (char const*)glGetString( GL_EXTENSIONS ),"GL_ARB_texture_non_power_of_two" ) &&
+			 NULL == strstr( (char const*)glGetString( GL_EXTENSIONS ),"GL_APPLE_texture_2D_limited_npot" ))
 			)
 		{
+			//printf("********************* __NO__ NPOT SUPPORT ******************** \n");
 			/*	not there, flag the failure	*/
 			has_NPOT_capability = SOIL_CAPABILITY_NONE;
 		} else
 		{
+			//printf("********************* HAS NPOT SUPPORT ******************** \n");
 			/*	it's there!	*/
 			has_NPOT_capability = SOIL_CAPABILITY_PRESENT;
 		}

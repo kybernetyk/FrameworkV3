@@ -47,9 +47,14 @@ namespace mx3
 			current_pe = _entityManager->getComponent <PEmitter> (current_entity);
 			if (current_pe)
 			{
-				if (current_pe->_renderable_type == RENDERABLETYPE_PARTICLE_EMITTER)
+				if (current_pe->_renderable_type == RENDERABLETYPE_PARTICLE_EMITTER &&
+					current_pe->pe->shoudHandle())
+//					&& current_pe->pe->isActive())
+// TODO: get a consistent isActive() into the PE system
+// it will return false even if there are particles left to be rendered
+// particleCount == 0 won't work either because that's the initial state of a PE
+// and without an update it won't increase >.<
 				{	
-					
 					current_position = _entityManager->getComponent <Position> (current_entity);
 					
 					current_pe->pe->x = current_position->x;
@@ -57,7 +62,8 @@ namespace mx3
 					
 					current_pe->pe->update(delta);
 					
-					if ([current_pe->pe->pe particleCount] <= 0)
+					//if ([current_pe->pe->pe particleCount] <= 0)
+					if (!current_pe->pe->shoudHandle())
 					{
 						_entityManager->addComponent <MarkOfDeath> (current_entity);
 					}
@@ -90,7 +96,33 @@ namespace mx3
 		[pe->pe->pe setSourcePosition: vec];*/
 		
 		if (duration != 0.0)
+		{	
 			[pe->pe->pe setDuration: duration];
+			
+		}
+		
+		return par;
+		
+	}
+	
+	Entity *ParticleSystem::createParticleEmitter (PE_Proxy *existing_pe, float duration, vector2D position)
+	{
+		EntityManager *em = Entity::entityManager;
+		
+		Entity *par = em->createNewEntity();
+		Position *pos = em->addComponent <Position> (par);
+		pos->x = position.x;
+		pos->y = position.y;
+
+		PEmitter *pe = em->addComponent <PEmitter> (par);
+		pe->pe = existing_pe;
+		pe->z = 5.0;
+		
+		if (duration != 0.0)
+		{	
+			[pe->pe->pe setDuration: duration];
+			
+		}
 		
 		return par;
 		

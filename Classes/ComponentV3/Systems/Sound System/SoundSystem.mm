@@ -70,22 +70,29 @@ namespace mx3
 		sounds[sfx_id] = filename;
 	}
 	
-	void SoundSystem::preloadSounds ()
+	void SoundSystem::preload_sound (std::string filename)
 	{
-		for (int i = 0; i < MAX_REGISTERED_SOUNDS; i++)
-		{
-			NSString *s = [NSString stringWithCString: sounds[i].c_str() 
-											 encoding: NSASCIIStringEncoding];
-			if (!s || [s length] == 0)
-				continue;
-			
-			NSLog(@"sound preload: %@", s);
-			
-			[[SimpleAudioEngine sharedEngine] preloadEffect: s];
-		}
-		
-		[[SimpleAudioEngine sharedEngine] setEffectsVolume: 0.9];
+		NSString *fn = [NSString stringWithCString: filename.c_str() encoding: NSASCIIStringEncoding];
+		//NSLog(@"sound preload: %@", fn);
+		[[SimpleAudioEngine sharedEngine] preloadEffect: fn];
 	}
+	
+//	void SoundSystem::preloadSounds ()
+//	{
+//		for (int i = 0; i < MAX_REGISTERED_SOUNDS; i++)
+//		{
+//			NSString *s = [NSString stringWithCString: sounds[i].c_str() 
+//											 encoding: NSASCIIStringEncoding];
+//			if (!s || [s length] == 0)
+//				continue;
+//			
+//			NSLog(@"sound preload: %@", s);
+//			
+//			[[SimpleAudioEngine sharedEngine] preloadEffect: s];
+//		}
+//		
+//		[[SimpleAudioEngine sharedEngine] setEffectsVolume: 0.9];
+//	}
 	
 //	void SoundSystem::playMusic (int music_id)
 //	{

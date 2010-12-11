@@ -269,14 +269,15 @@ namespace mx3
 		{
 			_id = COMPONENT_ID;
 			_renderable_type = RENDERABLETYPE_PARTICLE_EMITTER;
-			
 			pe = nil;
 		}
 		~PEmitter()
 		{
-			
 //			g_RenderableManager.release(quad);		//hmm - each PE is unique because it has a unique state :[ what to do?
-			delete pe;
+			if (!pe->do_not_delete)
+			{	
+				delete pe;
+			}
 		}
 		//WARNING: Don't forget to set the entity manager to dirty when you change the z value of an existing component! (Which shouldn't happen too often anyways)
 		

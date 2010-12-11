@@ -121,6 +121,8 @@ typedef struct {
 @property(nonatomic, assign) BOOL active;
 @property(nonatomic, assign) GLfloat duration;
 
+- (void) reset;
+
 // Initialises a particle emitter using configuration read from a file
 - (id)initParticleEmitterWithFile:(NSString*)aFileName;
 

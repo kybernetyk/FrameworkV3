@@ -97,6 +97,21 @@
 		return self;
 }
 
+- (void) reset
+{
+//	[self stopParticleEmitter];
+	//active = YES;
+	particleCount = 0;
+	elapsedTime = 0;
+	emitCounter = 0;
+
+}
+
+- (void) startParticleEmitter
+{
+	active = YES;
+}
+
 #include "Timer.h"
 
 - (void)updateWithDelta:(GLfloat)aDelta 

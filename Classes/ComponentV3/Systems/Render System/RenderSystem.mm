@@ -193,13 +193,14 @@ namespace mx3
 			if (ren->_renderable_type == RENDERABLETYPE_PARTICLE_EMITTER)
 			{
 				pe = (PEmitter*)ren;
-/*				pe->pe->x = pos->x;
-				pe->pe->y = pos->y;*/ 		///handled by particle system update()
-				
-				glPushMatrix();
-				glTranslatef(0.0, 0.0, pe->pe->z);
-				pe->pe->renderContent();
-				glPopMatrix();
+				//if (pe->pe->isActive())		//TODO: iSActive() sucks. returns false for PEs that have still particles to be rendered updated (end of animation) - MAKE SOMETHING SANE
+				if (pe->pe->pe->particleCount)	//ugly OBJ-C direct access hack
+				{
+					glPushMatrix();
+					glTranslatef(0.0, 0.0, pe->pe->z);
+					pe->pe->renderContent();
+					glPopMatrix();
+				}
 				
 				++it;
 				continue;

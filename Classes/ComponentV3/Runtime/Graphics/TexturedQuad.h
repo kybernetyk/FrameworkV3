@@ -117,6 +117,7 @@ namespace mx3
 			init();
 			loadFromFile(filename);
 			
+			//CV3Log("###### Loading new PE: %s\n", filename.c_str());
 		}
 		
 		void update (float delta)
@@ -129,9 +130,47 @@ namespace mx3
 			[pe updateWithDelta: delta];
 		}
 		
+		bool isActive ()
+		{
+			return [pe active];
+		}
+		
+		bool shoudHandle ()
+		{
+			if (![pe active] && [pe particleCount] == 0)
+				return false;
+			
+			return true;;
+		}
+		
+		void stop ()
+		{
+			[pe stopParticleEmitter];
+		}
+		
+		void start ()
+		{
+			[pe startParticleEmitter];
+		}
+		
+		void reset ()
+		{
+			[pe reset];
+		}
+		
 		void renderContent ()
 		{
 			[pe renderParticles];
+		}
+		
+		float getDuration ()
+		{
+			return [pe duration];
+		}
+		
+		float setDuration (float dur)
+		{
+			[pe setDuration: dur];
 		}
 
 		bool loadFromFile (std::string filename)
@@ -145,16 +184,18 @@ namespace mx3
 			
 			return false;
 		}
-		
+		bool do_not_delete;
 		void init()
 		{
 			IRenderable::init();
 			
 			pe = nil;
+			do_not_delete = false;
 		}
 		
 		~PE_Proxy ()
 		{
+			CV3Log("############## O M G PE PROXY ############\n");
 			if (pe)
 			{
 				//g_TextureManager.releaseTexture(texture);

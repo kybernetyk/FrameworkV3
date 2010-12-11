@@ -19,7 +19,8 @@ namespace mx3
 		ParticleSystem (EntityManager *entityManager);
 		void update (float delta);	
 		
-		static Entity *createParticleEmitter (std::string filename, float duration, vector2D posistion);
+		static Entity *createParticleEmitter (std::string filename, float duration, vector2D position);
+		static Entity *createParticleEmitter (PE_Proxy *existing_pe, float duration, vector2D position);
 		
 	protected:
 		EntityManager *_entityManager;

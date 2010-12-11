@@ -80,6 +80,7 @@ namespace mx3
 		//std::map<EntityGUID, Entity*>::iterator toKill = _entities.find(_id);
 		//_entities.erase(toKill);
 		_entities[_id] = NULL;
+		delete e;
 	}
 
 	void EntityManager::removeAllEntities (void)
