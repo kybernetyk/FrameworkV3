@@ -13,6 +13,7 @@
 #import "MXAlertPrompt.h"
 #import "NSString+Search.h"
 #import "SBJSON.h"
+#import "SoundSystem.h"
 
 @implementation MinyxStoreViewController
 @synthesize activity;
@@ -123,6 +124,7 @@
 #pragma mark actions 
 - (IBAction) dismissStore: (id) sender
 {
+	mx3::SoundSystem::play_sound (MENU_ITEM_SFX);
 	[MKStoreManager setDelegate: nil];
 	//[delegate minyxStoreDismissed: self];
 
@@ -134,6 +136,7 @@
 
 - (void) restorePurchases: (id) sender
 {
+	mx3::SoundSystem::play_sound (MENU_ITEM_SFX);
 	[MKStoreManager setDelegate: self];
 	[activity startAnimating];
 	[[MKStoreManager sharedManager] restorePreviousTransactions];
@@ -141,6 +144,7 @@
 
 - (IBAction) enterPromoCode: (id) sender
 {
+	mx3::SoundSystem::play_sound (MENU_ITEM_SFX);
 	[activity startAnimating];
 	MXAlertPrompt *prompt = [MXAlertPrompt alloc];
 	prompt = [prompt initWithTitle:@"Enter Promo Code" message:@"Enter the promo code you received:" delegate:self cancelButtonTitle:@"Cancel" okButtonTitle:@"Ok."];
@@ -152,6 +156,7 @@
 
 - (void)alertView:(UIAlertView *)alertView willDismissWithButtonIndex:(NSInteger)buttonIndex
 {
+	mx3::SoundSystem::play_sound (MENU_ITEM_SFX);
 	if (buttonIndex != [alertView cancelButtonIndex])
 	{
 		NSString *entered = [(MXAlertPrompt *)alertView enteredText];

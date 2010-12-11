@@ -173,4 +173,10 @@ namespace mx3
 		
 	//	[[SimpleAudioEngine sharedEngine] preloadBackgroundMusic: @"endless.mp3"];
 	}
+	
+	void SoundSystem::play_sound (std::string filename)
+	{
+		NSString *fn = [NSString stringWithCString: filename.c_str() encoding: NSASCIIStringEncoding];
+		[[SimpleAudioEngine sharedEngine] playEffect: fn];
+	}
 }

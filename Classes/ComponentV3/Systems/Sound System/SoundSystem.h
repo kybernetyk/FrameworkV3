@@ -36,7 +36,7 @@ namespace mx3
 		void update (float delta);	
 		
 		static mx3::Entity *make_new_sound (int soundfx);
-		
+		static void play_sound (std::string filename);
 		static void play_background_music (std::string filename);
 		
 	protected:

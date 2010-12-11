@@ -10,6 +10,7 @@
 #import "MKStoreManager.h"
 #import "NotificationSystem.h"
 #import <QuartzCore/QuartzCore.h>
+#import "SoundSystem.h"
 
 @implementation MinyxStoreDetailViewController
 @synthesize dataSource;
@@ -44,6 +45,7 @@
 
 - (void) dismissStore: (id) sender
 {
+	mx3::SoundSystem::play_sound (MENU_ITEM_SFX);
 	[MKStoreManager setDelegate: nil];
 
 //	NSNotificationCenter *dc = [NSNotificationCenter defaultCenter];
@@ -139,6 +141,7 @@
 #pragma mark actions
 - (void) buyTheShit: (id) sender
 {
+	mx3::SoundSystem::play_sound (MENU_ITEM_SFX);
 	[activity startAnimating];
 	NSString *feature = [product productIdentifier];
 	[MKStoreManager setDelegate: self];

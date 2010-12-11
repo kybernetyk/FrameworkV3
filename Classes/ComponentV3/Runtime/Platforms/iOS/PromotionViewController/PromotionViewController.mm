@@ -7,7 +7,7 @@
 //
 
 #import "PromotionViewController.h"
-
+#import "SoundSystem.h"
 
 @implementation PromotionViewController
 
@@ -65,8 +65,12 @@
 //	[self.parentViewController dismissModalViewControllerAnimated:YES];
 
 }
+
 extern BOOL g_MayReleaseMemory;
-- (IBAction) doneButtonTouched:(id) sender {
+
+- (IBAction) doneButtonTouched:(id) sender 
+{
+	mx3::SoundSystem::play_sound (MENU_ITEM_SFX);
 	g_MayReleaseMemory = YES;
 	[self.parentViewController dismissModalViewControllerAnimated:YES];
 }
