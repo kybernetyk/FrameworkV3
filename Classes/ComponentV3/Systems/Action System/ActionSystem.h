@@ -33,6 +33,8 @@ namespace mx3
 		void handle_create_entity_action (CreateEntityAction *action);
 		void handle_add_component_action (AddComponentAction *action);
 		
+		void handle_scale_by_action (ScaleByAction *action);
+		void handle_fade_to_action (FadeToAction *action);
 		
 		void handle_change_integer_to_action (ChangeIntegerToAction *action);
 		void handle_change_float_to_action (ChangeFloatToAction *action);
@@ -53,6 +55,7 @@ namespace mx3
 		Entity *_current_entity;
 		ActionContainer *_current_container;
 		Position *_current_position;	//most actions will be movement anyway. so we should fetch this component only once per entity
+		Renderable *_current_renderable;
 		
 	};
 	

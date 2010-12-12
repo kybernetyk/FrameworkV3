@@ -85,8 +85,6 @@
 
 }
 
-#define APP_ID @"167949196560754"
-#define API_KEY @"1bd9880910bffe7a16dcd55f997ff951"
 
 #pragma mark -
 #pragma mark farmville
@@ -115,8 +113,8 @@
 			[self share2];
 			return;
 		}
-		NSArray *perms = [NSArray arrayWithObjects:@"publish_stream",@"offline_access", nil];
-		[facebook authorize: APP_ID permissions: perms delegate: self];
+		NSArray *perms = [NSArray arrayWithObjects:@"publish_stream"/*,@"offline_access"*/, nil];
+		[facebook authorize: FB_APP_ID permissions: perms delegate: self];
 		
 		return;
 	}
@@ -217,7 +215,7 @@
 	
 	unlock_orientation = NO;
 	NSMutableDictionary* params = [NSMutableDictionary dictionaryWithObjectsAndKeys: 
-								   API_KEY, @"api_key",
+								   FB_API_KEY, @"api_key",
 								   fb_title , @"message",
 								   nil];
 	/*	NSString *action_links = @"[{\"text\":\"How Evil Are You???\",\"href\":\"http://itunes.apple.com/us/app/how-evil-are-you/id393122123?mt=8\"}]";
@@ -263,7 +261,7 @@
 	[params setObject: strAttachment forKey: @"attachment"];
 //	[params setObject: strActionLinks forKey: @"action_links"];
 	
-	NSLog(@"attachment: %@",strAttachment);
+	//NSLog(@"attachment: %@",strAttachment);
 ///	NSLog(@"links: %@",strActionLinks);
 	
 	[facebook retain];

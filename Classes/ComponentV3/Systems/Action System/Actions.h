@@ -18,7 +18,13 @@ namespace mx3
 #define ACTIONTYPE_MOVE_BY 2
 #define ACTIONTYPE_ADD_COMPONENT 3
 #define ACTIONTYPE_CREATE_ENTITY 4
-
+#define ACTIONTYPE_CHANGE_INTEGER_TO 5	
+#define ACTIONTYPE_CHANGE_INTEGER_BY 6
+#define ACTIONTYPE_CHANGE_FLOAT_TO 7
+#define ACTIONTYPE_CHANGE_FLOAT_BY 8
+#define ACTIONTYPE_SCALE_BY 9
+#define ACTIONTYPE_FADE_TO 10
+	
 	struct Component;
 	
 	struct Action
@@ -91,6 +97,36 @@ namespace mx3
 		
 		//DEBUGINFO ("Move By: x=%f, y=%f duration: %f timestamp: %f",x,y,duration, _timestamp)
 	};
+	
+	struct ScaleByAction : public Action 
+	{
+		float scale_x;
+		float scale_y;
+		
+		float _stepx;
+		float _stepy;
+		
+		ScaleByAction ()
+		{
+			_stepx = _stepy = INFINITY;
+			scale_x = scale_y = 1.0;
+			action_type = ACTIONTYPE_SCALE_BY;
+		}
+	};
+	
+	struct FadeToAction : public Action
+	{
+		float alpha;
+		
+		float _step;
+		FadeToAction ()
+		{
+			_step = INFINITY;
+			alpha = 1.0;
+			action_type = ACTIONTYPE_FADE_TO;
+		}
+	};
+	
 	struct AddComponentAction : public Action
 	{
 		
@@ -119,7 +155,7 @@ namespace mx3
 	//	DEBUGINFO ("CreateEntityAction. duration: %f timestamp: %f",duration,_timestamp)
 	};
 	
-#define ACTIONTYPE_CHANGE_INTEGER_TO 5
+
 	//maybe templatE?
 	struct ChangeIntegerToAction : public Action
 	{
@@ -133,8 +169,6 @@ namespace mx3
 			new_value = 0;
 		}
 	};
-	
-#define ACTIONTYPE_CHANGE_INTEGER_BY 6
 	struct ChangeIntegerByAction : public Action
 	{
 		int *pIntToChange;
@@ -150,8 +184,6 @@ namespace mx3
 	
 	
 	
-	
-#define ACTIONTYPE_CHANGE_FLOAT_TO 7
 	struct ChangeFloatToAction : public Action
 	{
 		float *pFloatToChange;
@@ -164,8 +196,7 @@ namespace mx3
 			new_value = 0;
 		}
 	};
-	
-#define ACTIONTYPE_CHANGE_FLOAT_BY 8
+
 	struct ChangeFloatByAction : public Action
 	{
 		float *pFloatToChange;

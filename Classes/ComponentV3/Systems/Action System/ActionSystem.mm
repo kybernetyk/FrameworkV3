@@ -77,6 +77,7 @@ namespace mx3
 		
 	}
 	
+	
 	void ActionSystem::handle_default_action (Action *action)
 	{
 		//printf(".");
@@ -138,6 +139,56 @@ namespace mx3
 		
 	}
 
+	void ActionSystem:: handle_scale_by_action (ScaleByAction * action)
+	{
+#ifdef __ABORT_GUARDS__
+		if (!_current_position)
+			abort();
+		
+#endif
+		if (action->duration == 0.0)
+		{
+			_current_position->scale_x *= action->scale_x;
+			_current_position->scale_y *= action->scale_y;
+			return;
+		}
+		
+		if (action->_stepx >= INFINITY)
+		{
+			action->_stepx = ((_current_position->scale_x * action->scale_x) - _current_position->scale_x) / action->duration;
+		}
+		
+		if (action->_stepy >= INFINITY)
+		{
+			action->_stepy = ((_current_position->scale_y * action->scale_y) - _current_position->scale_y) / action->duration;
+		}
+		
+		_current_position->scale_x += action->_stepx * _delta;
+		_current_position->scale_y += action->_stepy * _delta;
+	}
+	
+	void ActionSystem::handle_fade_to_action (FadeToAction *action)
+	{
+#ifdef __ABORT_GUARDS__
+		if (!_current_renderable)
+			abort();
+		
+#endif
+		if (action->duration == 0.0)
+		{
+			_current_renderable->alpha = action->alpha;
+			return;
+		}
+		
+		if (action->_step >= INFINITY)
+		{
+			action->_step = (action->alpha - _current_renderable->alpha) / action->duration;
+		}
+		
+
+		_current_renderable->alpha += action->_step * _delta;
+	}
+	
 	void ActionSystem::handle_add_component_action (AddComponentAction *action)
 	{
 		
@@ -261,6 +312,13 @@ namespace mx3
 					case ACTIONTYPE_MOVE_BY:
 						handle_move_by_action((MoveByAction*)current_action);
 						break;
+					case ACTIONTYPE_SCALE_BY:
+						handle_scale_by_action((ScaleByAction*)current_action);
+						break;
+					case ACTIONTYPE_FADE_TO:
+						handle_fade_to_action((FadeToAction*)current_action);
+						break;
+						
 					case ACTIONTYPE_ADD_COMPONENT:
 						handle_add_component_action((AddComponentAction*)current_action);
 						break;
@@ -335,7 +393,7 @@ namespace mx3
 			
 			_current_container = _entityManager->getComponent <ActionContainer> (_current_entity);
 			_current_position = _entityManager->getComponent <Position> (_current_entity);
-
+			_current_renderable = _entityManager->getComponent <Renderable> (_current_entity);
 #ifdef __ABORT_GUARDS__
 			if (!_current_container)
 				abort();

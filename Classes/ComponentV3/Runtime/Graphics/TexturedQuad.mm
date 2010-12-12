@@ -170,7 +170,7 @@ namespace mx3
 		if (!texture)
 			abort();
 		
-		texture->setAliasTexParams();
+		//texture->setAliasTexParams();
 		_filename = filename;
 		w = texture->w;
 		h = texture->h;
@@ -454,7 +454,7 @@ namespace mx3
 		if (!texture)
 			abort();
 		
-		texture->setAliasTexParams();
+		//texture->setAliasTexParams();
 		_filename = filename;
 		tex_w = texture->w;
 		tex_h = texture->h;
@@ -676,7 +676,7 @@ namespace mx3
 		if (!texture)
 			abort();
 		_tex_filename = font.tex_filename;
-		texture->setAliasTexParams();
+		//texture->setAliasTexParams();
 		_filename = fnt_filename;
 		return true;
 	}
