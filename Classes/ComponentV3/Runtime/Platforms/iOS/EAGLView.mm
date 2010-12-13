@@ -283,6 +283,7 @@
 	
 	mx3::InputDevice::sharedInstance()->setTouchActive(true);
 	mx3::InputDevice::sharedInstance()->setTouchLocation (v);
+	mx3::InputDevice::sharedInstance()->setInitialTouchLocation (v);
 	
 	[super touchesBegan: touches withEvent: event];
 	
@@ -336,10 +337,11 @@
 	mx3::InputDevice::sharedInstance()->setTouchLocation (v);
 	
 	//	NSLog(@"touch ended!");	
-	//	NSLog(@"loc: %f,%f",loc.x, loc.y);
+		
 	
 	
 	NSLog(@"touch ended");
+	NSLog(@"loc: %f,%f",v.x, v.y);
 	mx3::InputDevice::sharedInstance()->setTouchActive(false);
 	mx3::InputDevice::sharedInstance()->setTouchUpReceived(true);
 	

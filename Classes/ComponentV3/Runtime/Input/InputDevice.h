@@ -38,6 +38,16 @@ namespace mx3
 			
 		}
 		
+		vector2D initialTouchLocation ()
+		{
+			return _initial_touch_location;
+		}
+		
+		void setInitialTouchLocation (vector2D vec)
+		{
+			_initial_touch_location = vec;
+		}
+		
 		vector2D touchLocation ()
 		{
 			return _touch_location;
@@ -120,6 +130,7 @@ namespace mx3
 	protected:
 		Uint8 *m_pBuffer;
 		vector2D _touch_location;
+		vector2D _initial_touch_location;
 		bool _is_touch_active;
 		bool _is_touchup_active;
 		bool _touchup_handled;

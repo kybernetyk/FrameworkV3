@@ -145,7 +145,7 @@ namespace mx3
 					//printf("PLAYIN SID %i ...\n", sid);
 					[[SimpleAudioEngine sharedEngine] playEffect: [NSString stringWithCString: sounds[sid].c_str() encoding: NSASCIIStringEncoding]];
 					
-					sound_delays[sid] = 0.1;
+					sound_delays[sid] = 0.11;
 				}
 			}
 			_entityManager->addComponent<MarkOfDeath>(current_entity);
