@@ -55,8 +55,6 @@ namespace mx3
 		_entityManager = entityManager;
 		for (int i = 0; i < MAX_REGISTERED_SOUNDS; i++)
 			sound_delays[i] = 0.0;
-		
-		music_playing = 0;
 	}
 
 	void SoundSystem::registerSound (std::string filename, int sfx_id)
@@ -172,6 +170,12 @@ namespace mx3
 	
 	void SoundSystem::play_background_music (std::string filename)
 	{
+		if (music_vol >= INFINITY)
+		{
+			CV3Log("no music volume set!\n");
+			abort();
+		}
+		
 		NSString *fn = [NSString stringWithCString: filename.c_str() encoding: NSASCIIStringEncoding];
 	
 		[[SimpleAudioEngine sharedEngine] playBackgroundMusic: fn loop: YES];
@@ -223,6 +227,6 @@ namespace mx3
 	}
 
 	std::string SoundSystem::last_music_played;
-	float SoundSystem::music_vol;
+	float SoundSystem::music_vol = INFINITY;
 	float SoundSystem::sfx_vol;
 }
