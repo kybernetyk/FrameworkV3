@@ -3,8 +3,7 @@
 #include "Util.h"
 #include <vector>
 #include "Timer.h"
-#import <OpenGLES/ES1/gl.h>
-#import <OpenGLES/Es1/glext.h>
+#include "ogl.h"
 #include "Texture2D.h"
 #include "util.h"
 namespace mx3 

@@ -10,8 +10,7 @@
 //#include <windows.h>
 //#include <OpenGL/gl.h>        // Header File For The OpenGL32 Library
 //#include <OpenGL/glu.h>       // Header File For The GLu32 Library
-#import <OpenGLES/ES1/gl.h>
-#import <OpenGLES/Es1/glext.h>
+#include "ogl.h"
 
 namespace mx3 
 {

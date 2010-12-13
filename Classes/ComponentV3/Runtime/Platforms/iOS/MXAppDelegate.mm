@@ -12,6 +12,7 @@
 #include "Timer.h"
 #include "ComponentV3.h"
 #import "NotificationSystem.h"
+#import "SimpleAudioEngine.h"
 
 #ifdef USE_GAMECENTER
 #import "GameCenterManager.h"
@@ -187,12 +188,14 @@ BOOL g_MayReleaseMemory = YES;
 {
 	game::g_pGame->setPaused(true);
 	theGame->appWillResignActive();
+	//[[SimpleAudioEngine sharedEngine] stopBackgroundMusic];
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application 
 {
 	game::g_pGame->setPaused(false);
 	theGame->appDidBecomeActive ();
+	//[[SimpleAudioEngine sharedEngine] resumeBackgroundMusic];
 }
 
 - (void)applicationDidReceiveMemoryWarning:(UIApplication *)application 

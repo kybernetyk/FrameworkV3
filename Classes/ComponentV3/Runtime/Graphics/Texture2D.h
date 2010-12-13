@@ -8,7 +8,8 @@
  */
 #pragma once
 #include <string>
-#include <OpenGLES/ES1/gl.h>
+#include "ogl.h"
+
 namespace mx3 
 {
 	

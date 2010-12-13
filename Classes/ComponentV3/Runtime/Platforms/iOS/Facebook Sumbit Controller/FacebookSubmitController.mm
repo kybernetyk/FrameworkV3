@@ -270,9 +270,17 @@
 
 - (void)request:(FBRequest*)request didFailWithError:(NSError*)error
 {
-//	NSUserDefaults *defs = [NSUserDefaults standardUserDefaults];
-//	[defs removeObjectForKey: @"fbtoken"];
-//	[defs synchronize];
+	if ([error code] == 190)
+	{
+		
+		NSLog(@"user deauthed us - removing token!");
+		
+		NSUserDefaults *defs = [NSUserDefaults standardUserDefaults];
+		[defs removeObjectForKey: @"fbtoken"];
+		[defs removeObjectForKey: @"fbdate"];
+		[defs synchronize];
+	}
+	
 	
 	NSLog(@"FB REQ DID FAIL: %@", [error localizedDescription]);
 	[facebook autorelease];

@@ -176,7 +176,9 @@ namespace mx3
 	
 		[[SimpleAudioEngine sharedEngine] playBackgroundMusic: fn loop: YES];
 
-		[[SimpleAudioEngine sharedEngine] setBackgroundMusicVolume: 0.5];
+		last_music_played = filename;
+		
+		//[[SimpleAudioEngine sharedEngine] setBackgroundMusicVolume: g_MusicVolume];
 		
 	//	[[SimpleAudioEngine sharedEngine] preloadBackgroundMusic: @"endless.mp3"];
 	}
@@ -186,4 +188,41 @@ namespace mx3
 		NSString *fn = [NSString stringWithCString: filename.c_str() encoding: NSASCIIStringEncoding];
 		[[SimpleAudioEngine sharedEngine] playEffect: fn];
 	}
+	
+	void SoundSystem::set_sfx_volume (float vol)
+	{
+		[[SimpleAudioEngine sharedEngine] setEffectsVolume: vol];
+		sfx_vol = vol;
+	}
+	void SoundSystem::set_music_volume (float vol)
+	{
+		//if we change to volume 0 let's set the fx only mode
+		//so other apps may play music
+		if (vol <= 0.0 && music_vol > 0.0)
+		{
+			CDAudioManager *am = [CDAudioManager sharedManager];
+			[am setMode: kAMM_FxOnly];
+		}
+		
+		//if new volume is > 0 and previous volume was 0
+		//then let's set a new mode and resume music
+		if (vol > 0.0 && music_vol <= 0.0)
+		{
+			CDAudioManager *am = [CDAudioManager sharedManager];
+			[am setMode: kAMM_FxPlusMusic];
+			mx3::SoundSystem::resume_background_music ();
+		}
+		
+		[[SimpleAudioEngine sharedEngine] setBackgroundMusicVolume: vol];
+		music_vol = vol;
+	}
+	void SoundSystem::resume_background_music ()
+	{
+		if (last_music_played.length() > 2) //> ""
+			play_background_music (last_music_played);
+	}
+
+	std::string SoundSystem::last_music_played;
+	float SoundSystem::music_vol;
+	float SoundSystem::sfx_vol;
 }

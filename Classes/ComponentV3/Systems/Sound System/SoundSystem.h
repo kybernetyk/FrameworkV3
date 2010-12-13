@@ -40,13 +40,21 @@ namespace mx3
 		static void play_background_music (std::string filename);
 		static void preload_sound (std::string filename);
 		
+		static void set_sfx_volume (float vol);
+		static void set_music_volume (float vol);
+		static void resume_background_music ();
+		
 	protected:
 		EntityManager *_entityManager;
+		
+		static float music_vol;
+		static float sfx_vol;
 		
 		std::string sounds[MAX_REGISTERED_SOUNDS];
 		float sound_delays[MAX_REGISTERED_SOUNDS];
 		
 		int music_playing;
+		static std::string last_music_played;
 		std::vector<Entity*> _entities;
 	};
 

@@ -8,7 +8,7 @@
  */
 
 #include "Texture2D.h"
-#import <OpenGLES/ES1/gl.h>
+#include "ogl.h"
 #include <string>
 #include <vector>
 #include <iostream>

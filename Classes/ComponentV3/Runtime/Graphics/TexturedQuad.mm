@@ -8,7 +8,7 @@
  */
 
 #include "TexturedQuad.h"
-#include <OpenGLES/ES1/gl.h>
+#include "ogl.h"
 #include "RenderDevice.h"
 #include "Texture2D.h"
 #import "SOIL.h"
