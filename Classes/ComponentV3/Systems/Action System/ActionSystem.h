@@ -50,7 +50,8 @@ namespace mx3
 	protected:
 		EntityManager *_entityManager;
 		std::vector <Entity *> _entities;		
-		float _delta;
+		float __delta;
+		float _current_delta;		//use _current_delta in the action handlers. this value is clamped!
 		
 		Entity *_current_entity;
 		ActionContainer *_current_container;

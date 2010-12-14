@@ -69,10 +69,12 @@ namespace mx3
 	
 	void ActionSystem::step_action (Action *action)
 	{
-		action->_timestamp += _delta;
+		action->_timestamp += __delta;
+		_current_delta = __delta;
 		if ( (action->duration - action->_timestamp) <= 0.0)
 		{
 			action->finished = true;
+			_current_delta -= (action->_timestamp - action->duration);
 		}
 		
 	}
@@ -109,9 +111,15 @@ namespace mx3
 
 		}
 		
-		_current_position->x += action->_ups_x * _delta;
-		_current_position->y += action->_ups_y * _delta;
+		_current_position->x += action->_ups_x * _current_delta;
+		_current_position->y += action->_ups_y * _current_delta;
 		
+//		if (action->finished)
+//		{
+//			_current_position->x = action->x;
+//			_current_position->y = action->y;
+//			
+//		}
 	}
 	
 	void ActionSystem::handle_move_by_action (MoveByAction *action)
@@ -133,8 +141,8 @@ namespace mx3
 		if (action->_dy >= INFINITY)
 			action->_dy = _current_position->y + action->y;
 		
-		_current_position->x += (action->x/action->duration)*_delta;
-		_current_position->y += (action->y/action->duration)*_delta;
+		_current_position->x += (action->x/action->duration)*_current_delta;
+		_current_position->y += (action->y/action->duration)*_current_delta;
 		
 		
 	}
@@ -163,8 +171,8 @@ namespace mx3
 			action->_stepy = ((_current_position->scale_y * action->scale_y) - _current_position->scale_y) / action->duration;
 		}
 		
-		_current_position->scale_x += action->_stepx * _delta;
-		_current_position->scale_y += action->_stepy * _delta;
+		_current_position->scale_x += action->_stepx * _current_delta;
+		_current_position->scale_y += action->_stepy * _current_delta;
 	}
 	
 	void ActionSystem::handle_fade_to_action (FadeToAction *action)
@@ -186,7 +194,7 @@ namespace mx3
 		}
 		
 
-		_current_renderable->alpha += action->_step * _delta;
+		_current_renderable->alpha += action->_step * _current_delta;
 	}
 	
 	void ActionSystem::handle_add_component_action (AddComponentAction *action)
@@ -376,7 +384,7 @@ namespace mx3
 	
 	void ActionSystem::update (float delta)
 	{
-		_delta = delta;
+		__delta = delta;
 		_entities.clear();
 		_entityManager->getEntitiesPossessingComponent (_entities, ActionContainer::COMPONENT_ID);
 		
