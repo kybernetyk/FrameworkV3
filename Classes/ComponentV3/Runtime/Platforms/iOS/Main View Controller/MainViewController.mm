@@ -11,6 +11,7 @@
 #include "TextureManager.h"
 #import "NotificationSystem.h"
 #include "SoundSystem.h"
+#import "WebkitViewController.h"
 #ifdef USE_INAPPSTORE
 #import "MKStoreManager.h"
 #import "MinyxStoreViewController.h"
@@ -88,18 +89,25 @@
 			   name: kShowInAppStore 
 			 object: nil];
 	
-	[dc addObserver: self
+/*	[dc addObserver: self
 		   selector: @selector(dismissStore:)
 			   name: kHideInAppStore
-			 object: nil];
+			 object: nil];*/
 #endif
 	
 #ifdef USE_PROMOTION
 	[dc addObserver: self 
 		   selector: @selector(showPromotionView:)
-			   name: kShowPromotions
+			   name: kShowPromotionView
 			 object: nil];
 #endif	
+
+	[dc addObserver: self 
+		   selector: @selector(showWebkitView:)
+			   name: kShowWebkitView
+			 object: nil];
+	
+
 	
 #ifdef USE_NEWSFEED
 	newsController = [[NewslineViewController alloc] initWithNibName: @"NewslineViewController" 
@@ -110,7 +118,7 @@
 	//[newsController start];		//newscontroller listens to application did become active notification
 #endif
 	
-	post_notification (kNewGLViewLoaded, glView);
+	//post_notification (kNewGLViewLoaded, [self glView]);
 	
 }
 
@@ -139,10 +147,13 @@
 
 - (void)didReceiveMemoryWarning 
 {
-	if (g_MayReleaseMemory)
+	
+	//this shit is horribly defunct
+	//if (g_MayReleaseMemory)
 	{   
+	//	[glView release];
 		// Releases the view if it doesn't have a superview.
-		[super didReceiveMemoryWarning];	
+	//	[super didReceiveMemoryWarning];	
 	//	g_TextureManager.purgeCache();
 	}
 	
@@ -284,9 +295,10 @@ extern bool spawn_player;
 
 - (void) showInAppStore: (NSNotification *) notification
 {
+	
 	g_MayReleaseMemory = NO;
 	NSString *prodid = [notification object];
-	//NSLog(@"prodid: %@", prodid);
+	NSLog(@"prodid: %@", prodid);
 	
 //	NSLog(@"purchasable: %@", [[MKStoreManager sharedManager] purchasableObjects])
 	MinyxStoreViewController *msvc = [[MinyxStoreViewController alloc] initWithNibName:
@@ -298,16 +310,14 @@ extern bool spawn_player;
 	UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController: msvc];
 	[[nav navigationBar] setBarStyle: UIBarStyleBlack];
 	[[msvc navigationItem] setTitle: @"Minyx Store"];
-	[self presentModalViewController: nav animated: YES];
+
+	if ([self modalViewController])
+		[[self modalViewController] presentModalViewController: nav animated: YES];
+	else
+		[self presentModalViewController: nav animated: YES];
 	
 	[msvc autorelease];
 	[nav autorelease];
-}
-
-- (void) dismissStore: (NSNotification *) notification
-{
-	[self dismissModalViewControllerAnimated: YES];
-	g_MayReleaseMemory = YES;
 }
 #endif
 
@@ -318,10 +328,40 @@ extern bool spawn_player;
 	PromotionViewController *controller = [[PromotionViewController alloc]
 										   initWithNibName:@"PromotionViewController"
 										   bundle:[NSBundle mainBundle]];
-	controller.promotionAddress = PROMOTION_URL;
+	
+	if ([notification object])
+		controller.promotionAddress = [notification object];
+	else
+		controller.promotionAddress = PROMOTION_URL;
+	
 	[self presentModalViewController:controller animated:YES];
 	[controller release];
 }
 #endif
+
+
+- (void) showWebkitView: (NSNotification *) notification
+{
+	g_MayReleaseMemory = NO;
+	WebkitViewController *controller = [[WebkitViewController alloc]
+										   initWithNibName:@"WebkitViewController"
+										   bundle:[NSBundle mainBundle]];
+	
+	if ([notification object])
+	{	
+		controller.promotionAddress = [notification object];
+	}
+	else
+	{
+		[controller release];
+		g_MayReleaseMemory = YES;
+		return;
+	}
+	
+	[self presentModalViewController:controller animated:YES];
+	[controller release];
+}
+
+
 
 @end

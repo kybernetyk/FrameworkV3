@@ -111,17 +111,24 @@ BOOL g_MayReleaseMemory = YES;
 
 - (void) setNewGLView: (NSNotification *) notification
 {
-	NSLog(@"setting gl view to: %@", [notification object]);
-	NSLog(@"current gl view: %@", glView);
+	return;
 	
+	NSLog(@"setting gl view to: %@", [notification object]);
+
 	EAGLView *newgl = (EAGLView *)[notification object];
 	[self stopAnimation];
 	
 	[glView autorelease];
-	//glView = [newgl retain];
-	glView = newgl;
-	[self startAnimation];
+	glView = [newgl retain];
+//	glView = [mainViewController glView];
+	//glView = newgl;
+	
+	NSLog(@"superview: %@", [glView superview]);
+
 	mx3::RenderDevice::sharedInstance()->init ();
+	[self startAnimation];
+	
+	
 }
 
 #pragma mark -

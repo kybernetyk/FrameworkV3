@@ -10,6 +10,8 @@
 #import <QuartzCore/QuartzCore.h>
 #import "NSString+Search.h"
 #import "SBJSON.h"
+#import "PromotionViewController.h"
+#include "NotificationSystem.h"
 
 @implementation NewslineViewController
 @synthesize newsItems;
@@ -263,14 +265,24 @@
 	receivedData = nil;
 }
 
+
 - (IBAction) visitLink: (id) sender
 {
-	NSLog(@"visiting: %@",[self link]);
-	
 	if (![self link])
 		return;
+
+	NSLog(@"visiting: %@",[self link]);
 	
-	NSURL *url = [NSURL URLWithString: [self link]];
-	[[UIApplication sharedApplication] openURL: url];
+	if ([[self link] containsString: @"itunes"])
+	{
+		NSURL *url = [NSURL URLWithString: [self link]];
+		[[UIApplication sharedApplication] openURL: url];
+	}
+	else
+	{
+		post_notification(kShowWebkitView, [self link]);
+	}
+	
+	
 }
 @end

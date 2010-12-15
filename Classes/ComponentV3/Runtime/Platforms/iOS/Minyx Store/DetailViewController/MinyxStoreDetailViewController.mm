@@ -42,15 +42,16 @@
 	
 }
 
-
+extern BOOL g_MayReleaseMemory;
 - (void) dismissStore: (id) sender
 {
 	mx3::SoundSystem::play_sound (MENU_ITEM_SFX);
 	[MKStoreManager setDelegate: nil];
-
+	[[self parentViewController] dismissModalViewControllerAnimated: YES];
+	g_MayReleaseMemory = YES;
 //	NSNotificationCenter *dc = [NSNotificationCenter defaultCenter];
 //	[dc postNotificationName: kHideInAppStore object: self];
-	post_notification (kHideInAppStore, self);
+	//post_notification (kHideInAppStore, self);
 }
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.

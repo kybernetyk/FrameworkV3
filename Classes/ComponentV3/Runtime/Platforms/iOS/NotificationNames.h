@@ -12,13 +12,13 @@
 #define kShowMainMenu @"kShowMainMenuNotification"
 
 #define kShowInAppStore @"kShowInAppStore"
-#define kHideInAppStore @"kHideInAppStore"
 
 #define kShowLeaderBoard @"kShowLeaderBoard"
 #define kHideLeaderBoard @"kHideLeaderBoard"
 
-#define kShowPromotions @"kShowPromotions"
-#define kHidePromotions @"kHidePromotions"
+#define kShowPromotionView @"kShowPromotionView"
+
+#define kShowWebkitView @"kShowWebkitView"
 
 #define kNewGLViewLoaded @"kNewGLViewLoaded"
 
@@ -26,3 +26,4 @@
 
 #define kFacebookSubmitDidFail @"kFacebookSubmitDidFail"
 #define kFacebookSubmitDidSucceed @"kFacebookSubmitDidSucceed" 
+

@@ -122,13 +122,18 @@
 
 #pragma mark -
 #pragma mark actions 
+extern BOOL g_MayReleaseMemory;
 - (IBAction) dismissStore: (id) sender
 {
 	mx3::SoundSystem::play_sound (MENU_ITEM_SFX);
 	[MKStoreManager setDelegate: nil];
 	//[delegate minyxStoreDismissed: self];
 
-	post_notification (kHideInAppStore, self);
+	[[self parentViewController] dismissModalViewControllerAnimated: YES];
+	
+	g_MayReleaseMemory = YES;
+	
+	//post_notification (kHideInAppStore, self);
 	
 //	NSNotificationCenter *dc = [NSNotificationCenter defaultCenter];
 //	[dc postNotificationName: kHideInAppStore object: self];
