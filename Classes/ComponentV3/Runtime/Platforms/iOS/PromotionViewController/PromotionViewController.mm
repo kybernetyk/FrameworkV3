@@ -40,6 +40,7 @@
 	//if ([[[request URL] scheme] isEqualToString: @"itms"])
 	if (navigationType == UIWebViewNavigationTypeLinkClicked)
 	{
+		mx3::SoundSystem::play_sound (MENU_ITEM_SFX);
 		[[UIApplication sharedApplication] openURL: [request URL]];
 		return NO;
 	}
