@@ -193,14 +193,14 @@ BOOL g_MayReleaseMemory = YES;
 
 - (void)applicationWillResignActive:(UIApplication *)application 
 {
-	game::g_pGame->setPaused(true);
+	//game::g_pGame->setPaused(true);
 	theGame->appWillResignActive();
 	//[[SimpleAudioEngine sharedEngine] stopBackgroundMusic];
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application 
 {
-	game::g_pGame->setPaused(false);
+	//game::g_pGame->setPaused(false);
 	theGame->appDidBecomeActive ();
 	
 	//[[SimpleAudioEngine sharedEngine] resumeBackgroundMusic];

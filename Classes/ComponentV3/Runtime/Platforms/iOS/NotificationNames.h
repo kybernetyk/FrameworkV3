@@ -8,6 +8,8 @@
  */
 #pragma once
 
+#define kShowPauseScreen @"kShowPauseScreen"
+
 #define kHideMainMenu @"kHideMainMenuNotification"
 #define kShowMainMenu @"kShowMainMenuNotification"
 

@@ -24,6 +24,8 @@ namespace mx3
 		
 		virtual void frameDone () = 0;
 		
+		virtual int scene_type () = 0;
+		
 		virtual  ~Scene();
 	};
 }
