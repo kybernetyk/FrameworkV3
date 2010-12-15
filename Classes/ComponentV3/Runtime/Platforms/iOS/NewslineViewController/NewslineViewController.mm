@@ -277,11 +277,22 @@
 	{
 		NSURL *url = [NSURL URLWithString: [self link]];
 		[[UIApplication sharedApplication] openURL: url];
+		return;
 	}
-	else
+	
+
+	NSURL *url = [NSURL URLWithString: [self link]];
+	if ([[url scheme] isEqualToString: @"minyxstore"])
 	{
-		post_notification(kShowWebkitView, [self link]);
+		NSLog(@"posting notification!");
+		//[self doneButtonTouched: self];
+		
+		post_notification(kShowInAppStore, [url host]);
+		return;
 	}
+	
+	post_notification(kShowWebkitView, [self link]);
+
 	
 	
 }
