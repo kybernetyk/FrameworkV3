@@ -107,7 +107,7 @@
 	
 	[newslineView addSubview: [newsController view]];
 	[newsController setNewsItems: [appController newsItemsForOffline]];
-	[newsController start];
+	//[newsController start];		//newscontroller listens to application did become active notification
 #endif
 	
 	post_notification (kNewGLViewLoaded, glView);
@@ -223,6 +223,8 @@ extern bool spawn_player;
 #pragma mark gamecenter delegate
 - (void) processGameCenterAuth: (NSError*) error
 {
+	[g_pGameCenterManger submitCachedScores];
+	
 	NSLog(@"processGameCenterAuth. err: %@", [error localizedDescription]);
 }
 
@@ -271,6 +273,11 @@ extern bool spawn_player;
 	[self dismissModalViewControllerAnimated: YES];
 	g_MayReleaseMemory = YES;
 }	
+- (void) reloadScoresComplete: (GKLeaderboard*) leaderBoard error: (NSError*) error
+{
+	NSLog(@"scores are: %@", [g_pGameCenterManger top100_scores]);
+	NSLog(@"last pos: %i\n", [g_pGameCenterManger last_position]);
+}
 #endif
 
 #ifdef USE_INAPPSTORE

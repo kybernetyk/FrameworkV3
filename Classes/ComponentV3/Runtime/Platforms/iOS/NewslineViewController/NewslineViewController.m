@@ -56,6 +56,25 @@
 	hiddenFrame.origin.y += hiddenFrame.size.height;
 	
 	[[self view] setFrame: hiddenFrame];
+	
+	[moreButton setHidden: YES];
+	[[self view] setFrame: hiddenFrame];
+
+	
+	NSNotificationCenter *dc = [NSNotificationCenter defaultCenter];
+	[dc addObserver: self 
+		   selector: @selector(restart:) 
+			   name: UIApplicationDidBecomeActiveNotification 
+			 object: nil];
+	
+
+
+}
+
+- (void) restart: (NSNotification *) notification
+{
+	NSLog(@"RESTURD!");
+	[self start];
 }
 
 - (void) animateIn 
@@ -83,6 +102,7 @@
 
 - (void)viewDidUnload {
     [super viewDidUnload];
+	[[NSNotificationCenter defaultCenter] removeObserver: self];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
 }
@@ -90,6 +110,7 @@
 
 - (void)dealloc 
 {
+	[[NSNotificationCenter defaultCenter] removeObserver: self];
 	[self setNewsItems: nil];
 	[receivedData release];
 	receivedData = nil;
@@ -99,9 +120,7 @@
 
 - (void) start
 {
-	[moreButton setHidden: YES];
-	[[self view] setFrame: hiddenFrame];
-	
+		
 	
 	
 //	NSUserDefaults *defs = [NSUserDefaults standardUserDefaults];
@@ -113,7 +132,7 @@
 //		return;
 	
 	NSString *bundle_id = [[NSBundle mainBundle] bundleIdentifier];
-	NSString *urlstring = [NSString stringWithFormat: @"http://www.minyxgames.com/app_news.php?id=%@",bundle_id];
+	NSString *urlstring = [NSString stringWithFormat: @"http://www.minyxgames.com/app_news.py/news?appid=%@",bundle_id];
 	NSURL *url = [NSURL URLWithString: urlstring];
 	
 	NSURLRequest *req = [NSURLRequest requestWithURL: url];

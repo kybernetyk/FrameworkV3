@@ -69,12 +69,21 @@
 	NSMutableArray *scoresCache;
 	
 	id <GameCenterManagerDelegate, NSObject> delegate;
+	
+	NSArray *top100_scores;
+	NSUInteger last_position_score;
+	NSUInteger last_position;
 }
 
 //This property must be attomic to ensure that the cache is always in a viable state...
+@property (retain) NSArray *top100_scores;
+@property (assign) NSUInteger last_position_score;
+@property (assign) NSUInteger last_position;
+
 @property (retain) NSMutableDictionary* earnedAchievementCache;
 
 @property (nonatomic, assign)  id <GameCenterManagerDelegate> delegate;
+
 
 + (BOOL) isGameCenterAvailable;
 

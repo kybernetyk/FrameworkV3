@@ -142,6 +142,8 @@
 	[[MKStoreManager sharedManager] restorePreviousTransactions];
 }
 
+#pragma mark -
+#pragma mark promo code stuff
 - (IBAction) enterPromoCode: (id) sender
 {
 	mx3::SoundSystem::play_sound (MENU_ITEM_SFX);
@@ -163,8 +165,9 @@
 		//label.text = [NSString stringWithFormat:@"You typed: %@", entered];
 		//NSLog(@"text entered: %@", entered);
 		
+		NSString *device_id = [[UIDevice currentDevice] uniqueIdentifier]; 
 		NSString *bundle_id = [[NSBundle mainBundle] bundleIdentifier];
-		NSString *urlstring = [NSString stringWithFormat: @"http://www.minyxgames.com/promo.php?id=%@&code=%@",bundle_id,entered];
+		NSString *urlstring = [NSString stringWithFormat: @"http://www.minyxgames.com/promo.py/unlock?appid=%@&code=%@&deviceid=%@",bundle_id,entered,device_id];
 		NSURL *url = [NSURL URLWithString: urlstring];
 
 		NSURLRequest *req = [NSURLRequest requestWithURL: url];
@@ -253,12 +256,15 @@
 	
 	NSString *str = [[[NSString alloc] initWithData: receivedData encoding: NSUTF8StringEncoding] autorelease];
 	
+	NSLog(@"string: %@",str);
+	//str = [str lowercaseString];
+	
 	SBJSON *json = [[[SBJSON alloc] init] autorelease];
 	
-	NSArray *codes = [json objectWithString: str];
-	//NSLog(@"codes: %@", codes);
+	NSArray *response_elements = [json objectWithString: str];
+	NSLog(@"codes: %@", response_elements);
 	
-	if ([codes count] <= 0)
+	if ([response_elements count] <= 0)
 	{
 		
 		UIAlertView *av = [[UIAlertView alloc] initWithTitle: @"Invalid Promo Code"
@@ -277,51 +283,111 @@
 		return;
 	}
 	
-	NSMutableArray *features = [NSMutableArray arrayWithCapacity: 4];
-
-	NSUserDefaults *defs = [NSUserDefaults standardUserDefaults];
+	NSMutableArray *features_to_unlock = [NSMutableArray arrayWithCapacity: 4];
 	
+	for (NSDictionary *element in response_elements)
+	{
+		NSString *response_kind = [element objectForKey: @"response"];
+		if (!response_kind)
+			continue;
+		
+		if ([response_kind containsString: @"error" ignoringCase: YES])
+		{
+			
+			NSString *msg = [element objectForKey: @"message"];
+			if (!msg)
+				msg = @"The code you entered is invalid.";
+			
+			UIAlertView *av = [[UIAlertView alloc] initWithTitle: @"Invalid Promo Code"
+														 message: msg
+														delegate: nil 
+											   cancelButtonTitle: @"Ok."
+											   otherButtonTitles: nil];
+			[av show];
+			[av release];
+			
+			
+			[connection release];
+			[receivedData release];
+			receivedData = nil;
+			
+			return;
+		}
+		
+		if ([response_kind containsString: @"unlock" ignoringCase: YES])
+		{
+			NSString *unlock_code = [element objectForKey: @"unlock"];
+			if (!unlock_code)
+				continue;
+			
+			[features_to_unlock addObject: unlock_code];
+		}
+		
+		if ([response_kind containsString: @"message" ignoringCase: YES])
+		{
+			NSString *msg_title = [element objectForKey: @"title"];
+			if (!msg_title)
+				continue;
+			
+			NSString *msg = [element objectForKey: @"message"];
+			if (!msg)
+				continue;
+			
+			UIAlertView *av = [[UIAlertView alloc] initWithTitle: msg_title
+														 message: msg
+														delegate: nil 
+											   cancelButtonTitle: @"Ok."
+											   otherButtonTitles: nil];
+			[av show];
+			[av release];
+		}			
+		
+	}
+	
+	NSUserDefaults *defs = [NSUserDefaults standardUserDefaults];
+	NSMutableArray *feature_names = [NSMutableArray arrayWithCapacity: 4];
 	int c = 0;
 	int unlock_count = 0;
-	for (NSString *s in codes)
+	for (NSString *feature in features_to_unlock)
 	{
 		c++;
 		
-		s = [s stringByTrimmingCharactersInSet: [NSCharacterSet whitespaceAndNewlineCharacterSet]];
-//		NSLog(@"object %i: %@",c, s);
+		feature = [feature stringByTrimmingCharactersInSet: [NSCharacterSet whitespaceAndNewlineCharacterSet]];
+		NSLog(@"object %i: %@",c, feature);
 		
 		for (SKProduct *prod in [self products])
 		{
-			if ([[prod productIdentifier] containsString: s ignoringCase: YES])
+			if ([[prod productIdentifier] containsString: feature ignoringCase: YES])
 			{
-				//[features appendFormat: @"%@, ", [prod localizedTitle]];
-				[features addObject: [prod localizedTitle]];
+				[feature_names addObject: [prod localizedTitle]];
 				[defs setBool: YES forKey: [prod productIdentifier]];
 				unlock_count ++;
 			}
 		}
 	}
 	[defs synchronize];
-		
-	NSMutableString *msg = [NSMutableString stringWithString: @"You unlocked: "];
-	c = 0;
-	for (NSString *feature in features)
+
+	if ([feature_names count] > 0)
 	{
-		c++;
-		[msg appendFormat: @"\"%@\"", feature];
-		if (c < [features count])
-			[msg appendString: @", "];
+		NSMutableString *msg = [NSMutableString stringWithString: @"You unlocked: "];
+		c = 0;
+		for (NSString *feature in feature_names)
+		{
+			c++;
+			[msg appendFormat: @"\"%@\"", feature];
+			if (c < [feature_names count])
+				[msg appendString: @", "];
+		}
+		
+		UIAlertView *av = [[UIAlertView alloc] initWithTitle: @"Unlock successful"
+													 message: msg
+													delegate: nil 
+										   cancelButtonTitle: @"Ok."
+										   otherButtonTitles: nil];
+		[av show];
+		[av release];
+		[tableView reloadData];
 	}
-	
-//	NSString *msg = [NSString stringWithFormat: @"You unlocked: ", features];
-	UIAlertView *av = [[UIAlertView alloc] initWithTitle: @"Unlock successful"
-												 message: msg
-												delegate: nil 
-									   cancelButtonTitle: @"Ok."
-									   otherButtonTitles: nil];
-	[av show];
-	[av release];
-	[tableView reloadData];
 
     
 	[connection release];

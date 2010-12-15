@@ -195,6 +195,7 @@ BOOL g_MayReleaseMemory = YES;
 {
 	game::g_pGame->setPaused(false);
 	theGame->appDidBecomeActive ();
+	
 	//[[SimpleAudioEngine sharedEngine] resumeBackgroundMusic];
 }
 

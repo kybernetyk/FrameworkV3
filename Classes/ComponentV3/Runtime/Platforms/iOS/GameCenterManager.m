@@ -56,6 +56,9 @@ GameCenterManager *g_pGameCenterManger = nil;
 
 @synthesize earnedAchievementCache;
 @synthesize delegate;
+@synthesize top100_scores;
+@synthesize last_position_score;
+@synthesize last_position;
 
 - (id) init
 {
@@ -65,6 +68,8 @@ GameCenterManager *g_pGameCenterManger = nil;
 		earnedAchievementCache= NULL;
 		g_pGameCenterManger = self;
 		[self loadScoresFromDefaults];
+		
+		//[self setScores: [NSMutableDictionary dictionaryWithCapacity: 4]];
 	}
 	return self;
 }
@@ -146,7 +151,7 @@ GameCenterManager *g_pGameCenterManger = nil;
 	
 	
 	NSMutableArray *cacheCopy = [scoresCache copy];
-	NSLog(@"submitCachedScores");
+	NSLog(@"submitCachedScores: %@",scoresCache);
 	for (GKScore *s in cacheCopy)
 	{
 		if (![[s playerID] isEqualToString: [[GKLocalPlayer localPlayer] playerID]])
@@ -255,13 +260,19 @@ GameCenterManager *g_pGameCenterManger = nil;
 
 - (void) reloadHighScoresForCategory: (NSString*) category
 {
+	NSLog(@"reloading for: %@",category);
 	GKLeaderboard* leaderBoard= [[[GKLeaderboard alloc] init] autorelease];
 	leaderBoard.category= category;
-	leaderBoard.timeScope= GKLeaderboardTimeScopeAllTime;
-	leaderBoard.range= NSMakeRange(1, 1);
+	leaderBoard.timeScope= GKLeaderboardTimeScopeToday;
+	leaderBoard.range= NSMakeRange(1, 100);
 	
-	[leaderBoard loadScoresWithCompletionHandler:  ^(NSArray *scores, NSError *error)
+	[leaderBoard loadScoresWithCompletionHandler:  ^(NSArray *_scores, NSError *error)
 	{
+		NSLog(@"scores: %@", _scores);
+		//[[self scores] setObject: [NSArray arrayWithArray: _scores] forKey: category];
+		[self setTop100_scores: [NSArray arrayWithArray: _scores]];
+		[self setLast_position: [leaderBoard maxRange]];
+
 		[self callDelegateOnMainThread: @selector(reloadScoresComplete:error:) withArg: leaderBoard error: error];
 	}];
 }
