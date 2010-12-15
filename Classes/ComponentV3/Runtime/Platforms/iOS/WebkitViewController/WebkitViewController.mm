@@ -25,7 +25,7 @@ extern BOOL g_MayReleaseMemory;
 	
 	// Creates the URL request to load in the webview
 	NSURLRequest *request = [NSURLRequest requestWithURL:url];
-	[self.webView setHidden: YES];
+//	[self.webView setHidden: YES];
 	// Load the request in our webview
 	[self.webView loadRequest:request];
 	
@@ -108,6 +108,12 @@ extern BOOL g_MayReleaseMemory;
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
+}
+
+- (void)viewDidLoad
+{
+	[super viewDidLoad];
+	[self.webView setHidden: YES];
 }
 
 - (void)viewDidUnload 
