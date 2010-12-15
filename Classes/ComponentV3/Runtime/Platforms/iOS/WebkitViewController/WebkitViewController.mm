@@ -21,13 +21,6 @@ extern BOOL g_MayReleaseMemory;
 - (void) viewWillAppear:(BOOL)animated {	
 	
 	// Create a URL from the address
-	NSURL *url = [NSURL URLWithString:promotionAddress];
-	
-	// Creates the URL request to load in the webview
-	NSURLRequest *request = [NSURLRequest requestWithURL:url];
-//	[self.webView setHidden: YES];
-	// Load the request in our webview
-	[self.webView loadRequest:request];
 	
 	NSLog(@"will appear");
 	
@@ -46,7 +39,7 @@ extern BOOL g_MayReleaseMemory;
 		g_MayReleaseMemory = YES;
 		NSLog(@"posting notification!");
 		//[self doneButtonTouched: self];
-		
+		mx3::SoundSystem::play_sound (MENU_ITEM_SFX);
 			
 		post_notification(kShowInAppStore, [[request URL] host]);
 			
@@ -56,6 +49,7 @@ extern BOOL g_MayReleaseMemory;
 	//if ([[[request URL] scheme] isEqualToString: @"itms"])
 	if (navigationType == UIWebViewNavigationTypeLinkClicked)
 	{
+		mx3::SoundSystem::play_sound (MENU_ITEM_SFX);
 		[[UIApplication sharedApplication] openURL: [request URL]];
 		return NO;
 	}
@@ -114,6 +108,15 @@ extern BOOL g_MayReleaseMemory;
 {
 	[super viewDidLoad];
 	[self.webView setHidden: YES];
+	
+	NSURL *url = [NSURL URLWithString:promotionAddress];
+	
+	// Creates the URL request to load in the webview
+	NSURLRequest *request = [NSURLRequest requestWithURL:url];
+	//	[self.webView setHidden: YES];
+	// Load the request in our webview
+	[self.webView loadRequest:request];
+	
 }
 
 - (void)viewDidUnload 
