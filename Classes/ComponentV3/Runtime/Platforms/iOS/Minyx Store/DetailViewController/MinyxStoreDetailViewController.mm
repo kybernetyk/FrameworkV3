@@ -42,6 +42,14 @@
 	
 }
 
+- (void) setCornersForView: (UIView *) aView
+{
+	[[aView layer] setCornerRadius: 8.0];
+	[[aView layer] setMasksToBounds: YES];
+	
+}
+
+
 extern BOOL g_MayReleaseMemory;
 - (void) dismissStore: (id) sender
 {
@@ -102,6 +110,24 @@ extern BOOL g_MayReleaseMemory;
 	   ]  
 	  ]
 	 ];
+	
+	
+	large_detail_frame = [detailImageView_imageView frame];
+	small_detail_frame = large_detail_frame;
+	small_detail_frame.size.width /= 4.0;
+	small_detail_frame.size.height /= 4.0;
+	small_detail_frame.origin.x = [[self view] bounds].size.width / 2 - small_detail_frame.size.width / 2;
+	small_detail_frame.origin.y = [[self view] bounds].size.height / 2 - small_detail_frame.size.height / 2;
+	
+	[detailImageView_imageView setFrame: small_detail_frame];
+	
+	[self setCornersForView: detailImageView_captionLabel];
+	
+	if ([[self dataSource] detailImageNameForProductID: [product productIdentifier]])
+		[showDetialButton setHidden: NO];
+	else
+		[showDetialButton setHidden: YES];
+	
 }
 
 
@@ -149,6 +175,68 @@ extern BOOL g_MayReleaseMemory;
 	[[MKStoreManager sharedManager] buyFeature: feature];
 	
 }
+
+- (void) showDetailImage: (id) sender
+{
+	mx3::SoundSystem::play_sound (MENU_ITEM_SFX);
+	NSString *imgName = [[self dataSource] detailImageNameForProductID: [product productIdentifier]];
+	NSString *caption = [[self dataSource] detailImageCaptionForProductID: [product productIdentifier]];
+	
+	if (caption)
+		[detailImageView_captionLabel setText: caption];
+	
+	[detailImageView_captionLabel setHidden: YES];
+	
+	[detailImageView_imageView setImage: [UIImage imageNamed: imgName]];
+	[detailImageView_imageView setFrame: small_detail_frame];
+	[detailImageView_closeButton setHidden: YES];
+	[[self view] addSubview: detailImageView];
+	
+
+	
+	//[UIView beginAnimations: @"zoooomin" context: NULL];
+	//[UIView setAnimationDuration: 1.0];
+	//[UIView setAnimationDidStopSelector: @selector(detailShowDone:)];
+	
+//	+ (void)animateWithDuration:(NSTimeInterval)duration delay:(NSTimeInterval)delay options:(UIViewAnimationOptions)options animations:(void (^)(void))animations completion:(void (^)(BOOL finished))completion;
+
+	[UIView animateWithDuration: 0.4
+						  delay: 0.0
+						options: UIViewAnimationOptionLayoutSubviews | UIViewAnimationOptionCurveEaseInOut
+					 animations: ^(){
+						[detailImageView_imageView setFrame: large_detail_frame]; 
+					 }
+					 completion: ^(BOOL finished){
+						 [detailImageView_closeButton setHidden: NO];
+						 if (caption)
+							 [detailImageView_captionLabel setHidden: NO];
+					 }
+	 ];
+	
+	
+}
+
+
+- (IBAction) dismissDetailImage: (id) sender
+{
+	mx3::SoundSystem::play_sound (MENU_ITEM_SFX);
+	
+	[detailImageView_closeButton setHidden: YES];
+	[detailImageView_captionLabel setHidden: YES];
+	[UIView animateWithDuration: 0.4
+						  delay: 0.0
+						options: UIViewAnimationOptionLayoutSubviews | UIViewAnimationOptionCurveEaseIn
+					 animations: ^(){
+						 [detailImageView_imageView setFrame: small_detail_frame];
+					 }
+					 completion: ^(BOOL finished){
+						 [detailImageView removeFromSuperview];	
+					 }
+	 ];
+	
+	
+}
+
 
 #pragma mark -
 #pragma mark MKStoreManager

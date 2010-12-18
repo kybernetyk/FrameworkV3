@@ -20,10 +20,22 @@
 	IBOutlet UIImageView *imageView;
 	IBOutlet UIActivityIndicatorView *activity;
 	IBOutlet UIButton *buyButton;
+	IBOutlet UIButton *showDetialButton;
+	
+	IBOutlet UIView *detailImageView;
+	IBOutlet UIImageView *detailImageView_imageView;
+	IBOutlet UIButton *detailImageView_closeButton;
+	IBOutlet UILabel *detailImageView_captionLabel;
+	
+	CGRect small_detail_frame;
+	CGRect large_detail_frame;
 }
 @property (readwrite, assign) id dataSource;
 @property (readwrite, retain) SKProduct *product;
 
 - (IBAction) buyTheShit: (id) sender;
+
+- (IBAction) showDetailImage: (id) sender;
+- (IBAction) dismissDetailImage: (id) sender;
 
 @end
