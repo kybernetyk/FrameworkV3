@@ -26,6 +26,7 @@ namespace mx3
 #define ACTIONTYPE_FADE_TO 10
 	
 	struct Component;
+	typedef void (^ActionBlock)();
 	
 	struct Action
 	{
@@ -34,8 +35,12 @@ namespace mx3
 		float duration;						//the action's duration
 		float _timestamp;					//internal framecounter				
 		
-		Action *on_complete_action;				//the action that should be ran after this one. NULL indicates no action
+		ActionBlock on_complete_block;
 		
+		Action *on_complete_action;				//the action that should be ran after this one. NULL indicates no action
+				//block that will be executed on completion. 
+											//ALWAYS USE Block_copy() in assignment!
+											//for convinience use the set_on_complete_block() helper
 		
 		bool finished;
 		bool may_be_aborted;				//may this action be aborted/replaced by another one?
@@ -43,6 +48,10 @@ namespace mx3
 		Action()
 		{
 			action_type = ACTIONTYPE_NONE;
+			on_complete_block = NULL;/* ^{
+				printf("action complete!\n");
+			};*/
+			
 			on_complete_action = NULL;
 			_timestamp = duration = 0.0;
 			may_be_aborted = true;
@@ -53,6 +62,10 @@ namespace mx3
 		{
 		}
 
+//		void set_on_complete_block (ActionBlock block)
+//		{
+//			on_complete_block = Block_copy (block);
+//		}
 		
 		//DEBUGINFO ("Empty Action with duration: %f and timestamp: %f", duration, _timestamp)
 	};

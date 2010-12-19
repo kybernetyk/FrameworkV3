@@ -16,6 +16,10 @@
 
 namespace mx3 
 {
+	
+	void action_set_complete_block (Action *action, ActionBlock block);		//sets the block to execute on complete
+	void action_append_action (Action *first, Action *to_append);	//appends to_append to first's on_complete_action chain (to the last action in the chain)
+	
 	class ActionSystem
 	{
 	public:

@@ -139,6 +139,15 @@ namespace mx3
 	#pragma mark animation
 	#define ANIMATION_STATE_PAUSE 0
 	#define ANIMATION_STATE_PLAY 1
+	
+	#define ANIMATION_STATE_EXTERNAL 3
+	//external indicates that the frame counter is advanced by an external source
+	//the system will do bounds checking, looping and destruction and set the atlas coords
+	
+	#define ANIMATION_STATE_EXTERNAL_NO_CHECKs 4
+	//indicates a total external control. the system won't check any boundes, etc and won't destroy the animation
+	//it will only set the right atlas coordinates for the current frame to the animation's sprite
+	
 	struct FrameAnimation : public Component
 	{
 		static ComponentID COMPONENT_ID;

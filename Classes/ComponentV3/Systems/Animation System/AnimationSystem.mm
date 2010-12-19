@@ -130,23 +130,25 @@ namespace mx3
 					
 				}
 
-				if (current_animation->_cached_frame != (int)current_animation->current_frame)
-				{
-					printf("frm: %i\n", (int)current_animation->current_frame);
-					atlas_quad = g_RenderableManager.getResource <TexturedAtlasQuad> (&current_sprite->res_handle);
-					
-					rect fs = current_animation->frame_size;
-					int sx = atlas_quad->tex_w / fs.w;
-					//	int sy = current_sprite->atlas_quad->tex_h / fs.h;
-					
-					int fx = ((int)current_animation->current_frame) % sx;
-					int fy = ((int)current_animation->current_frame) / sx; // (/ sy is for quadratische texutren! ansonsten muessen wir durch x beficken, damit wir indexiert tun koennen)
-					
-					current_sprite->src.x = fx * fs.w;
-					current_sprite->src.y = fy * fs.h;
-					
-					current_animation->_cached_frame = current_animation->current_frame;
-				}
+			}
+			
+			//only copy data if we're in a new frame
+			if (current_animation->_cached_frame != (int)current_animation->current_frame)
+			{
+				//printf("frm: %i\n", (int)current_animation->current_frame);
+				atlas_quad = g_RenderableManager.getResource <TexturedAtlasQuad> (&current_sprite->res_handle);
+				
+				rect fs = current_animation->frame_size;
+				int sx = atlas_quad->tex_w / fs.w;
+				//	int sy = current_sprite->atlas_quad->tex_h / fs.h;
+				
+				int fx = ((int)current_animation->current_frame) % sx;
+				int fy = ((int)current_animation->current_frame) / sx; // (/ sy is for quadratische texutren! ansonsten muessen wir durch x beficken, damit wir indexiert tun koennen)
+				
+				current_sprite->src.x = fx * fs.w;
+				current_sprite->src.y = fy * fs.h;
+				
+				current_animation->_cached_frame = current_animation->current_frame;
 			}
 			
 		}

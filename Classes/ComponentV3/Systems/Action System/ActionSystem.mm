@@ -14,6 +14,25 @@ mx3::ActionSystem *g_pActionSystem;
 
 namespace mx3 
 {
+	void action_set_complete_block (Action *action, ActionBlock block)
+	{
+		action->on_complete_block = Block_copy (block);
+	}
+	
+	void action_append_action (Action *first, Action *to_append)
+	{
+		Action *last = first;
+		while (1)
+		{
+			if (last->on_complete_action)
+				last = last->on_complete_action;
+			else
+				break;
+		}
+		
+		last->on_complete_action = to_append;
+	}
+	
 	ActionSystem::ActionSystem (EntityManager *entityManager)
 	{
 		_entityManager = entityManager;
@@ -359,6 +378,12 @@ namespace mx3
 			//let's see what to do after the action is finished
 			if (current_action->finished)
 			{
+				if (current_action->on_complete_block)
+				{	
+					current_action->on_complete_block ();
+					Block_release (current_action->on_complete_block);
+				}
+				
 				Action *on_complete_action = current_action->on_complete_action;
 				
 				//run another action
