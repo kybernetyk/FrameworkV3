@@ -157,6 +157,8 @@ namespace mx3
 		FrameAnimation *next_animation;
 		Action *on_complete_action;
 		
+		int _cached_frame;
+		
 		FrameAnimation ()
 		{
 			_id = COMPONENT_ID;
@@ -168,6 +170,7 @@ namespace mx3
 			frame_size = rect_make(0.0, 0.0, 0.0, 0.0);
 			state = ANIMATION_STATE_PAUSE;
 			start_frame = 0;
+			_cached_frame = -1;
 			end_frame = 0;
 			next_animation = NULL;
 			on_complete_action = NULL;
