@@ -203,76 +203,103 @@
 	NSString *fb_title = [[self dataSource] titleForFBShare];
 	NSString *fb_picurl = [[self dataSource] picurlForFBShare];
 	NSString *fb_link = [[self dataSource] linkForFBShare];
+	NSString *fb_link_name = [[self dataSource] linkNameForFBShare];
 	NSString *fb_caption = [[self dataSource] captionForFBShare];	
 	NSString *fb_description = [[self dataSource] descriptionForFBShare];	
 	
-	if (!fb_title || !fb_picurl || !fb_link || !fb_caption || !fb_description)
+	if (!fb_title || !fb_picurl || !fb_link || !fb_caption || !fb_description || !fb_link_name)
 	{
 		NSLog(@"lol! your datasource sucks!");
 		abort();
 		return;
 	}
 	
-	unlock_orientation = NO;
-	NSMutableDictionary* params = [NSMutableDictionary dictionaryWithObjectsAndKeys: 
-								   FB_API_KEY, @"api_key",
-								   fb_title , @"message",
-								   nil];
-	/*	NSString *action_links = @"[{\"text\":\"How Evil Are You???\",\"href\":\"http://itunes.apple.com/us/app/how-evil-are-you/id393122123?mt=8\"}]";
-	 [params setObject:action_links forKey:@"action_links"];
-	 
-	 
-	 NSLog(@"post params: %@", params);*/
-	
-	NSString *picurl = fb_picurl;//[NSString stringWithString: @"http://www.minyxgames.com/minyx-ultra/icon_90.png"];
-	//NSString *picurl = [NSString stringWithString: @"http://www.minyxgames.com/mega-fill-up/not_awesome_face.png"];
-	NSString *captionText = fb_caption;//[NSString stringWithFormat: @"{*actor*} has reached level %i and has now %i Gold!",level, score];
-	
+	NSMutableDictionary* params = [NSMutableDictionary dictionary];
 
+	[params setObject: fb_title forKey: @"message"];
+	[params setObject: fb_picurl forKey: @"picture"];
+	[params setObject: fb_link forKey: @"link"];
+	[params setObject: fb_link_name forKey: @"name"];
+	[params setObject: fb_caption forKey: @"caption"];
+	[params setObject: fb_description forKey: @"description"];
 	
-	NSString *descString = fb_description;//@"And how much can you get? Minyx Ultra is free!";
+	NSLog(@"sending params: %@", params);
 	
-	//media
-	NSMutableDictionary *media_entry = [NSMutableDictionary dictionary];
-	[media_entry setObject: @"image" forKey: @"type"];
-	[media_entry setObject: picurl forKey: @"src"];
-	[media_entry setObject: fb_link forKey: @"href"];
-	NSArray *media = [NSArray arrayWithObject: media_entry];
-	
-	//attachment
-	NSMutableDictionary *attachment = [NSMutableDictionary dictionary];
-	[attachment setObject: fb_link forKey: @"href"];
-	[attachment setObject: captionText forKey: @"caption"];
-	[attachment setObject: descString forKey: @"description"];
-	[attachment setObject: media forKey: @"media"];
-	
-	
-	//actionlinks
-	//	NSMutableDictionary *action_link = [NSMutableDictionary dictionary];
-	//	[action_link setObject: @"Minyx Ultra for iPhone" forKey: @"text"];
-	//	[action_link setObject: @"http://itunes.apple.com/app/LOL"  forKey: @"href"];
-	//	NSArray *action_links = [NSArray arrayWithObject: action_link];
-	
-	SBJSON *json = [[[SBJSON alloc] init] autorelease];
-	
-	NSString *strAttachment = [json stringWithObject: attachment];
-//	NSString *strActionLinks = [json stringWithObject: action_links];
-	
-	[params setObject: strAttachment forKey: @"attachment"];
-//	[params setObject: strActionLinks forKey: @"action_links"];
-	
-	//NSLog(@"attachment: %@",strAttachment);
-///	NSLog(@"links: %@",strActionLinks);
+	//SBJSON *json = [[[SBJSON alloc] init] autorelease];
+
+	//NSString *params_str = [json stringWithObject: params];
 	
 	[facebook retain];
-	[facebook requestWithMethodName: @"stream.publish" andParams: params andHttpMethod: @"POST" andDelegate: self];
+//	[facebook requestWithMethodName: @"stream.publish" andParams: params andHttpMethod: @"POST" andDelegate: self];
+
+	[facebook requestWithGraphPath: @"me/feed"
+						 andParams: params 
+					 andHttpMethod: @"POST" 
+					   andDelegate: self];
+	
+	return;
+	
+//	unlock_orientation = NO;
+//	NSMutableDictionary* params = [NSMutableDictionary dictionaryWithObjectsAndKeys: 
+//								   FB_API_KEY, @"api_key",
+//								   fb_title , @"message",
+//								   nil];
+//	/*	NSString *action_links = @"[{\"text\":\"How Evil Are You???\",\"href\":\"http://itunes.apple.com/us/app/how-evil-are-you/id393122123?mt=8\"}]";
+//	 [params setObject:action_links forKey:@"action_links"];
+//	 
+//	 
+//	 NSLog(@"post params: %@", params);*/
+//	
+//	NSString *picurl = fb_picurl;//[NSString stringWithString: @"http://www.minyxgames.com/minyx-ultra/icon_90.png"];
+//	//NSString *picurl = [NSString stringWithString: @"http://www.minyxgames.com/mega-fill-up/not_awesome_face.png"];
+//	NSString *captionText = fb_caption;//[NSString stringWithFormat: @"{*actor*} has reached level %i and has now %i Gold!",level, score];
+//	
+//
+//	
+//	NSString *descString = fb_description;//@"And how much can you get? Minyx Ultra is free!";
+//	
+//	//media
+//	NSMutableDictionary *media_entry = [NSMutableDictionary dictionary];
+//	[media_entry setObject: @"image" forKey: @"type"];
+//	[media_entry setObject: picurl forKey: @"src"];
+//	[media_entry setObject: fb_link forKey: @"href"];
+//	NSArray *media = [NSArray arrayWithObject: media_entry];
+//	
+//	//attachment
+//	NSMutableDictionary *attachment = [NSMutableDictionary dictionary];
+//	[attachment setObject: fb_link forKey: @"href"];
+//	[attachment setObject: captionText forKey: @"caption"];
+//	[attachment setObject: descString forKey: @"description"];
+//	[attachment setObject: media forKey: @"media"];
+//	
+//	
+//	//actionlinks
+//	//	NSMutableDictionary *action_link = [NSMutableDictionary dictionary];
+//	//	[action_link setObject: @"Minyx Ultra for iPhone" forKey: @"text"];
+//	//	[action_link setObject: @"http://itunes.apple.com/app/LOL"  forKey: @"href"];
+//	//	NSArray *action_links = [NSArray arrayWithObject: action_link];
+//	
+//	SBJSON *json = [[[SBJSON alloc] init] autorelease];
+//	
+//	NSString *strAttachment = [json stringWithObject: attachment];
+//	
+//	[params setObject: strAttachment forKey: @"attachment"];
+//	
+//	NSLog(@"attachment: %@",strAttachment);
+//	
+//	[facebook retain];
+//	[facebook requestWithMethodName: @"stream.publish" andParams: params andHttpMethod: @"POST" andDelegate: self];
 }
 
 - (void)request:(FBRequest*)request didFailWithError:(NSError*)error
 {
-	NSLog(@"FB REQ DID FAIL: %@", [error localizedDescription]);
+	NSLog(@"FB REQ %@ DID FAIL: %@",request, error);
 	
-	if ([error code] == 190 || [error code] == 104 || [error code] == 250)
+	NSString *responseText = [[[NSString alloc] initWithData: [request responseText] encoding: NSUTF8StringEncoding] autorelease];
+	
+	NSLog(@"response text: %@", responseText);
+	
+	if ([error code] == 190 || [error code] == 104 || [error code] == 250 || [error code] == 10000)
 	{
 		
 		NSLog(@"user deauthed us - removing token! %@", error);
@@ -318,7 +345,7 @@
  */
 - (void)request:(FBRequest*)request didLoad:(id)result
 {
-	NSLog(@"FB REQ SUCCESS: %@", [[[NSString alloc] initWithData: result encoding: NSUTF8StringEncoding] autorelease]);
+	NSLog(@"FB REQ SUCCESS: %@", result);// [[[NSString alloc] initWithData: result encoding: NSUTF8StringEncoding] autorelease]);
 	unlock_orientation = NO;
 	//dont re enable on success
 	//	NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
