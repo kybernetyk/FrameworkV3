@@ -5,7 +5,8 @@
 #include <stdio.h>
 namespace mx3 
 {
-	double GetDoubleTime(void);
+	//double GetDoubleTime(void);
+	float GetFloatTime (void);
 	unsigned int GetTickCount();
 	
 	class Timer
@@ -27,7 +28,7 @@ namespace mx3
 			return m_ulDelta;
 		}*/
 		
-		inline double fdelta ()
+		inline float fdelta ()
 		{
 			return m_ulDelta;
 		}
@@ -40,7 +41,7 @@ namespace mx3
 			return s.str();
 		}
 		
-		double printFPS (bool printout)
+		float printFPS (bool printout)
 		{
 			frames ++;
 			temp += m_ulDelta;
@@ -61,14 +62,14 @@ namespace mx3
 		}
 		
 	protected:
-		double m_ulTickCount;
-		double m_ulLastTickCount;
-		double m_ulDelta;
+		float m_ulTickCount;
+		float m_ulLastTickCount;
+		float m_ulDelta;
 		
-		double temp;
-		double frames;
+		float temp;
+		float frames;
 		
-		double fps;
+		float fps;
 	};
 
 

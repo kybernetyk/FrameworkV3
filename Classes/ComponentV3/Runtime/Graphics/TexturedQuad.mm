@@ -813,7 +813,7 @@ namespace mx3
 			glColorPointer(4, GL_FLOAT, 0, colors);
 			
 			
-			double tx,ty,tw,th;
+			float tx,ty,tw,th;
 			
 			
 			bm_char *pchar = NULL;
@@ -821,10 +821,10 @@ namespace mx3
 			{
 				pchar = &font.chars[ text[i] ];
 				
-				tx = (double)pchar->x / (double)texture->w;
-				ty = (double)pchar->y / (double)texture->h;
-				tw = (double)pchar->w / (double)texture->w;
-				th = (double)pchar->h / (double)texture->h;
+				tx = (float)pchar->x / (float)texture->w;
+				ty = (float)pchar->y / (float)texture->h;
+				tw = (float)pchar->w / (float)texture->w;
+				th = (float)pchar->h / (float)texture->h;
 				GLfloat		vertices[] = 
 				{	
 					0,			0,			0,
