@@ -812,7 +812,8 @@ namespace mx3
 			};
 			glColorPointer(4, GL_FLOAT, 0, colors);
 			
-			
+			//IF RENDER ERRORS OCCUR
+			//EXCHANGE FLOAT FOR DOUBLE!
 			float tx,ty,tw,th;
 			
 			
