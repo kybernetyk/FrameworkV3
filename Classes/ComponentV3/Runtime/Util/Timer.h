@@ -5,7 +5,7 @@
 #include <stdio.h>
 namespace mx3 
 {
-	//double GetDoubleTime(void);
+	double GetDoubleTime(void);
 	float GetFloatTime (void);
 	unsigned int GetTickCount();
 	
@@ -46,7 +46,7 @@ namespace mx3
 			frames ++;
 			temp += m_ulDelta;
 			//printf ("%f\n",temp);
-			if (temp >= 0.5f)
+			if (temp >= 0.1f)
 			{
 				if (printout)
 					CV3Log  ("fps: %f\n", frames / temp);
@@ -57,19 +57,19 @@ namespace mx3
 				frames = 0.0;
 				
 			}
-			
+			//return 1.0 / m_ulDelta;
 			return fps;
 		}
 		
 	protected:
-		float m_ulTickCount;
-		float m_ulLastTickCount;
-		float m_ulDelta;
+		double m_ulTickCount;
+		double m_ulLastTickCount;
+		double m_ulDelta;
 		
-		float temp;
-		float frames;
+		double temp;
+		double frames;
 		
-		float fps;
+		double fps;
 	};
 
 

@@ -26,14 +26,14 @@ namespace mx3
 		return (v.tv_sec * 1000) + (v.tv_usec / 1000);
 	}
 	
-//	double GetDoubleTime(void)
-//	{
-//		mach_timebase_info_data_t base;
-//		mach_timebase_info(&base);
-//		
-//		uint64_t nanos = (mach_absolute_time()*base.numer)/base.denom;
-//		return (double)nanos*1.0e-9;
-//	}
+	double GetDoubleTime(void)
+	{
+		mach_timebase_info_data_t base;
+		mach_timebase_info(&base);
+		
+		uint64_t nanos = (mach_absolute_time()*base.numer)/base.denom;
+		return (double)nanos*1.0e-9;
+	}
 
 	float GetFloatTime(void)
 	{
@@ -47,7 +47,7 @@ namespace mx3
 	void Timer::update (void)
 	{
 		m_ulLastTickCount = m_ulTickCount;
-		m_ulTickCount = GetFloatTime();
+		m_ulTickCount = GetDoubleTime();
 		
 		m_ulDelta = (m_ulTickCount - m_ulLastTickCount);
 	}
