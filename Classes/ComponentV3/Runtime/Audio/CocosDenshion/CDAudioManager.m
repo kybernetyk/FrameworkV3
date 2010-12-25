@@ -332,6 +332,11 @@ static BOOL configured = FALSE;
 	return (isPlaying != 0);
 }
 
+- (tAudioManagerMode) mode
+{
+	return _mode;
+}
+
 -(void) setMode:(tAudioManagerMode) mode {
 
 	_mode = mode;

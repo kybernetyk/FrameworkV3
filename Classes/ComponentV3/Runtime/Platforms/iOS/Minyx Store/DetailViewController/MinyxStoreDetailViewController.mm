@@ -11,6 +11,9 @@
 #import "NotificationSystem.h"
 #import <QuartzCore/QuartzCore.h>
 #import "SoundSystem.h"
+#import "CocosDenshion.h"
+#import "CDAudioManager.h"
+#import "SimpleAudioEngine.h"
 
 @implementation MinyxStoreDetailViewController
 @synthesize dataSource;
@@ -49,10 +52,18 @@
 	
 }
 
-
 extern BOOL g_MayReleaseMemory;
 - (void) dismissStore: (id) sender
 {
+	if (reinit_sfx)
+	{
+		CDAudioManager *am = [CDAudioManager sharedManager];
+		[CDAudioManager configure: _lolmode];
+		
+		mx3::SoundSystem::resume_background_music();
+		reinit_sfx = NO;
+	}
+	
 	mx3::SoundSystem::play_sound (MENU_ITEM_SFX);
 	[MKStoreManager setDelegate: nil];
 	[[self parentViewController] dismissModalViewControllerAnimated: YES];
@@ -62,13 +73,19 @@ extern BOOL g_MayReleaseMemory;
 	//post_notification (kHideInAppStore, self);
 }
 
+
+
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad 
 {
     [super viewDidLoad];
 
+	CDAudioManager *am = [CDAudioManager sharedManager];
+	_lolmode = [am mode];
+	reinit_sfx = NO;
 	
 	[self setBorderAndCornersForView: imageView];
+
 	//[self setBorderAndCornersForView: detailText];
 	//[self setBorderAndCornersForView: buyButton];
 	
@@ -122,12 +139,41 @@ extern BOOL g_MayReleaseMemory;
 	[detailImageView_imageView setFrame: small_detail_frame];
 	
 	[self setCornersForView: detailImageView_captionLabel];
+	[self setCornersForView: webView];
+
+	BOOL h = NO;
 	
-	if ([[self dataSource] detailImageNameForProductID: [product productIdentifier]])
-		[showDetialButton setHidden: NO];
+	large_yt_frame = [webView frame];
+	small_yt_frame = large_yt_frame;
+	small_yt_frame.size.width /= 4.0;
+	small_yt_frame.size.height /= 4.0;
+	small_yt_frame.origin.x = [[self view] bounds].size.width / 2 - small_yt_frame.size.width / 2;
+	small_yt_frame.origin.y = [[self view] bounds].size.height / 2 - small_yt_frame.size.height / 2;
+	
+	[webView setFrame: small_yt_frame];
+	
+	
+	if (!h && [[self dataSource] youtubeURLForProductID: [product productIdentifier]])
+	{
+		[showYTButton setHidden: NO];
+		h = YES;
+	}
 	else
-		[showDetialButton setHidden: YES];
+	{
+		[showYTButton setHidden: YES];
+	}
 	
+	if (!h && [[self dataSource] detailImageNameForProductID: [product productIdentifier]])
+	{	
+		[showDetialButton setHidden: NO];
+		h = YES;
+	}
+	else
+	{	
+		[showDetialButton setHidden: YES];
+	}
+	
+
 }
 
 
@@ -174,6 +220,110 @@ extern BOOL g_MayReleaseMemory;
 	[MKStoreManager setDelegate: self];
 	[[MKStoreManager sharedManager] buyFeature: feature];
 	
+}
+
+- (void) showYTVideo: (id) sender
+{
+	mx3::SoundSystem::play_sound (MENU_ITEM_SFX);
+	[youtubeView_closeButton setHidden: YES];
+	[youtubeView_close2Button setHidden: YES];
+	[youtubeView_activity stopAnimating];
+	//[webView setHidden: YES];
+	
+	//[[UIApplication sharedApplication] openURL: [NSURL URLWithString: [dataSource youtubeURLForProductID: [product productIdentifier]]]];
+	[[self view] addSubview: youtubeView];
+	[webView setDelegate: self];
+	
+	
+	[UIView animateWithDuration: 0.4
+						  delay: 0.0
+						options: UIViewAnimationOptionLayoutSubviews | UIViewAnimationOptionCurveEaseInOut
+					 animations: ^(){
+						 [webView setFrame: large_yt_frame]; 
+					 }
+					 completion: ^(BOOL finished){
+						 //[youtubeView_closeButton setHidden: NO];
+						 [youtubeView_close2Button setHidden: NO];
+						 [youtubeView_activity startAnimating];
+
+						 NSString* embedHTML = @"<html><head><meta name=\"viewport\" content=\"width=%i,user-scalable=no\" /><style type=\"text/css\">body { background-color: transparent; color: white; }</style></head><body style=\"margin:0\"><embed id=\"yt\" src=\"%@\" type=\"application/x-shockwave-flash\" width=\"%i\" height=\"%i\"></embed></body></html>";
+						 
+						 NSString* html = [NSString stringWithFormat: embedHTML,
+										   (int)large_yt_frame.size.width, 
+										   [[self dataSource] youtubeURLForProductID: [product productIdentifier]], 
+										   (int)large_yt_frame.size.width, 
+										   (int)large_yt_frame.size.height];  
+						 
+						 NSLog(@"html: %@", html);
+						 
+						 
+						 [webView loadHTMLString: html baseURL:nil];  
+
+						 
+					 }
+	 ];
+	
+}
+
+- (IBAction) dismissYTVideo: (id) sender
+{
+	[webView setDelegate: nil];
+	[webView loadHTMLString: @"" baseURL: nil];
+	
+	[youtubeView_closeButton setHidden: YES];
+	[youtubeView_close2Button setHidden: YES];
+	//[am init: _lolmode];
+//	[am setMode: _lolmode];
+//	[[SimpleAudioEngine sharedEngine] setEnabled: YES];
+	
+	//[SimpleAudioEngine end];
+	//[SimpleAudioEngine sharedEngine];
+	if (reinit_sfx)
+	{
+		CDAudioManager *am = [CDAudioManager sharedManager];
+		[CDAudioManager configure: _lolmode];
+		
+		mx3::SoundSystem::resume_background_music();
+
+		reinit_sfx = NO;
+	}
+	
+	mx3::SoundSystem::play_sound (MENU_ITEM_SFX);
+
+	
+	[UIView animateWithDuration: 0.4
+						  delay: 0.0
+						options: UIViewAnimationOptionLayoutSubviews | UIViewAnimationOptionCurveEaseIn
+					 animations: ^(){
+						 [webView setFrame: small_yt_frame];
+					 }
+					 completion: ^(BOOL finished){
+						 [youtubeView removeFromSuperview];	
+					 }
+	 ];
+}
+
+- (void)webViewDidFinishLoad:(UIWebView *)webView 
+{
+	//NSLog(@"req url: %@", [[[webView request] URL] absoluteString]);
+
+	
+	[webView setHidden: NO];
+	[youtubeView_activity stopAnimating];
+	[youtubeView_closeButton setHidden: NO];
+	
+	reinit_sfx = YES;
+	[[[CDAudioManager sharedManager] soundEngine] stopAllSounds];
+	[[SimpleAudioEngine sharedEngine] setEnabled: NO];
+	[SimpleAudioEngine end];
+	[CDAudioManager end];
+}
+
+- (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error 
+{
+	[webView setHidden: NO];
+	[youtubeView_activity stopAnimating];
+	[youtubeView_closeButton setHidden: NO];
 }
 
 - (void) showDetailImage: (id) sender

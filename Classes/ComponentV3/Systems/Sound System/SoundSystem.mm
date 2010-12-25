@@ -71,7 +71,7 @@ namespace mx3
 	void SoundSystem::preload_sound (std::string filename)
 	{
 		NSString *fn = [NSString stringWithCString: filename.c_str() encoding: NSASCIIStringEncoding];
-		//NSLog(@"sound preload: %@", fn);
+		CV3Log("preloading sound: %s\n", filename.c_str());
 		[[SimpleAudioEngine sharedEngine] preloadEffect: fn];
 	}
 	

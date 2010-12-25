@@ -183,6 +183,7 @@ typedef enum {
 -(BOOL) isOtherAudioPlaying;
 /** Sets the way the audio manager interacts with the operating system such as whether it shares output with other apps or obeys the mute switch */
 -(void) setMode:(tAudioManagerMode) mode;
+- (tAudioManagerMode) mode;
 /** Shuts down the shared audio manager instance so that it can be reinitialised */
 +(void) end;
 
