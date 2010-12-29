@@ -228,6 +228,11 @@ extern BOOL g_MayReleaseMemory;
 	[youtubeView_closeButton setHidden: YES];
 	[youtubeView_close2Button setHidden: YES];
 	[youtubeView_activity stopAnimating];
+	[[[self navigationItem] rightBarButtonItem] setEnabled: NO];
+	//[[[self navigationItem] leftBarButtonItem] setEnabled: NO];
+	
+
+	[[self navigationItem] setHidesBackButton: YES animated: YES];
 	//[webView setHidden: YES];
 	
 	//[[UIApplication sharedApplication] openURL: [NSURL URLWithString: [dataSource youtubeURLForProductID: [product productIdentifier]]]];
@@ -246,7 +251,7 @@ extern BOOL g_MayReleaseMemory;
 						 [youtubeView_close2Button setHidden: NO];
 						 [youtubeView_activity startAnimating];
 
-						 NSString* embedHTML = @"<html><head><meta name=\"viewport\" content=\"width=%i,user-scalable=no\" /><style type=\"text/css\">body { background-color: transparent; color: white; }</style></head><body style=\"margin:0\"><embed id=\"yt\" src=\"%@\" type=\"application/x-shockwave-flash\" width=\"%i\" height=\"%i\"></embed></body></html>";
+						 NSString* embedHTML = @"<html><head><meta name=\"viewport\" content=\"width=%i,user-scalable=no\" /><style type=\"text/css\">body { background-color: transparent; color: white; }</style></head><body style=\"margin:0\"><embed id=\"yt\" src=\"%@\" type=\"application/x-shockwave-flash\" width=\"%i\" height=\"%i\" fullscreen=true></embed></body></html>";
 						 
 						 NSString* html = [NSString stringWithFormat: embedHTML,
 										   (int)large_yt_frame.size.width, 
@@ -267,6 +272,9 @@ extern BOOL g_MayReleaseMemory;
 
 - (IBAction) dismissYTVideo: (id) sender
 {
+	[[[self navigationItem] rightBarButtonItem] setEnabled: YES];
+	[[self navigationItem] setHidesBackButton: NO animated: YES];
+
 	[webView setDelegate: nil];
 	[webView loadHTMLString: @"" baseURL: nil];
 	
