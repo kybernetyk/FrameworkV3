@@ -43,6 +43,6 @@ enum bm_alignment
 };
 
 extern int bm_loadfont (const char *filename, bm_font *font);
-extern int bm_width (bm_font *font, char *text);
-extern int bm_height (bm_font *font, char *text);
+extern int bm_width (bm_font *font, const char *text);
+extern int bm_height (bm_font *font, const char *text);
 extern void bm_destroyfont (bm_font *font);

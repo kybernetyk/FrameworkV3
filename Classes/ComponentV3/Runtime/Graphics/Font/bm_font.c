@@ -54,13 +54,12 @@ int bm_loadfont (const char *filename, bm_font *font)
 	
 	
 	//chars
-	
+	int char_id;
+	bm_char temp_char;
+		
 	//DIFF 3: i < chars_count (for hiero <=) oO
 	for (int i = 0; i <= chars_count; i++)
 	{
-		int char_id;
-		bm_char temp_char;
-		
 		memset(buff,0x00,BUFFSIZE);
 		fgets(buff, BUFFSIZE, f_in);
 		//printf("%s",buff);
@@ -87,7 +86,6 @@ int bm_loadfont (const char *filename, bm_font *font)
 			break; //break the loop if we have no chars left (discard kerning, etc)
 				   //abort();
 		}
-		
 	}
 	
 	//DIFF 4: we should parse the kerning info
@@ -178,7 +176,7 @@ int bm_loadfont_hiero (const char *filename, bm_font *font)
 	return 1;
 }
 
-int bm_width (bm_font *font, char *text)
+int bm_width (bm_font *font, const char *text)
 {
 	int w, l;
 	
@@ -194,7 +192,7 @@ int bm_width (bm_font *font, char *text)
 	return w;
 }
 
-int bm_height (bm_font *font, char *text)
+int bm_height (bm_font *font, const char *text)
 {
 	int h = 0;
 	int l = strlen(text);

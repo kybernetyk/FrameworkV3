@@ -9,12 +9,17 @@
 #pragma once
 #include <string>
 #include "Util.h"
-#include "bm_font.h"
 #include "TextureManager.h"
 #import "ParticleEmitter.h"
+extern "C"
+{
+	#include "bm_font.h"
+};
+
+
 namespace mx3 
 {
-		
+
 		
 //	class Texture2D;
 
@@ -68,35 +73,15 @@ namespace mx3
 	class OGLFont : public IRenderable
 	{
 	public:
-		OGLFont (std::string fnt_filename)
-		{
-			init();
-
-			loadFromFNTFile (fnt_filename);
-		}
-		
-		~OGLFont ()
-		{
-//			if (texture)
-//			{
-//				g_TextureManager.releaseTexture(texture);
-//				texture = NULL;
-//			}
-			g_TextureManager.releaseTexture (_tex_filename);
-		}
-		void init()
-		{
-			IRenderable::init();
-			text = NULL;
-			//texture = NULL;
-		}
-
+		OGLFont (std::string fnt_filename);
+		~OGLFont ();
+		void init();
 		std::string _tex_filename;
 		void transform ();
 		void renderContent();
 		
 		bool loadFromFNTFile (std::string fnt_filename);
-		
+
 		char *text;
 		bm_font font;
 	//	Texture2D *texture;

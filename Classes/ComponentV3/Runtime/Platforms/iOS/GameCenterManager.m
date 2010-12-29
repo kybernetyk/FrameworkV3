@@ -117,6 +117,11 @@ GameCenterManager *g_pGameCenterManger = nil;
 	}
 }
 
++ (BOOL) isLocalPlayerAuthenticated
+{
+	return [[GKLocalPlayer localPlayer] isAuthenticated];
+}
+
 - (void) saveScoresToDefaults
 {
 	@synchronized (self)

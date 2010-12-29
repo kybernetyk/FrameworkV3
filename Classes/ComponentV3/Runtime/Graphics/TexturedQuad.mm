@@ -14,6 +14,11 @@
 #import "SOIL.h"
 #include <math.h>
 
+extern "C"
+{	
+	#include "bm_font.h"
+};
+
 namespace mx3 
 {
 	
@@ -540,7 +545,29 @@ namespace mx3
 
 	extern std::string pathForFile2 (const char *filename);
 
-
+	OGLFont::OGLFont (std::string fnt_filename)
+	{
+		init();
+		
+		loadFromFNTFile (fnt_filename);
+	}
+	
+	OGLFont::~OGLFont ()
+	{
+		//			if (texture)
+		//			{
+		//				g_TextureManager.releaseTexture(texture);
+		//				texture = NULL;
+		//			}
+		g_TextureManager.releaseTexture (_tex_filename);
+	}
+	void OGLFont::init()
+	{
+		IRenderable::init();
+		text = NULL;
+		//texture = NULL;
+	}
+	
 	bool OGLFont::loadFromFNTFile (std::string fnt_filename)
 	{
 		const char *fn = pathForFile2 (fnt_filename.c_str()).c_str();;
