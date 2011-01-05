@@ -8,7 +8,7 @@
  */
 #pragma once
 #include "Scene.h"
-
+#include "globals.h"
 
 namespace game 
 {
@@ -18,12 +18,17 @@ namespace game
 		void preload ();
 		void init ();
 		void end ();
-		void reset ();
 		
 		void update (float delta);
 		void render ();
 		
 		void frameDone ();
+		void reset ();
+		
+		int scene_type ()
+		{
+			return SCENE_TYPE_MAIN_MENU;
+		}
 		
 		~MenuScene();
 	};

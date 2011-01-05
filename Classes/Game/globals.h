@@ -35,7 +35,9 @@ namespace game
 	#define BOARD_NUM_COLS 7
 	#define BOARD_NUM_ROWS 16
 
-	
+#define SCENE_TYPE_MAIN_MENU 0x00
+#define SCENE_TYPE_GAME 0x01
+
 
 }
 

@@ -36,7 +36,6 @@ namespace game
 		void preload ();
 		void init ();
 		void end ();
-		void reset ();
 		
 		void update (float delta);
 		void render ();
@@ -44,6 +43,16 @@ namespace game
 		void frameDone ();
 		
 		~GameScene ();
+		
+		void saveHiScore ();
+		
+		void reset ();
+		
+		int scene_type ()
+		{
+			return SCENE_TYPE_GAME;
+		}
+		
 		
 	protected:
 		EntityManager *_entityManager;
