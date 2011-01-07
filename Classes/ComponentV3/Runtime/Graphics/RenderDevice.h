@@ -18,7 +18,7 @@ namespace mx3
 		static void unload (void);
 
 		
-		void init (void);
+		void init (float scale = 1.0);
 		void release (void);
 
 	//	void flip (void);
@@ -189,7 +189,12 @@ namespace mx3
 //		-(CGPoint)convertToGL:(CGPoint)uiPoint;
 		vector2D coord_convertScreenToWorld (vector2D vec)
 		{
-			//printf("input: %f, %f\n", vec.x,vec.y);
+//			printf("input: %f, %f\n", vec.x,vec.y);
+			
+#if __IPHONE_OS_VERSION_MIN_REQUIRED >= 30000
+#else
+			vec.y = SCREEN_H*scale_factor - (float)vec.y;
+#endif
 			
 			vector2D ret;
 			ret.x = vec.x * _xconv + camera.x - _meterViewportSize.x/2; //+ camera offset etc
@@ -209,6 +214,7 @@ namespace mx3
 		GLuint textureFrameBuffer;
 		GLuint renderTexture;
 		GLint prev;
+		float scale_factor;
 		
 		void setupBackingTexture ()
 		{

@@ -124,10 +124,11 @@ namespace mx3
 		
 	}
 
-	void RenderDevice::init (void)
+	void RenderDevice::init (float scale)
 	{
-		float screen_size_x = SCREEN_W;
-		float screen_size_y = SCREEN_H;	//change to 280 for a 40px high empty strip [eg for an ad banner]
+		scale_factor = scale;
+		float screen_size_x = SCREEN_W * scale_factor;
+		float screen_size_y = SCREEN_H * scale_factor;	//change to 280 for a 40px high empty strip [eg for an ad banner]
 
 		float viewport_size_x = SCREEN_W;// / pixeltometerratio;//viewport_size_x / xyratio;
 		float viewport_size_y = SCREEN_H;	

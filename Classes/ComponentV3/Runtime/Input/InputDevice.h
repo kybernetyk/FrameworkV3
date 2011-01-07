@@ -64,7 +64,7 @@ namespace mx3
 			int y;
 			Uint8 i = SDL_GetMouseState(&x, &y);
 
-			mx3::vector2D v = {x,SCREEN_H - (float)y};
+			mx3::vector2D v = {x,y};
 			v = mx3::RenderDevice::sharedInstance()->coord_convertScreenToWorld (v);
 			
 			if ( (i & SDL_BUTTON_LEFT) )
@@ -76,7 +76,7 @@ namespace mx3
 				setTouchLocation (v);
 				
 				
-			//	printf("x: %f, y: %f\n",v.x,v.y);
+//				printf("x: %f, y: %f\n",v.x,v.y);
 			}
 			else
 			{
