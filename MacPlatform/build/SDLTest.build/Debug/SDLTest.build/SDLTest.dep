@@ -1,0 +1,13 @@
+434ebcd8c52275786385bf363f47cfbd dd288742fa515d566dd8cf53d9a4d192 ffffffffffffffffffffffffffffffff 102 /Users/jrk/Desktop/SDLTest/build/Debug/SDLTest.app
+00ba8150e0079c1c662103897c131da4 6020b28bb70dba5960bd25e3ef96dc00 ffffffffffffffffffffffffffffffff 23736 /Users/jrk/Desktop/SDLTest/build/Debug/SDLTest.app/Contents/MacOS/SDLTest
+bb3144dd16ca3d681c6763abcd7be32f e7271db8c87c6b3ad5a55d78314b1df9 ffffffffffffffffffffffffffffffff 14156 /Users/jrk/Desktop/SDLTest/build/SDLTest.build/Debug/SDLTest.build/Objects-normal/x86_64/main.o
+bb3144dd5b89a9ec1c6763abcd7bbc20 ea41fd901a0ecaf61c7d3cfdc5e09633 ffffffffffffffffffffffffffffffff 42340 /Users/jrk/Desktop/SDLTest/build/SDLTest.build/Debug/SDLTest.build/Objects-normal/x86_64/SDLMain.o
+bb3144dd115b73b01c6763abcd7b80ae b6ed25a56f279d0eb39e01a745d62eb5 ffffffffffffffffffffffffffffffff 21080 /Users/jrk/Desktop/SDLTest/build/SDLTest.build/Debug/SDLTest.build/Objects-normal/x86_64/SDLTestAppDelegate.o
+000000000de250d00000000000000174 bb3144dd5c7d89081c6763abcd7b804a ffffffffffffffffffffffffffffffff 54306576 /var/folders/It/IttwIeUMFDKZzn-5dyiHeE+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/SDLTest_Prefix-fiwiicxdmuvwbuddcmwxhseaqzsm/SDLTest_Prefix.pch.gch
+000000004add24f200000000000000aa 849fd6c9f6054684a6c7efa8d29053f0 ffffffffffffffffffffffffffffffff 102 /Users/jrk/Desktop/SDLTest/build/Debug/SDLTest.app/Contents/Resources/SDLMain.nib
+000000004d26fab8000000000002bb6b d4defb3c9e94dc1cf0eac6187e1a9c0b ffffffffffffffffffffffffffffffff 34378 /Users/jrk/Desktop/SDLTest/build/Debug/SDLTest.app/Contents/Resources/English.lproj/MainMenu.nib
+000000004d26fab8000000000000002d f5c8ec6b334123bae5a75b7959be95ed ffffffffffffffffffffffffffffffff 92 /Users/jrk/Desktop/SDLTest/build/Debug/SDLTest.app/Contents/Resources/English.lproj/InfoPlist.strings
+000000004add32bd00000000000000cc 865d4e9dc9f8fc50d693eb9559f4ef2f ffffffffffffffffffffffffffffffff 204 /Users/jrk/Desktop/SDLTest/build/Debug/SDLTest.app/Contents/Frameworks/SDL.framework
+00000000000000000000000000000000 0e206ccb083d6c9d4efe48ba9b047958 ffffffffffffffffffffffffffffffff 8 /Users/jrk/Desktop/SDLTest/build/Debug/SDLTest.app/Contents/PkgInfo
+00000000000000000000000000000000 0e206ccb083d6c9d4efe48ba9b047958 ffffffffffffffffffffffffffffffff 886 /Users/jrk/Desktop/SDLTest/build/Debug/SDLTest.app/Contents/Info.plist
+000000000de250d00000000000000174 615593c097f952c81003108ddfa9b58a ffffffffffffffffffffffffffffffff 54306576 /var/folders/It/IttwIeUMFDKZzn-5dyiHeE+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/SDLTest_Prefix-deltquwxbardtxcxppmgmfnyphbk/SDLTest_Prefix.pch.gch

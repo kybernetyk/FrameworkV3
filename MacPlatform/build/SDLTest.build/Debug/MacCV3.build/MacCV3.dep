@@ -1,0 +1,12 @@
+40e08d099f12c137c6a45cb7edde9f79 897fc28c3a93966013cb75a75443d93d ffffffffffffffffffffffffffffffff 102 /Users/jrk/Desktop/SDLTest/build/Debug/MacCV3.app
+9a7142568e517b77aaa5dd9b96deb84c 7579f4efe1f5f706c4d510b0d8909eaa ffffffffffffffffffffffffffffffff 23728 /Users/jrk/Desktop/SDLTest/build/Debug/MacCV3.app/Contents/MacOS/MacCV3
+000000004add24f200000000000000aa 244f2ab2339c71f4a8e9361ec5763212 ffffffffffffffffffffffffffffffff 102 /Users/jrk/Desktop/SDLTest/build/Debug/MacCV3.app/Contents/Resources/SDLMain.nib
+000000004d26fe29000000000002c922 55165e063a053bfdb98b34d715e4a4fb ffffffffffffffffffffffffffffffff 34366 /Users/jrk/Desktop/SDLTest/build/Debug/MacCV3.app/Contents/Resources/English.lproj/MainMenu.nib
+000000004d26fab8000000000000002d 5f0b9753bce0c52715be1646f2201738 ffffffffffffffffffffffffffffffff 92 /Users/jrk/Desktop/SDLTest/build/Debug/MacCV3.app/Contents/Resources/English.lproj/InfoPlist.strings
+000000004add32bd00000000000000cc 81bad85745cfd0b6ac0885138120f127 ffffffffffffffffffffffffffffffff 204 /Users/jrk/Desktop/SDLTest/build/Debug/MacCV3.app/Contents/Frameworks/SDL.framework
+00000000000000000000000000000000 91522dacd98b81836c52ab0ed9ec4afd ffffffffffffffffffffffffffffffff 8 /Users/jrk/Desktop/SDLTest/build/Debug/MacCV3.app/Contents/PkgInfo
+00000000000000000000000000000000 91522dacd98b81836c52ab0ed9ec4afd ffffffffffffffffffffffffffffffff 883 /Users/jrk/Desktop/SDLTest/build/Debug/MacCV3.app/Contents/Info.plist
+e54b3336cbdb6091b4fb5fadbd791945 edc5a87c6fa507ef0d5e3b03bf15dbce ffffffffffffffffffffffffffffffff 42340 /Users/jrk/Desktop/SDLTest/build/SDLTest.build/Debug/MacCV3.build/Objects-normal/x86_64/SDLMain.o
+e54b33368109bacdb4fb5fadbd7925cb 159c2f3b9bd268988ba5242893c133ea ffffffffffffffffffffffffffffffff 21080 /Users/jrk/Desktop/SDLTest/build/SDLTest.build/Debug/MacCV3.build/Objects-normal/x86_64/SDLTestAppDelegate.o
+e54b33368698f43cb4fb5fadbd79464a 8763f627b7267d8a98a59d1d07664dd6 ffffffffffffffffffffffffffffffff 14156 /Users/jrk/Desktop/SDLTest/build/SDLTest.build/Debug/MacCV3.build/Objects-normal/x86_64/main.o
+000000000de250d00000000000000174 e54b3336cc2f4075b4fb5fadbd79252f ffffffffffffffffffffffffffffffff 54306576 /var/folders/It/IttwIeUMFDKZzn-5dyiHeE+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/MacCV3_Prefix-fiwiicxdmuvwbuddcmwxhseaqzsm/MacCV3_Prefix.pch.gch

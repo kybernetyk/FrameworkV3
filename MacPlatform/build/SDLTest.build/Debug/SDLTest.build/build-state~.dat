@@ -1,0 +1,266 @@
+TSDLTest
+v7
+r0
+t316093087.263078
+cCheck dependencies
+cProcessInfoPlistFile /Users/jrk/Desktop/SDLTest/build/Debug/SDLTest.app/Contents/Info.plist SDLTest-Info.plist
+cCopyStringsFile /Users/jrk/Desktop/SDLTest/build/Debug/SDLTest.app/Contents/Resources/English.lproj/InfoPlist.strings English.lproj/InfoPlist.strings
+cCompileXIB /Users/jrk/Desktop/SDLTest/English.lproj/MainMenu.xib
+cStripNIB /Users/jrk/Desktop/SDLTest/SDLMain.nib
+cProcessPCH /var/folders/It/IttwIeUMFDKZzn-5dyiHeE+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/SDLTest_Prefix-deltquwxbardtxcxppmgmfnyphbk/SDLTest_Prefix.pch.gch SDLTest_Prefix.pch normal x86_64 objective-c com.apple.compilers.gcc.4_2
+cCompileC build/SDLTest.build/Debug/SDLTest.build/Objects-normal/x86_64/main.o /Users/jrk/Desktop/SDLTest/main.m normal x86_64 objective-c com.apple.compilers.gcc.4_2
+cCompileC build/SDLTest.build/Debug/SDLTest.build/Objects-normal/x86_64/SDLTestAppDelegate.o /Users/jrk/Desktop/SDLTest/SDLTestAppDelegate.m normal x86_64 objective-c com.apple.compilers.gcc.4_2
+cCompileC build/SDLTest.build/Debug/SDLTest.build/Objects-normal/x86_64/SDLMain.o /Users/jrk/Desktop/SDLTest/SDLMain.m normal x86_64 objective-c com.apple.compilers.gcc.4_2
+
+N/Developer/SDKs/MacOSX10.6.sdk
+c000000004CAA740B00000000000000EE
+t1286239243
+s238
+
+N/Developer/SDKs/MacOSX10.6.sdk/System/Library/Frameworks/Cocoa.framework/Headers/Cocoa.h
+c0000000040C4AA6800000000000001E5
+t1086630504
+s485
+
+N/Developer/SDKs/MacOSX10.6.sdk/usr/include/sys/param.h
+c000000004C23994700000000000027BE
+t1277401415
+s10174
+
+N/Developer/SDKs/MacOSX10.6.sdk/usr/include/unistd.h
+c000000004BBD2CE9000000000000563E
+t1270689001
+s22078
+
+N/System/Library/Frameworks/Cocoa.framework/Cocoa
+c000000004A1F2D63000000000000A5E0
+t1243557219
+s42464
+
+N/Users/jrk/Desktop/SDLTest/English.lproj/InfoPlist.strings
+c000000004D26FAB8000000000000002D
+t1294400184
+s45
+
+N/Users/jrk/Desktop/SDLTest/English.lproj/MainMenu.xib
+c000000004D26FAB8000000000002BB6B
+t1294400184
+s179051
+
+N/Users/jrk/Desktop/SDLTest/SDLMain.h
+c000000004ADD24F20000000000000176
+t1256006898
+s374
+i<Cocoa/Cocoa.h>
+
+N/Users/jrk/Desktop/SDLTest/SDLMain.m
+c000000004ADD24F20000000000002C00
+t1256006898
+s11264
+i"SDL.h"
+i"SDLMain.h"
+i<sys/param.h>
+i<unistd.h>
+
+N/Users/jrk/Desktop/SDLTest/SDLMain.nib
+c000000004ADD24F200000000000000AA
+t1256006898
+s170
+
+N/Users/jrk/Desktop/SDLTest/SDLTestAppDelegate.h
+c000000004D26FAB8000000000000012A
+t1294400184
+s298
+i<Cocoa/Cocoa.h>
+
+N/Users/jrk/Desktop/SDLTest/SDLTestAppDelegate.m
+c000000004D26FAB8000000000000015F
+t1294400184
+s351
+i"SDLTestAppDelegate.h"
+
+N/Users/jrk/Desktop/SDLTest/SDLTest_Prefix.pch
+c000000004D26FAB80000000000000091
+t1294400184
+s145
+i<Cocoa/Cocoa.h>
+
+N/Users/jrk/Desktop/SDLTest/build/Debug/SDLTest.app
+t2
+s0
+
+N/Users/jrk/Desktop/SDLTest/build/Debug/SDLTest.app/Contents/Info.plist
+t1294400283
+s886
+
+N/Users/jrk/Desktop/SDLTest/build/Debug/SDLTest.app/Contents/MacOS/SDLTest
+t2
+s0
+
+N/Users/jrk/Desktop/SDLTest/build/Debug/SDLTest.app/Contents/PkgInfo
+t1294400283
+s8
+
+N/Users/jrk/Desktop/SDLTest/build/Debug/SDLTest.app/Contents/Resources/English.lproj/InfoPlist.strings
+t1294400283
+s92
+
+N/Users/jrk/Desktop/SDLTest/build/Debug/SDLTest.app/Contents/Resources/English.lproj/MainMenu.nib
+t1294400284
+s34378
+
+N/Users/jrk/Desktop/SDLTest/build/Debug/SDLTest.app/Contents/Resources/SDLMain.nib
+t1294400283
+s102
+
+N/Users/jrk/Desktop/SDLTest/build/SDLTest.build/Debug/SDLTest.build/Objects-normal/x86_64/SDLMain.o
+t2
+s0
+
+N/Users/jrk/Desktop/SDLTest/build/SDLTest.build/Debug/SDLTest.build/Objects-normal/x86_64/SDLTest.LinkFileList
+c000000004D26FB1B0000000000000131
+t1294400283
+s305
+
+N/Users/jrk/Desktop/SDLTest/build/SDLTest.build/Debug/SDLTest.build/Objects-normal/x86_64/SDLTestAppDelegate.o
+t1294400287
+s21080
+
+N/Users/jrk/Desktop/SDLTest/build/SDLTest.build/Debug/SDLTest.build/Objects-normal/x86_64/main.o
+t1294400287
+s4968
+
+N/Users/jrk/Desktop/SDLTest/main.m
+c000000004D26FAB800000000000000EC
+t1294400184
+s236
+i<Cocoa/Cocoa.h>
+
+N/var/folders/It/IttwIeUMFDKZzn-5dyiHeE+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/SDLTest_Prefix-deltquwxbardtxcxppmgmfnyphbk/SDLTest_Prefix.pch.gch
+t1294400286
+s54306576
+
+NSDLTest-Info.plist
+c000000004D26FAB800000000000003EA
+t1294400184
+s1002
+
+CCheck dependencies
+r0
+lSLF07#2@18"Check dependencies316093083#316093083#0(0"0(0#1#0"8607317312#0"0#
+
+CCompileC build/SDLTest.build/Debug/SDLTest.build/Objects-normal/x86_64/SDLMain.o /Users/jrk/Desktop/SDLTest/SDLMain.m normal x86_64 objective-c com.apple.compilers.gcc.4_2
+s316093087.139779
+e316093087.263009
+r0
+xCompileC
+xbuild/SDLTest.build/Debug/SDLTest.build/Objects-normal/x86_64/SDLMain.o
+x/Users/jrk/Desktop/SDLTest/SDLMain.m
+xnormal
+xx86_64
+xobjective-c
+xcom.apple.compilers.gcc.4_2
+o/Users/jrk/Desktop/SDLTest/SDLMain.m:8:17: error: SDL.h: No such file or directory
+o/Users/jrk/Desktop/SDLTest/SDLMain.m: In function '-[SDLApplication terminate:]':
+o/Users/jrk/Desktop/SDLTest/SDLMain.m:75: error: 'SDL_Event' undeclared (first use in this function)
+o/Users/jrk/Desktop/SDLTest/SDLMain.m:75: error: (Each undeclared identifier is reported only once
+o/Users/jrk/Desktop/SDLTest/SDLMain.m:75: error: for each function it appears in.)
+o/Users/jrk/Desktop/SDLTest/SDLMain.m:75: error: expected ';' before 'event'
+o/Users/jrk/Desktop/SDLTest/SDLMain.m:76: error: 'event' undeclared (first use in this function)
+o/Users/jrk/Desktop/SDLTest/SDLMain.m:76: error: 'SDL_QUIT' undeclared (first use in this function)
+o/Users/jrk/Desktop/SDLTest/SDLMain.m:77: warning: implicit declaration of function 'SDL_PushEvent'
+o/Users/jrk/Desktop/SDLTest/SDLMain.m: In function '-[SDLMain application:openFile:]':
+o/Users/jrk/Desktop/SDLTest/SDLMain.m:266: warning: implicit declaration of function 'SDL_strlen'
+o/Users/jrk/Desktop/SDLTest/SDLMain.m:267: warning: implicit declaration of function 'SDL_malloc'
+o/Users/jrk/Desktop/SDLTest/SDLMain.m:267: warning: cast to pointer from integer of different size
+o/Users/jrk/Desktop/SDLTest/SDLMain.m:274: warning: implicit declaration of function 'SDL_free'
+o/Users/jrk/Desktop/SDLTest/SDLMain.m:279: warning: implicit declaration of function 'SDL_strlcpy'
+o/Users/jrk/Desktop/SDLTest/SDLMain.m: In function '-[SDLMain applicationDidFinishLaunching:]':
+o/Users/jrk/Desktop/SDLTest/SDLMain.m:301: warning: implicit declaration of function 'SDL_main'
+o/Users/jrk/Desktop/SDLTest/SDLMain.m: In function 'main':
+o/Users/jrk/Desktop/SDLTest/SDLMain.m:361: warning: cast to pointer from integer of different size
+o/Users/jrk/Desktop/SDLTest/SDLMain.m:369: warning: cast to pointer from integer of different size
+o{standard input}:unknown:Undefined local symbol L_OBJC_CLASSLIST_REFERENCES_$_0
+o{standard input}:unknown:Undefined local symbol L_OBJC_SELECTOR_REFERENCES_0
+o{standard input}:unknown:Undefined local symbol L_OBJC_SELECTOR_REFERENCES_1
+lSLF07#2@44"Compile /Users/jrk/Desktop/SDLTest/SDLMain.m316093087#316093087#0(2064"/Users/jrk/Desktop/SDLTest/SDLMain.m:8:17: error: SDL.h: No such file or directory/Users/jrk/Desktop/SDLTest/SDLMain.m: In function '-[SDLApplication terminate:]':/Users/jrk/Desktop/SDLTest/SDLMain.m:75: error: 'SDL_Event' undeclared (first use in this function)/Users/jrk/Desktop/SDLTest/SDLMain.m:75: error: (Each undeclared identifier is reported only once/Users/jrk/Desktop/SDLTest/SDLMain.m:75: error: for each function it appears in.)/Users/jrk/Desktop/SDLTest/SDLMain.m:75: error: expected ';' before 'event'/Users/jrk/Desktop/SDLTest/SDLMain.m:76: error: 'event' undeclared (first use in this function)/Users/jrk/Desktop/SDLTest/SDLMain.m:76: error: 'SDL_QUIT' undeclared (first use in this function)/Users/jrk/Desktop/SDLTest/SDLMain.m:77: warning: implicit declaration of function 'SDL_PushEvent'/Users/jrk/Desktop/SDLTest/SDLMain.m: In function '-[SDLMain application:openFile:]':/Users/jrk/Desktop/SDLTest/SDLMain.m:266: warning: implicit declaration of function 'SDL_strlen'/Users/jrk/Desktop/SDLTest/SDLMain.m:267: warning: implicit declaration of function 'SDL_malloc'/Users/jrk/Desktop/SDLTest/SDLMain.m:267: warning: cast to pointer from integer of different size/Users/jrk/Desktop/SDLTest/SDLMain.m:274: warning: implicit declaration of function 'SDL_free'/Users/jrk/Desktop/SDLTest/SDLMain.m:279: warning: implicit declaration of function 'SDL_strlcpy'/Users/jrk/Desktop/SDLTest/SDLMain.m: In function '-[SDLMain applicationDidFinishLaunching:]':/Users/jrk/Desktop/SDLTest/SDLMain.m:301: warning: implicit declaration of function 'SDL_main'/Users/jrk/Desktop/SDLTest/SDLMain.m: In function 'main':/Users/jrk/Desktop/SDLTest/SDLMain.m:361: warning: cast to pointer from integer of different size/Users/jrk/Desktop/SDLTest/SDLMain.m:369: warning: cast to pointer from integer of different size{standard input}:unknown:Undefined local symbol L_OBJC_CLASSLIST_REFERENCES_$_0{standard input}:unknown:Undefined local symbol L_OBJC_SELECTOR_REFERENCES_0{standard input}:unknown:Undefined local symbol L_OBJC_SELECTOR_REFERENCES_114(4@32"SDL.h: No such file or directory316093087#0#83#0(6@36"/Users/jrk/Desktop/SDLTest/SDLMain.m277699698#8#0#8#0#28"*: No such file or directory0(4@51"'SDL_Event' undeclared (first use in this function)316093087#165#100#0(6@36"/Users/jrk/Desktop/SDLTest/SDLMain.m277699698#75#0#75#0#43"'*' undeclared (first use in this function)0(4@27"Expected ';' before 'event'316093087#445#76#0(6@36"/Users/jrk/Desktop/SDLTest/SDLMain.m277699698#75#0#75#0#19"expected * before *0(4@47"'event' undeclared (first use in this function)316093087#521#96#0(6@36"/Users/jrk/Desktop/SDLTest/SDLMain.m277699698#76#0#76#0#43"'*' undeclared (first use in this function)0(4@50"'SDL_QUIT' undeclared (first use in this function)316093087#617#99#0(6@36"/Users/jrk/Desktop/SDLTest/SDLMain.m277699698#76#0#76#0#43"'*' undeclared (first use in this function)0(22@48"Implicit declaration of function 'SDL_PushEvent'316093087#716#99#0(6@36"/Users/jrk/Desktop/SDLTest/SDLMain.m277699698#77#0#77#0#36"implicit declaration of function '*'0(22@45"Implicit declaration of function 'SDL_strlen'316093087#901#97#0(6@36"/Users/jrk/Desktop/SDLTest/SDLMain.m277699698#266#0#266#0#36"implicit declaration of function '*'0(22@45"Implicit declaration of function 'SDL_malloc'316093087#998#97#0(6@36"/Users/jrk/Desktop/SDLTest/SDLMain.m277699698#267#0#267#0#36"implicit declaration of function '*'0(22@46"Cast to pointer from integer of different size316093087#1095#98#0(6@36"/Users/jrk/Desktop/SDLTest/SDLMain.m277699698#267#0#267#0#46"cast to pointer from integer of different size0(22@43"Implicit declaration of function 'SDL_free'316093087#1193#95#0(6@36"/Users/jrk/Desktop/SDLTest/SDLMain.m277699698#274#0#274#0#36"implicit declaration of function '*'0(22@46"Implicit declaration of function 'SDL_strlcpy'316093087#1288#98#0(6@36"/Users/jrk/Desktop/SDLTest/SDLMain.m277699698#279#0#279#0#36"implicit declaration of function '*'0(22@43"Implicit declaration of function 'SDL_main'316093087#1481#95#0(6@36"/Users/jrk/Desktop/SDLTest/SDLMain.m277699698#301#0#301#0#36"implicit declaration of function '*'0(22@46"Cast to pointer from integer of different size316093087#1634#98#0(6@36"/Users/jrk/Desktop/SDLTest/SDLMain.m277699698#361#0#361#0#46"cast to pointer from integer of different size0(22@46"Cast to pointer from integer of different size316093087#1732#98#0(6@36"/Users/jrk/Desktop/SDLTest/SDLMain.m277699698#369#0#369#0#46"cast to pointer from integer of different size0(0#0#36"/Users/jrk/Desktop/SDLTest/SDLMain.m8613964416#1324"    cd /Users/jrk/Desktop/SDLTest    setenv LANG en_US.US-ASCII    /Developer/usr/bin/gcc-4.2 -x objective-c -arch x86_64 -fmessage-length=0 -pipe -std=gnu99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/SDKs/MacOSX10.6.sdk -mfix-and-continue -mmacosx-version-min=10.6 -gdwarf-2 -iquote /Users/jrk/Desktop/SDLTest/build/SDLTest.build/Debug/SDLTest.build/SDLTest-generated-files.hmap -I/Users/jrk/Desktop/SDLTest/build/SDLTest.build/Debug/SDLTest.build/SDLTest-own-target-headers.hmap -I/Users/jrk/Desktop/SDLTest/build/SDLTest.build/Debug/SDLTest.build/SDLTest-all-target-headers.hmap -iquote /Users/jrk/Desktop/SDLTest/build/SDLTest.build/Debug/SDLTest.build/SDLTest-project-headers.hmap -F/Users/jrk/Desktop/SDLTest/build/Debug -I/Users/jrk/Desktop/SDLTest/build/Debug/include -I/Users/jrk/Desktop/SDLTest/build/SDLTest.build/Debug/SDLTest.build/DerivedSources/x86_64 -I/Users/jrk/Desktop/SDLTest/build/SDLTest.build/Debug/SDLTest.build/DerivedSources -include /var/folders/It/IttwIeUMFDKZzn-5dyiHeE+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/SDLTest_Prefix-deltquwxbardtxcxppmgmfnyphbk/SDLTest_Prefix.pch -c /Users/jrk/Desktop/SDLTest/SDLMain.m -o /Users/jrk/Desktop/SDLTest/build/SDLTest.build/Debug/SDLTest.build/Objects-normal/x86_64/SDLMain.o1#
+
+CCompileC build/SDLTest.build/Debug/SDLTest.build/Objects-normal/x86_64/SDLTestAppDelegate.o /Users/jrk/Desktop/SDLTest/SDLTestAppDelegate.m normal x86_64 objective-c com.apple.compilers.gcc.4_2
+s316093086.940600
+e316093087.150330
+r1
+xCompileC
+xbuild/SDLTest.build/Debug/SDLTest.build/Objects-normal/x86_64/SDLTestAppDelegate.o
+x/Users/jrk/Desktop/SDLTest/SDLTestAppDelegate.m
+xnormal
+xx86_64
+xobjective-c
+xcom.apple.compilers.gcc.4_2
+lSLF07#2@55"Compile /Users/jrk/Desktop/SDLTest/SDLTestAppDelegate.m316093086#316093087#0(0"0(0#0#47"/Users/jrk/Desktop/SDLTest/SDLTestAppDelegate.m8590445408#1346"    cd /Users/jrk/Desktop/SDLTest    setenv LANG en_US.US-ASCII    /Developer/usr/bin/gcc-4.2 -x objective-c -arch x86_64 -fmessage-length=0 -pipe -std=gnu99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/SDKs/MacOSX10.6.sdk -mfix-and-continue -mmacosx-version-min=10.6 -gdwarf-2 -iquote /Users/jrk/Desktop/SDLTest/build/SDLTest.build/Debug/SDLTest.build/SDLTest-generated-files.hmap -I/Users/jrk/Desktop/SDLTest/build/SDLTest.build/Debug/SDLTest.build/SDLTest-own-target-headers.hmap -I/Users/jrk/Desktop/SDLTest/build/SDLTest.build/Debug/SDLTest.build/SDLTest-all-target-headers.hmap -iquote /Users/jrk/Desktop/SDLTest/build/SDLTest.build/Debug/SDLTest.build/SDLTest-project-headers.hmap -F/Users/jrk/Desktop/SDLTest/build/Debug -I/Users/jrk/Desktop/SDLTest/build/Debug/include -I/Users/jrk/Desktop/SDLTest/build/SDLTest.build/Debug/SDLTest.build/DerivedSources/x86_64 -I/Users/jrk/Desktop/SDLTest/build/SDLTest.build/Debug/SDLTest.build/DerivedSources -include /var/folders/It/IttwIeUMFDKZzn-5dyiHeE+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/SDLTest_Prefix-deltquwxbardtxcxppmgmfnyphbk/SDLTest_Prefix.pch -c /Users/jrk/Desktop/SDLTest/SDLTestAppDelegate.m -o /Users/jrk/Desktop/SDLTest/build/SDLTest.build/Debug/SDLTest.build/Objects-normal/x86_64/SDLTestAppDelegate.o0#
+
+CCompileC build/SDLTest.build/Debug/SDLTest.build/Objects-normal/x86_64/main.o /Users/jrk/Desktop/SDLTest/main.m normal x86_64 objective-c com.apple.compilers.gcc.4_2
+s316093086.939601
+e316093087.139690
+r1
+xCompileC
+xbuild/SDLTest.build/Debug/SDLTest.build/Objects-normal/x86_64/main.o
+x/Users/jrk/Desktop/SDLTest/main.m
+xnormal
+xx86_64
+xobjective-c
+xcom.apple.compilers.gcc.4_2
+lSLF07#2@41"Compile /Users/jrk/Desktop/SDLTest/main.m316093086#316093087#0(0"0(0#0#33"/Users/jrk/Desktop/SDLTest/main.m8607866560#1318"    cd /Users/jrk/Desktop/SDLTest    setenv LANG en_US.US-ASCII    /Developer/usr/bin/gcc-4.2 -x objective-c -arch x86_64 -fmessage-length=0 -pipe -std=gnu99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/SDKs/MacOSX10.6.sdk -mfix-and-continue -mmacosx-version-min=10.6 -gdwarf-2 -iquote /Users/jrk/Desktop/SDLTest/build/SDLTest.build/Debug/SDLTest.build/SDLTest-generated-files.hmap -I/Users/jrk/Desktop/SDLTest/build/SDLTest.build/Debug/SDLTest.build/SDLTest-own-target-headers.hmap -I/Users/jrk/Desktop/SDLTest/build/SDLTest.build/Debug/SDLTest.build/SDLTest-all-target-headers.hmap -iquote /Users/jrk/Desktop/SDLTest/build/SDLTest.build/Debug/SDLTest.build/SDLTest-project-headers.hmap -F/Users/jrk/Desktop/SDLTest/build/Debug -I/Users/jrk/Desktop/SDLTest/build/Debug/include -I/Users/jrk/Desktop/SDLTest/build/SDLTest.build/Debug/SDLTest.build/DerivedSources/x86_64 -I/Users/jrk/Desktop/SDLTest/build/SDLTest.build/Debug/SDLTest.build/DerivedSources -include /var/folders/It/IttwIeUMFDKZzn-5dyiHeE+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/SDLTest_Prefix-deltquwxbardtxcxppmgmfnyphbk/SDLTest_Prefix.pch -c /Users/jrk/Desktop/SDLTest/main.m -o /Users/jrk/Desktop/SDLTest/build/SDLTest.build/Debug/SDLTest.build/Objects-normal/x86_64/main.o0#
+
+CCompileXIB /Users/jrk/Desktop/SDLTest/English.lproj/MainMenu.xib
+s316093083.794841
+e316093084.117149
+r1
+xCompileXIB
+x/Users/jrk/Desktop/SDLTest/English.lproj/MainMenu.xib
+lSLF07#2@37"CompileXIB English.lproj/MainMenu.xib316093083#316093084#0(0"0(0#0#53"/Users/jrk/Desktop/SDLTest/English.lproj/MainMenu.xib8608348896#328"    cd /Users/jrk/Desktop/SDLTest    /Developer/usr/bin/ibtool --errors --warnings --notices --output-format human-readable-text --compile /Users/jrk/Desktop/SDLTest/build/Debug/SDLTest.app/Contents/Resources/English.lproj/MainMenu.nib /Users/jrk/Desktop/SDLTest/English.lproj/MainMenu.xib --sdk /Developer/SDKs/MacOSX10.6.sdk0#
+
+CCopyStringsFile /Users/jrk/Desktop/SDLTest/build/Debug/SDLTest.app/Contents/Resources/English.lproj/InfoPlist.strings English.lproj/InfoPlist.strings
+s316093083.793985
+e316093083.848818
+r1
+xCopyStringsFile
+x/Users/jrk/Desktop/SDLTest/build/Debug/SDLTest.app/Contents/Resources/English.lproj/InfoPlist.strings
+xEnglish.lproj/InfoPlist.strings
+lSLF07#2@36"Copy English.lproj/InfoPlist.strings316093083#316093083#0(0"0(0#0#58"/Users/jrk/Desktop/SDLTest/English.lproj/InfoPlist.strings8608402784#341"    cd /Users/jrk/Desktop/SDLTest    setenv ICONV /usr/bin/iconv    /Developer/Library/Xcode/Plug-ins/CoreBuildTasks.xcplugin/Contents/Resources/copystrings --validate --inputencoding utf-8 --outputencoding UTF-16 English.lproj/InfoPlist.strings --outdir /Users/jrk/Desktop/SDLTest/build/Debug/SDLTest.app/Contents/Resources/English.lproj0#
+
+CLd /Users/jrk/Desktop/SDLTest/build/Debug/SDLTest.app/Contents/MacOS/SDLTest normal x86_64
+r0
+
+CProcessInfoPlistFile /Users/jrk/Desktop/SDLTest/build/Debug/SDLTest.app/Contents/Info.plist SDLTest-Info.plist
+s316093083.791258
+e316093083.793920
+r1
+xProcessInfoPlistFile
+x/Users/jrk/Desktop/SDLTest/build/Debug/SDLTest.app/Contents/Info.plist
+xSDLTest-Info.plist
+lSLF07#2@26"Process SDLTest-Info.plist316093083#316093083#0(0"0(0#0#45"/Users/jrk/Desktop/SDLTest/SDLTest-Info.plist8608657952#274"    cd /Users/jrk/Desktop/SDLTest    builtin-infoPlistUtility SDLTest-Info.plist -genpkginfo /Users/jrk/Desktop/SDLTest/build/Debug/SDLTest.app/Contents/PkgInfo -expandbuildsettings -platform macosx -o /Users/jrk/Desktop/SDLTest/build/Debug/SDLTest.app/Contents/Info.plist0#
+
+CProcessPCH /var/folders/It/IttwIeUMFDKZzn-5dyiHeE+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/SDLTest_Prefix-deltquwxbardtxcxppmgmfnyphbk/SDLTest_Prefix.pch.gch SDLTest_Prefix.pch normal x86_64 objective-c com.apple.compilers.gcc.4_2
+s316093084.117249
+e316093086.939483
+r1
+xProcessPCH
+x/var/folders/It/IttwIeUMFDKZzn-5dyiHeE+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/SDLTest_Prefix-deltquwxbardtxcxppmgmfnyphbk/SDLTest_Prefix.pch.gch
+xSDLTest_Prefix.pch
+xnormal
+xx86_64
+xobjective-c
+xcom.apple.compilers.gcc.4_2
+lSLF07#2@29"Precompile SDLTest_Prefix.pch316093084#316093086#0(0"0(0#0#45"/Users/jrk/Desktop/SDLTest/SDLTest_Prefix.pch8608577632#1236"    cd /Users/jrk/Desktop/SDLTest    setenv LANG en_US.US-ASCII    /Developer/usr/bin/gcc-4.2 -x objective-c-header -arch x86_64 -fmessage-length=0 -pipe -std=gnu99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/SDKs/MacOSX10.6.sdk -mfix-and-continue -mmacosx-version-min=10.6 -gdwarf-2 -iquote /Users/jrk/Desktop/SDLTest/build/SDLTest.build/Debug/SDLTest.build/SDLTest-generated-files.hmap -I/Users/jrk/Desktop/SDLTest/build/SDLTest.build/Debug/SDLTest.build/SDLTest-own-target-headers.hmap -I/Users/jrk/Desktop/SDLTest/build/SDLTest.build/Debug/SDLTest.build/SDLTest-all-target-headers.hmap -iquote /Users/jrk/Desktop/SDLTest/build/SDLTest.build/Debug/SDLTest.build/SDLTest-project-headers.hmap -F/Users/jrk/Desktop/SDLTest/build/Debug -I/Users/jrk/Desktop/SDLTest/build/Debug/include -I/Users/jrk/Desktop/SDLTest/build/SDLTest.build/Debug/SDLTest.build/DerivedSources/x86_64 -I/Users/jrk/Desktop/SDLTest/build/SDLTest.build/Debug/SDLTest.build/DerivedSources -c /Users/jrk/Desktop/SDLTest/SDLTest_Prefix.pch -o /var/folders/It/IttwIeUMFDKZzn-5dyiHeE+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/SDLTest_Prefix-deltquwxbardtxcxppmgmfnyphbk/SDLTest_Prefix.pch.gch0#
+
+CStripNIB /Users/jrk/Desktop/SDLTest/SDLMain.nib
+s316093083.848903
+e316093084.004110
+r1
+xStripNIB
+x/Users/jrk/Desktop/SDLTest/SDLMain.nib
+lSLF07#2@20"StripNIB SDLMain.nib316093083#316093084#0(0"0(0#0#38"/Users/jrk/Desktop/SDLTest/SDLMain.nib8614359904#229"    cd /Users/jrk/Desktop/SDLTest    /Developer/usr/bin/ibtool --strip /Users/jrk/Desktop/SDLTest/build/Debug/SDLTest.app/Contents/Resources/SDLMain.nib --output-format human-readable-text /Users/jrk/Desktop/SDLTest/SDLMain.nib0#
+
+CTouch /Users/jrk/Desktop/SDLTest/build/Debug/SDLTest.app
+r0
+
