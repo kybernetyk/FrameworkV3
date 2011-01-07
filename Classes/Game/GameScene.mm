@@ -157,7 +157,7 @@ namespace game
 			spawn_player = false;
 		}
 		
-		
+		//printf("game scene update ...\n");
 	}
 
 	void GameScene::render ()

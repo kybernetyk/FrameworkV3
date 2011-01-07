@@ -19,7 +19,7 @@ namespace game
 #pragma mark game 
 
 	
-	struct GameBoardElement : public Component
+	struct GameBoardElement : public mx3::Component
 	{
 		static ComponentID COMPONENT_ID;
 		

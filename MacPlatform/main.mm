@@ -9,6 +9,9 @@
 #import <Cocoa/Cocoa.h>
 #import <SDL/SDL.h>
 
+#include "Game.h"
+#include "RenderDevice.h"
+
 int SDL_main(int argc, char *argv[])
 {
 //    return NSApplicationMain(argc,  (const char **) argv);
@@ -29,6 +32,11 @@ int SDL_main(int argc, char *argv[])
 	
 	SDL_WM_SetCaption ("MaCV3",0);
 
+	mx3::RenderDevice::sharedInstance()->init();
+	
+	game::Game the_game;
+	the_game.init();
+	
 	SDL_Event event; /* Event structure */
 	bool bRunning = true;
 	while (bRunning)
@@ -45,13 +53,15 @@ int SDL_main(int argc, char *argv[])
 			}
 		}
 
+		the_game.update();
+		the_game.render();
 
 		SDL_GL_SwapBuffers();
 		glClearColor(0.0,0.0,0.7,0.0);
 		glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);	 // Clear The Screen And The Depth Buffer
 		glLoadIdentity();	
 	
-		usleep(30000);
+		usleep(16666);
 	}
 	
 	

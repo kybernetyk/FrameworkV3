@@ -11,7 +11,11 @@
 #import "EntityManager.h"
 #import "Component.h"
 #import "Entity.h"
+
+#if __IPHONE_OS_VERSION_MIN_REQUIRED >= 30000
 #import <AVFoundation/AVFoundation.h>
+#endif
+
 #import <AudioToolbox/AudioToolbox.h>
 #import "SimpleAudioEngine.h"
 namespace mx3 

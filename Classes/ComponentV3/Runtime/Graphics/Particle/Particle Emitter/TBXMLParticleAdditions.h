@@ -21,6 +21,7 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
+#if __IPHONE_OS_VERSION_MIN_REQUIRED >= 30000
 
 #import "TBXML.h"
 #import "Global.h"
@@ -55,3 +56,4 @@
 - (Color4f) color4fFromChildElementNamed:(NSString*)aName parentElement:(TBXMLElement*)aParentXMLElement;
 
 @end
+#endif

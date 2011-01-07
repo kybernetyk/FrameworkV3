@@ -90,7 +90,9 @@ namespace mx3
 	class PE_Proxy : public IRenderable
 	{
 	public:
+		#if __IPHONE_OS_VERSION_MIN_REQUIRED >= 30000
 		ParticleEmitter *pe;
+		#endif
 
 		PE_Proxy ()
 		{
@@ -107,80 +109,103 @@ namespace mx3
 		
 		void update (float delta)
 		{
+			#if __IPHONE_OS_VERSION_MIN_REQUIRED >= 30000
 			Vector2f pos;
 			pos.x = x;
 			pos.y = y;
 			
 			[pe setSourcePosition: pos];
 			[pe updateWithDelta: delta];
+			#endif
 		}
 		
 		bool isActive ()
 		{
+			#if __IPHONE_OS_VERSION_MIN_REQUIRED >= 30000
 			return [pe active];
+			#endif
 		}
 		
 		bool shoudHandle ()
 		{
+#if __IPHONE_OS_VERSION_MIN_REQUIRED >= 30000
 			if (![pe active] && [pe particleCount] == 0)
 				return false;
-			
+#endif
 			return true;;
 		}
 		
 		void stop ()
 		{
+#if __IPHONE_OS_VERSION_MIN_REQUIRED >= 30000			
 			[pe stopParticleEmitter];
+#endif
 		}
 		
 		void start ()
 		{
+#if __IPHONE_OS_VERSION_MIN_REQUIRED >= 30000
 			[pe startParticleEmitter];
+#endif
 		}
 		
 		void reset ()
 		{
+#if __IPHONE_OS_VERSION_MIN_REQUIRED >= 30000
 			[pe reset];
+#endif
 		}
 		
 		void renderContent ()
 		{
+#if __IPHONE_OS_VERSION_MIN_REQUIRED >= 30000
 			[pe renderParticles];
+#endif
 		}
 		
 		float getDuration ()
 		{
+#if __IPHONE_OS_VERSION_MIN_REQUIRED >= 30000
 			return [pe duration];
+#endif
 		}
 		
 		float setDuration (float dur)
 		{
+#if __IPHONE_OS_VERSION_MIN_REQUIRED >= 30000
 			[pe setDuration: dur];
+#endif
 		}
 
 		bool loadFromFile (std::string filename)
 		{
 			NSString *nsfilename = [NSString stringWithCString: filename.c_str() 
 													  encoding: NSASCIIStringEncoding];
-			
+#if __IPHONE_OS_VERSION_MIN_REQUIRED >= 30000			
 			pe = [[ParticleEmitter alloc] initParticleEmitterWithFile: nsfilename];
 			if (pe)
 				return true;
 			
 			return false;
+#else
+			return true;
+#endif
 		}
+		
 		bool do_not_delete;
 		void init()
 		{
 			IRenderable::init();
-			
+#if __IPHONE_OS_VERSION_MIN_REQUIRED >= 30000			
 			pe = nil;
+#endif
 			do_not_delete = false;
 		}
 		
 		~PE_Proxy ()
 		{
 			CV3Log("############## O M G PE PROXY ############\n");
+#if __IPHONE_OS_VERSION_MIN_REQUIRED >= 30000
 			if (pe)
 			{
 				//g_TextureManager.releaseTexture(texture);
@@ -188,6 +213,7 @@ namespace mx3
 				[pe release];
 				pe = nil;
 			}
+#endif
 		}
 		
 	};

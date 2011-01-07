@@ -25,7 +25,11 @@ for in game sounds. static methods should be used for menus
 #include <vector>
 #include "EntityManager.h"
 #include "Entity.h"
+
+#if __IPHONE_OS_VERSION_MIN_REQUIRED >= 30000
 #import <AVFoundation/AVFoundation.h>
+#endif
+
 #import <AudioToolbox/AudioToolbox.h>
 
 namespace mx3 

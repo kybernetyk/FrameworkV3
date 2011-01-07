@@ -24,6 +24,7 @@
 //
 // The design and code for the ParticleEmitter were heavely influenced by the design and code
 // used in Cocos2D for their particle system.
+#if __IPHONE_OS_VERSION_MIN_REQUIRED >= 30000
 
 #import "ParticleEmitter.h"
 #import "TBXML.h"
@@ -551,3 +552,4 @@
 
 @end
 
+#endif

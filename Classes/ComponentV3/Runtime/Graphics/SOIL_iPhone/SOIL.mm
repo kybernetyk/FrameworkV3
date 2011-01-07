@@ -26,13 +26,16 @@
 //	#include <Carbon/Carbon.h>
 
 #import <QuartzCore/QuartzCore.h>
+#if __IPHONE_OS_VERSION_MIN_REQUIRED >= 30000
 #import <UIKit/UIKit.h>
+#endif
 
+#include "ogl.h"
 
-#import <OpenGLES/EAGLDrawable.h>
-#import <OpenGLES/EAGL.h>
-#import <OpenGLES/ES1/gl.h>
-#import <OpenGLES/ES1/glext.h>
+//#import <OpenGLES/EAGLDrawable.h>
+//#import <OpenGLES/EAGL.h>
+//#import <OpenGLES/ES1/gl.h>
+//#import <OpenGLES/ES1/glext.h>
 
 	#define APIENTRY
 #else
