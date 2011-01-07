@@ -174,6 +174,9 @@ namespace mx3
 	
 	void SoundSystem::play_background_music (std::string filename)
 	{
+		//on mac we have multiple BG music channels
+		[[SimpleAudioEngine sharedEngine] stopBackgroundMusic];
+		
 		if (music_vol >= INFINITY)
 		{
 			CV3Log("no music volume set!\n");

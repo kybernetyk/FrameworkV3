@@ -1,8 +1,14 @@
 #pragma once
 #include "Util.h"
+#include "RenderDevice.h"
 
+#if __IPHONE_OS_VERSION_MIN_REQUIRED >= 30000
 #define SDLKey unsigned char
 #define Uint8 unsigned char
+
+#else 
+#include <SDL/SDL.h>
+#endif
 
 namespace mx3 
 {
@@ -22,6 +28,24 @@ namespace mx3
 			return m_pBuffer [key];
 		}
 
+#if __IPHONE_OS_VERSION_MIN_REQUIRED >= 30000
+		inline void update (void)
+		{
+	
+			if (_touchup_handled)
+			{
+				_is_touchup_active = false;
+				_touchup_handled = false;
+			}
+			
+			if (_touchdown_handled)
+			{
+				_is_touch_active = false;
+				_touchdown_handled = false;
+			}
+		}
+#else
+		
 		inline void update (void)
 		{
 			if (_touchup_handled)
@@ -35,8 +59,42 @@ namespace mx3
 				_is_touch_active = false;
 				_touchdown_handled = false;
 			}
+
+			int x;
+			int y;
+			Uint8 i = SDL_GetMouseState(&x, &y);
+
+			mx3::vector2D v = {x,SCREEN_H - (float)y};
+			v = mx3::RenderDevice::sharedInstance()->coord_convertScreenToWorld (v);
 			
+			if ( (i & SDL_BUTTON_LEFT) )
+			{
+				if (!_is_touch_active)
+					setInitialTouchLocation (v);
+
+				setTouchActive(true);
+				setTouchLocation (v);
+				
+				
+			//	printf("x: %f, y: %f\n",v.x,v.y);
+			}
+			else
+			{
+				if (_is_touch_active)
+					setTouchUpReceived (true);
+
+				setTouchLocation (v);
+				setTouchActive (false);
+			}
+
+			//	_touch_location.x = (float)x/960.0*480.0;
+		//	_touch_location.y = (640.0-(float)y)/640.0*320.0;
+			
+			
+			
+					
 		}
+#endif		
 		
 		vector2D initialTouchLocation ()
 		{
