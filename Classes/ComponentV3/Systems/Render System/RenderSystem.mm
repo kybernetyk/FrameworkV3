@@ -196,7 +196,6 @@ namespace mx3
 				//if (pe->pe->isActive())		//TODO: iSActive() sucks. returns false for PEs that have still particles to be rendered updated (end of animation) - MAKE SOMETHING SANE
 
 				
-#if __IPHONE_OS_VERSION_MIN_REQUIRED >= 30000
 				if (pe->pe->pe->particleCount)	//ugly OBJ-C direct access hack
 				{
 					glPushMatrix();
@@ -204,7 +203,6 @@ namespace mx3
 					pe->pe->renderContent();
 					glPopMatrix();
 				}
-#endif				
 				++it;
 				continue;
 			}

@@ -119,11 +119,6 @@ namespace mx3
 				1.0,1.0,1.0,alpha,
 			};
 			glColorPointer(4, GL_FLOAT, 0, colors);
-			//		glEnableClientState( GL_VERTEX_ARRAY);
-	//		glEnableClientState( GL_TEXTURE_COORD_ARRAY );
-			
-	//		glEnable( GL_TEXTURE_2D);
-//			texture->makeActive();
 
 			texture->makeActive();
 			//glColor4f(1.0, 1.0,1.0, alpha);

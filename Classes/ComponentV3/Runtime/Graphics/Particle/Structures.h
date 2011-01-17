@@ -22,7 +22,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import <OpenGLES/ES1/gl.h>
+#import "ogl.h"
 
 #pragma mark -
 #pragma mark Type structures

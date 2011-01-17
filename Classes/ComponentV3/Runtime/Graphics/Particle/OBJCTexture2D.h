@@ -21,9 +21,8 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
-#if __IPHONE_OS_VERSION_MIN_REQUIRED >= 30000
 
-#import <OpenGLES/ES1/gl.h>
+#import "ogl.h"
 
 // Enumerators for the different pixel formats this class can handle
 typedef enum {
@@ -75,8 +74,11 @@ typedef enum {
 
 // Designated initializer that takes a UIImage and a filter (used for the MIN and MAG settings
 // of the texture) and creates an OpenGL texture.
+#ifdef __IPHONE_OS_VERSION_MAX_ALLOWED
 - (id) initWithImage:(UIImage*)aImage filter:(GLenum)aFilter;
+#else
+- (id) initWithImage:(NSImage*)aImage filter:(GLenum)aFilter;
+#endif
 
 @end
 
-#endif

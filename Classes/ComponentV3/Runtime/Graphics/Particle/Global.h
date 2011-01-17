@@ -21,9 +21,8 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
-#if __IPHONE_OS_VERSION_MIN_REQUIRED >= 30000
 
-#import <OpenGLES/ES1/gl.h>
+#import "ogl.h"
 #import "Structures.h"
 
 #pragma mark -
@@ -90,4 +89,3 @@ static inline Vector2f Vector2fNormalize(Vector2f v) {
 	return Vector2fMultiply(v, 1.0f/Vector2fLength(v));
 }
 
-#endif

@@ -24,7 +24,7 @@
 //
 // The design and code for the ParticleEmitter were heavely influenced by the design and code
 // used in Cocos2D for their particle system.
-#if __IPHONE_OS_VERSION_MIN_REQUIRED >= 30000
+
 
 #import "ParticleEmitter.h"
 #import "TBXML.h"
@@ -300,12 +300,14 @@
 
 }
 
-- (void)stopParticleEmitter {
+- (void)stopParticleEmitter 
+{
 	active = NO;
 	elapsedTime = 0;
 	emitCounter = 0;
 }
 
+#ifdef __IPHONE_OS_VERSION_MAX_ALLOWED
 - (void)renderParticles 
 {
 
@@ -365,7 +367,167 @@
 //	glDisableClientState(GL_COLOR_ARRAY);
 	
 }
+#else
+- (void)renderParticles 
+{
+	//particleIndex = 0;
+	
+	int pindex = 0;
+	
+	Particle *currentParticle = NULL;
+	PointSprite *currentSprite = NULL;
+	
+	mx3::Texture2D::boundTexture = texture.name;
+	glBindTexture(GL_TEXTURE_2D, texture.name);
+	glBlendFunc(blendFuncSource, blendFuncDestination);
+//	glDisableClientState(GL_TEXTURE_COORD_ARRAY);
+//	glEnableClientState(GL_COLOR_ARRAY);
+	
+	float x, y, z;
+	float size;
+	z = 0.0;
+	float w,h;
+	float alpha = 1.0;
+	Color4f col;
+	
+	while(pindex < particleCount) 
+	{
+		// Get the particle for the current particle index
+		currentParticle = &particles[pindex];
+		currentSprite = &vertices[pindex];
+		
+	//	printf("x: %f, y: %f, s: %f\n",currentSprite->x, currentSprite->y, currentSprite->size);
+		
+		pindex++;
+	
+		x = currentSprite->x;
+		y = currentSprite->y;
+		size = currentSprite->size;
+		col = currentSprite->color;
+		
+		w = h = size/2.0;
+	
+		glPushMatrix();
+	
+		/* transform */
+		glTranslatef(x, y, z);
+		
+		
+		
+		
+//		if (size != 1.0)
+//			glScalef(size, size, 1.0);
+		
+//		if (rotation != 0.0f )
+//			glRotatef( -rotation, 0.0f, 0.0f, 1.0f );
+		
+//		if (scale_x != 1.0 || scale_y != 1.0)
+//			glScalef( scale_x, scale_y, 1.0f );
+//		
+//		glTranslatef(- (anchorPoint.x * w), - (anchorPoint.y * h), 0);
+		/* e:transform */		
+		
+		
+		
+		GLfloat		coordinates[] = { 0.0f,	1.0,
+			1.0,	1.0,
+			0.0f,	0.0f,
+			1.0,	0.0f };
+		GLfloat		vtx[] = 
+		{	
+			-w,			-h,			0,
+			w,			-h,			0,
+			-w,			h,			0,
+			w,			h,			0
+		};
+		
+		GLfloat colors[] = 
+		{
+			col.red, col.green, col.blue, col.alpha,
+			col.red, col.green, col.blue, col.alpha,
+			col.red, col.green, col.blue, col.alpha,
+			col.red, col.green, col.blue, col.alpha
 
+			/*			1.0,1.0,1.0,alpha,
+			1.0,1.0,1.0,alpha,
+			1.0,1.0,1.0,alpha,
+			1.0,1.0,1.0,alpha,*/
+		};
+		glColorPointer(4, GL_FLOAT, 0, colors);
+		glVertexPointer(3, GL_FLOAT, 0, vtx);
+		glTexCoordPointer(2, GL_FLOAT, 0, coordinates);
+		glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
+		
+		glPopMatrix();
+		
+	
+	
+	}
+	
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	//glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+	
+	
+	return;
+	/*
+	//glEnableClientState(GL_COLOR_ARRAY);
+	
+	// Disable the texture coord array so that texture information is not copied over when rendering
+	// the point sprites.
+	glDisableClientState(GL_TEXTURE_COORD_ARRAY);
+	
+	// Bind to the verticesID VBO and popuate it with the necessary vertex & color informaiton
+	glBindBuffer(GL_ARRAY_BUFFER, verticesID);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(PointSprite) * maxParticles, vertices, GL_DYNAMIC_DRAW);
+	
+	// Configure the vertex pointer which will use the currently bound VBO for its data
+	glVertexPointer(2, GL_FLOAT, sizeof(PointSprite), 0);
+	glColorPointer(4,GL_FLOAT,sizeof(PointSprite),(GLvoid*) (sizeof(GLfloat)*3));
+	
+	mx3::Texture2D::boundTexture = texture.name;
+	// Bind to the particles texture
+	glBindTexture(GL_TEXTURE_2D, texture.name);
+	
+	// Enable the point size array
+	glEnableClientState(GL_POINT_SIZE_ARRAY_OES);
+	
+	// Configure the point size pointer which will use the currently bound VBO.  PointSprite contains
+	// both the location of the point as well as its size, so the config below tells the point size
+	// pointer where in the currently bound VBO it can find the size for each point
+	glPointSizePointerOES(GL_FLOAT,sizeof(PointSprite),(GLvoid*) (sizeof(GL_FLOAT)*2));
+	
+	// Change the blend function used if blendAdditive has been set
+	
+    // Set the blend function based on the configuration
+    glBlendFunc(blendFuncSource, blendFuncDestination);
+	
+	// Enable and configure point sprites which we are going to use for our particles
+	glEnable(GL_POINT_SPRITE_OES);
+	glTexEnvi( GL_POINT_SPRITE_OES, GL_COORD_REPLACE_OES, GL_TRUE );
+	
+	// Now that all of the VBOs have been used to configure the vertices, pointer size and color
+	// use glDrawArrays to draw the points
+	glDrawArrays(GL_POINTS, 0, particleIndex);
+	
+	// Unbind the current VBO
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
+	
+	// Disable the client states which have been used incase the next draw function does 
+	// not need or use them
+	glDisableClientState(GL_POINT_SIZE_ARRAY_OES);
+	glDisable(GL_POINT_SPRITE_OES);
+	
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	
+	// Re-enable the texture coordinates as we use them elsewhere in the game and it is expected that
+	// its on
+	glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+	
+	//	glDisableClientState(GL_COLOR_ARRAY);
+	*/
+}
+
+#endif
 @end
 
 #pragma mark -
@@ -479,12 +641,24 @@
 		if (fileName && !fileData) {		
 			// Create a new texture which is going to be used as the texture for the point sprites. As there is
             // no texture data in the file, this is done using an external image file
+#ifdef __IPHONE_OS_VERSION_MAX_ALLOWED
 			texture = [[OBJCTexture2D alloc] initWithImage:[UIImage imageNamed:fileName] filter:GL_LINEAR];
+#else
+			texture = [[OBJCTexture2D alloc] initWithImage:[NSImage imageNamed:fileName] filter:GL_LINEAR];
+#endif
 		}
         
         // If texture data is present in the file then create the texture image from that data rather than an external file
-        if (fileData) {
+        if (fileData) 
+		{
+#ifdef __IPHONE_OS_VERSION_MAX_ALLOWED
             texture = [[OBJCTexture2D alloc] initWithImage:[UIImage imageWithData:[[NSData dataWithBase64EncodedString:fileData] gzipInflate]] filter:GL_LINEAR];
+#else
+			NSData *dta = [[NSData dataWithBase64EncodedString:fileData] gzipInflate];
+			NSImage *img = [[[NSImage alloc] initWithData: dta] autorelease];
+			
+            texture = [[OBJCTexture2D alloc] initWithImage: img	filter:GL_LINEAR];
+#endif			
         }
 	}
 	
@@ -552,4 +726,3 @@
 
 @end
 
-#endif

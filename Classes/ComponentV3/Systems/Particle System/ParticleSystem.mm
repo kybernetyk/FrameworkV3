@@ -97,10 +97,7 @@ namespace mx3
 		
 		if (duration != 0.0)
 		{	
-#if __IPHONE_OS_VERSION_MIN_REQUIRED >= 30000
 			[pe->pe->pe setDuration: duration];
-#endif
-			
 		}
 		
 		return par;
@@ -122,9 +119,7 @@ namespace mx3
 		
 		if (duration != 0.0)
 		{	
-#if __IPHONE_OS_VERSION_MIN_REQUIRED >= 30000
 			[pe->pe->pe setDuration: duration];
-#endif			
 		}
 		
 		return par;
