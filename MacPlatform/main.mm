@@ -41,12 +41,20 @@ int SDL_main(int argc, char *argv[])
 	bool bRunning = true;
 	while (bRunning)
 	{
+		NSAutoreleasePool	*pool = [[NSAutoreleasePool alloc] init];
+
 		while(SDL_PollEvent(&event))
 		{
 			switch(event.type)
 			{
 				case SDL_QUIT:
 					bRunning = false;
+					break;
+				case SDL_KEYDOWN:
+					if ( ( (KMOD_LMETA & event.key.keysym.mod) || (KMOD_RMETA & event.key.keysym.mod)) && event.key.keysym.sym == SDLK_q) 
+					{ 
+						bRunning = false;
+					} 
 					break;
 				default:
 					break;
@@ -61,6 +69,7 @@ int SDL_main(int argc, char *argv[])
 		glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);	 // Clear The Screen And The Depth Buffer
 		glLoadIdentity();	
 	
+		[pool drain];
 		usleep(16666);
 	}
 	

@@ -51,12 +51,14 @@ namespace mx3
 		static void set_sfx_volume (float vol);
 		static void set_music_volume (float vol);
 		static void resume_background_music ();
+
+		static float music_vol;
+		static float sfx_vol;
+
 		
 	protected:
 		EntityManager *_entityManager;
 		
-		static float music_vol;
-		static float sfx_vol;
 		
 		std::string sounds[MAX_REGISTERED_SOUNDS];
 		float sound_delays[MAX_REGISTERED_SOUNDS];
