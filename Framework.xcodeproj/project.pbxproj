@@ -64,6 +64,7 @@
 		032AB6D312E9CEA2003FD7F3 /* promo_head.png in Resources */ = {isa = PBXBuildFile; fileRef = 032AB69F12E9CEA2003FD7F3 /* promo_head.png */; };
 		032AB6D412E9CEA2003FD7F3 /* WebkitViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 032AB6A112E9CEA2003FD7F3 /* WebkitViewController.mm */; };
 		032AB6D512E9CEA2003FD7F3 /* WebkitViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 032AB6A212E9CEA2003FD7F3 /* WebkitViewController.xib */; };
+		038165C912E9CF61007D33DC /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 038165C812E9CF61007D33DC /* SystemConfiguration.framework */; };
 		03B8431E12A80233008D6D25 /* AppController.m in Sources */ = {isa = PBXBuildFile; fileRef = 03B8431C12A80233008D6D25 /* AppController.m */; };
 		03B8432412A8026D008D6D25 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 03B8432312A8026D008D6D25 /* AVFoundation.framework */; };
 		03B8432612A8026D008D6D25 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 03B8432512A8026D008D6D25 /* OpenAL.framework */; };
@@ -209,6 +210,7 @@
 		032AB6A012E9CEA2003FD7F3 /* WebkitViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebkitViewController.h; sourceTree = "<group>"; };
 		032AB6A112E9CEA2003FD7F3 /* WebkitViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = WebkitViewController.mm; sourceTree = "<group>"; };
 		032AB6A212E9CEA2003FD7F3 /* WebkitViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WebkitViewController.xib; sourceTree = "<group>"; };
+		038165C812E9CF61007D33DC /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		03B8431B12A80233008D6D25 /* AppController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppController.h; sourceTree = "<group>"; };
 		03B8431C12A80233008D6D25 /* AppController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppController.m; sourceTree = "<group>"; };
 		03B8431D12A80233008D6D25 /* SystemConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SystemConfig.h; sourceTree = "<group>"; };
@@ -340,6 +342,7 @@
 				03B8437012A802CC008D6D25 /* AudioToolbox.framework in Frameworks */,
 				032A195B12AC72900046B89E /* GameKit.framework in Frameworks */,
 				03275B3712AD7D5B00B4CF98 /* StoreKit.framework in Frameworks */,
+				038165C912E9CF61007D33DC /* SystemConfiguration.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -988,6 +991,7 @@
 				03B8436F12A802CC008D6D25 /* AudioToolbox.framework */,
 				032A195A12AC72900046B89E /* GameKit.framework */,
 				03275B3612AD7D5B00B4CF98 /* StoreKit.framework */,
+				038165C812E9CF61007D33DC /* SystemConfiguration.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
