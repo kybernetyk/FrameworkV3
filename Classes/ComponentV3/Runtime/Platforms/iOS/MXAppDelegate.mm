@@ -18,6 +18,8 @@
 #import "GameCenterManager.h"
 #endif
 
+#import "Appirater.h"
+
 BOOL g_MayReleaseMemory = YES;
 
 @implementation MXAppDelegate
@@ -175,6 +177,8 @@ BOOL g_MayReleaseMemory = YES;
 			   name: kNewGLViewLoaded 
 			 object: nil];
 	
+	[Appirater appLaunched: YES];
+	
 	theGame = new game::Game();
 	theGame->init();
 	
@@ -220,6 +224,7 @@ BOOL g_MayReleaseMemory = YES;
 
 -(void) applicationWillEnterForeground:(UIApplication*)application 
 {
+	[Appirater appEnteredForeground: YES];
 	[self startAnimation];
 	theGame->appWillEnterForeground();
 }
