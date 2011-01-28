@@ -105,12 +105,12 @@
 	NSLog(@"can_show_iad: %i", can_show_iad);
 	NSLog(@"can_show_admob: %i", can_show_admob);
 	
-//	if (can_show_iad)
-//	{
-//
-//		[self showIAd];
-//		return;
-//	}
+	if (can_show_iad)
+	{
+
+		[self showIAd];
+		return;
+	}
 	
 	if (can_show_admob)
 	{
