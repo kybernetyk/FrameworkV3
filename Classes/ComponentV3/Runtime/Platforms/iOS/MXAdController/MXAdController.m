@@ -12,6 +12,7 @@
 #import "AdMobView.h"
 #import "AdMobDelegateProtocol.h"
 #import "SystemConfig.h"
+extern BOOL g_is_online;
 
 @implementation MXAdController
 @synthesize houseadButton;
@@ -76,13 +77,11 @@
 - (void) bringToFront
 {
 	id test = [[[[[self view] superview] superview] subviews] lastObject];
-	
 	if (test != [[self view] superview])
 	{
 		[[[[self view] superview] superview] bringSubviewToFront: [[self view] superview]];	
 		NSLog(@"bringing the shit!");
 	}
-	
 }
 
 - (void) showAnAd
@@ -94,20 +93,19 @@
 	//[[[self view] superview] bringSubviewToFront: [self view]];
 	
 	
-//	NSLog(@"is online? %i", g_is_online);
-//	if (!g_is_online)
-//	{
-//		[self showHouseAd];
-//		
-//		return;
-//	}
+	NSLog(@"is online? %i", g_is_online);
+	if (!g_is_online)
+	{
+		[self showHouseAd];
+		
+		return;
+	}
 
 	NSLog(@"can_show_iad: %i", can_show_iad);
 	NSLog(@"can_show_admob: %i", can_show_admob);
 	
 	if (can_show_iad)
 	{
-
 		[self showIAd];
 		return;
 	}

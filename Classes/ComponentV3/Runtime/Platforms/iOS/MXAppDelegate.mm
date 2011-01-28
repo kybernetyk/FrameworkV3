@@ -13,6 +13,7 @@
 #include "ComponentV3.h"
 #import "NotificationSystem.h"
 #import "SimpleAudioEngine.h"
+#import "Reachability.h"
 
 #ifdef USE_GAMECENTER
 #import "GameCenterManager.h"
@@ -21,6 +22,7 @@
 #import "Appirater.h"
 
 BOOL g_MayReleaseMemory = YES;
+BOOL g_is_online = NO;
 
 @implementation MXAppDelegate
 @synthesize window;
@@ -134,8 +136,26 @@ BOOL g_MayReleaseMemory = YES;
 }
 
 #pragma mark -
-#pragma mark application delegate
+#pragma mark Reachability
+- (void) reachabilityChanged: (NSNotification* )note
+{
+	Reachability* curReach = [note object];
+	NetworkStatus stat = [curReach currentReachabilityStatus];
+	
+	NSLog(@"mxmenu reachability changed to %i",stat);
+	
+	if (stat == NotReachable)
+	{	
+		g_is_online = NO;	
+	}
+	else
+	{
+		g_is_online = YES;
+	}
+}
 
+#pragma mark -
+#pragma mark application delegate
 - (void)applicationDidFinishLaunching:(UIApplication *)application 
 {
 	CV3Log ("Component V3 Engine. Version %s starting up ...\n", CV3_VERSION);
@@ -176,6 +196,11 @@ BOOL g_MayReleaseMemory = YES;
 		   selector: @selector(setNewGLView:) 
 			   name: kNewGLViewLoaded 
 			 object: nil];
+
+	[nc addObserver: self 
+		   selector: @selector(reachabilityChanged:) 
+			   name: kReachabilityChangedNotification 
+			 object: nil];
 	
 	[Appirater appLaunched: YES];
 	
@@ -185,6 +210,10 @@ BOOL g_MayReleaseMemory = YES;
 	[self startAnimation];
 	
 	theGame->appDidFinishLaunching ();
+	
+	reachability = [[Reachability reachabilityWithHostName: @"apple.com"] retain];
+	[reachability startNotifer];
+
 //	NSLog(@"adview: %@", [mainViewController adView]);
 //	[window bringSubviewToFront: [mainViewController adView]];
 }
