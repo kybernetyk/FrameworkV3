@@ -1,3 +1,4 @@
+#ifdef USE_ADS
 //
 //  MoneyViewController.h
 //  Mega Fill-Up Lite
@@ -22,7 +23,7 @@
 	UIButton *houseadButton;
 	
 	NSTimer *refreshTimer;
-	
+	NSTimer *adFrontTimer;
 	
 	ADBannerView *iAdView;
 	AdMobView *adMobAd;
@@ -38,3 +39,4 @@
 - (IBAction) openHouseAd: (id) sender;
 
 @end
+#endif

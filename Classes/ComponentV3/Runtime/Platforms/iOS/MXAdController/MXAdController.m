@@ -1,3 +1,4 @@
+#ifdef USE_ADS
 //
 //  MoneyViewController.m
 //  Mega Fill-Up Lite
@@ -5,6 +6,7 @@
 //  Created by jrk on 6/11/10.
 //  Copyright 2010 flux forge. All rights reserved.
 //
+
 
 #import "MXAdController.h"
 #import "AdMobView.h"
@@ -26,7 +28,8 @@
 */
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation 
 {
-	NSLog(@"peniswurstum");
+	return NO;
+	
 #ifdef ORIENTATION_LANDSCAPE_LOCKED
 	if (interfaceOrientation ==  UIInterfaceOrientationLandscapeRight)
 		return YES;
@@ -59,27 +62,55 @@
 												   selector: @selector(showAnAd)
 												   userInfo: nil 
 													repeats: YES] retain];
+	//what a fucking hack
+	//brings our adview to front every 0.5 sec
+	//because it could be somewhere behind a menu screen :]]]]]
+	if (!adFrontTimer)
+		adFrontTimer = [[NSTimer scheduledTimerWithTimeInterval: 1.0 
+														 target: self 
+													   selector: @selector(bringToFront)
+													   userInfo: nil 
+														repeats: YES] retain];
+}
+
+- (void) bringToFront
+{
+	id test = [[[[[self view] superview] superview] subviews] lastObject];
+	
+	if (test != [[self view] superview])
+	{
+		[[[[self view] superview] superview] bringSubviewToFront: [[self view] superview]];	
+		NSLog(@"bringing the shit!");
+	}
+	
 }
 
 - (void) showAnAd
 {
-	NSLog(@"is online? %i", g_is_online);
-	if (!g_is_online)
-	{
-		[self showHouseAd];
-		
-		return;
-	}
+	//Mainviewcontroller.view -> mainviewcontroller.adview
+	[self bringToFront];
+
+//	[[[[self parentViewController] view] superview] bringSubviewToFront: [[self parentViewController] view]];
+	//[[[self view] superview] bringSubviewToFront: [self view]];
+	
+	
+//	NSLog(@"is online? %i", g_is_online);
+//	if (!g_is_online)
+//	{
+//		[self showHouseAd];
+//		
+//		return;
+//	}
 
 	NSLog(@"can_show_iad: %i", can_show_iad);
 	NSLog(@"can_show_admob: %i", can_show_admob);
 	
-	if (can_show_iad)
-	{
-
-		[self showIAd];
-		return;
-	}
+//	if (can_show_iad)
+//	{
+//
+//		[self showIAd];
+//		return;
+//	}
 	
 	if (can_show_admob)
 	{
@@ -119,9 +150,10 @@
 
 - (IBAction) openHouseAd: (id) sender
 {
+	NSLog(@"LOL!");
 	//[[BCAchievementNotificationCenter defaultCenter] notifyWithTitle:@"Yo Dawg!" message:@"Sup dawg?" image: [UIImage imageNamed: @"Icon.png"]];
 	
-	[[UIApplication sharedApplication] openURL: [NSURL URLWithString: @"http://itunes.apple.com/us/app/mega-fill-up/id400633918?mt=8&ls=1"]];
+	[[UIApplication sharedApplication] openURL: [NSURL URLWithString: HOUSEAD_TARGET_URL]];
 	
 }
 
@@ -217,7 +249,7 @@
 - (NSString *)publisherIdForAd:(AdMobView *)adView 
 {
 	NSLog(@"publisher ID for AD?");
-	return @"a14cd555ce52c23"; // this should be prefilled; if not, get it from www.admob.com
+	return ADMOB_PUBLISHER_ID; // this should be prefilled; if not, get it from www.admob.com
 }
 
 - (UIViewController *)currentViewControllerForAd:(AdMobView *)adView {
@@ -268,6 +300,7 @@
 - (void)didReceiveAd:(AdMobView *)adView 
 {
 	NSLog(@"AdMob: Did receive ad");
+#ifdef ORIENTATION_LANDSCAPE
 	// get the view frame
 //	CGRect frame = self.view.frame;
 	
@@ -291,6 +324,7 @@
 	//CGAffineTransformScale(makeLandscape, 480.0/320, 480.0/320);
 	adMobAd.transform = makeLandscape;
 	
+#endif
 	
 	[self.view addSubview:adMobAd];
 	[adMobAd setHidden: YES];
@@ -383,5 +417,12 @@
     [super dealloc];
 }
 
+- (void) viewDidDisappear:(BOOL)animated 
+{
+	NSLog(@"viewDidDisappear disappeared!");
+	//[[[[self view] superview] superview] bringSubviewToFront: [[self view] superview]];
+}
 
 @end
+
+#endif

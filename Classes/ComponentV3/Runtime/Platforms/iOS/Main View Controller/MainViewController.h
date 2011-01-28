@@ -11,6 +11,9 @@
 #import "GameCenterManager.h"
 #endif
 #import "NewslineViewController.h"
+#ifdef USE_ADS
+#import "MXAdController.h"
+#endif
 
 @class EAGLView;
 
@@ -20,6 +23,7 @@
 	id appController;
 	
 	IBOutlet UIView *newslineView;
+	UIView *adView;
 	
 #ifdef USE_NEWSFEED
 	NewslineViewController *newsController;
@@ -28,12 +32,16 @@
 #ifdef USE_GAMECENTER
 	GameCenterManager *gcManager;
 #endif
+	
+#ifdef USE_ADS
+	MXAdController *adController;
+#endif
 }
 
 - (IBAction) spawnOne: (id) sender;
 
 - (IBAction) spawnPlayer: (id) sender;
-
+@property (nonatomic, assign) IBOutlet UIView *adView;
 @property (nonatomic, retain) IBOutlet EAGLView *glView;
 @property (nonatomic, retain) IBOutlet id appController;
 @end

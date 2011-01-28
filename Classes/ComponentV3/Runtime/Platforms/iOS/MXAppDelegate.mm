@@ -158,7 +158,7 @@ BOOL g_MayReleaseMemory = YES;
 		NSLog(@"couldn't create the main view controller!");
 		abort();
 	}
-	
+	NSLog(@"window: %@",window);
 	[window addSubview: [mainViewController view]];
 	
 	//glView = [[mainViewController glView] retain];
@@ -185,6 +185,8 @@ BOOL g_MayReleaseMemory = YES;
 	[self startAnimation];
 	
 	theGame->appDidFinishLaunching ();
+//	NSLog(@"adview: %@", [mainViewController adView]);
+//	[window bringSubviewToFront: [mainViewController adView]];
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application 

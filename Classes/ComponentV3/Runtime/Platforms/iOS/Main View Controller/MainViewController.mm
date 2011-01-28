@@ -22,7 +22,6 @@
 
 @implementation GKLeaderboardViewController (meinpenis)
 
-
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation 
 {
 #ifdef ORIENTATION_LANDSCAPE
@@ -48,6 +47,7 @@
 @implementation MainViewController
 @synthesize glView;
 @synthesize appController;
+@synthesize adView;
 /*
  // The designated initializer.  Override if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
@@ -119,10 +119,27 @@
 #endif
 	
 	//post_notification (kNewGLViewLoaded, [self glView]);
+#ifdef USE_ADS
+	[[self view] addSubview: [self adView]];
 	
+	//NSLog(@"keywindow: %@", [[UIApplication sharedApplication] keyWindow]);
+//	[[[UIApplication sharedApplication] keyWindow] addSubview: [self adView]];
+//	[[[UIApplication sharedApplication] keyWindow] bringSubviewToFront: [self adView]];
+	
+	if (!adController)
+	{
+#ifdef ORIENTATION_LANDSCAPE
+		adController = [[MXAdController alloc] initWithNibName: @"MXAdController_landscape" bundle: nil];
+#else
+		adController = [[MXAdController alloc] initWithNibName: @"MXAdController_portrait" bundle: nil];
+#endif
+		[adController setSuperViewController: self];
+		[[self adView] addSubview: [adController view]];
+	}
+
+
+#endif	
 }
-
-
 
 // Override to allow orientations other than the default portrait orientation.
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation 
