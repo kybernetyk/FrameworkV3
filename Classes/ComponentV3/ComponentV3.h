@@ -9,7 +9,7 @@
 
 #pragma once
 
-#define CV3_VERSION "2011.01.17"
+#define CV3_VERSION "2011.02.02"
 
 #include "SystemConfig.h"
 #include "types.h"

@@ -1,6 +1,11 @@
 Framework V3
 ============
-Version: 2010.12.2
+Version: 2010.02.02
+
+Important
+---------
+
+next_scene->init() in game update! not after the creation!
 
 
 How to create a new Project?
