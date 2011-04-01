@@ -2,11 +2,13 @@ Framework V3
 ============
 Version: 2010.02.02
 
+C++ game framework for the iOS. Includes a component based entity system.
+Licensed under BSD with attribution (some files may have a different license - if so it's mentioned in the file).
+
+
 Important
 ---------
-
-next_scene->init() in game update! not after the creation!
-
+This project has been deprecated in favor of libhellstorm.
 
 How to create a new Project?
 ----------------------------
@@ -35,8 +37,7 @@ How to create a new Project?
 	libz
 	
 7. Add the following line at the bottom of your .pch file:
-	#include "SystemConfig.h"
-	
+	#include "SystemConfig.h"	
 
 You are ready to go!
 
@@ -44,4 +45,4 @@ You are ready to go!
 
 TO DO
 =====
-* Pass a list of sound resources + IDs to the sound system
+* Nothing
